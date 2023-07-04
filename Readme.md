@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Юрий  Дзюба](https://up.htmlacademy.ru/react/13/user/2298777).
-* Наставник: `Неизвестно`.
+* Студент: [Юрий Дзюба](https://up.htmlacademy.ru/react/13/user/2298777).
+* Наставник: [Идель Гатауллин](https://htmlacademy.ru/profile/id2271765).
 
 ---
 
