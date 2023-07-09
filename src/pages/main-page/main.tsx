@@ -5,7 +5,7 @@ type MainPageProps = {
 }
 
 function MainPage({numberOfOfferCards} : MainPageProps) : JSX.Element {
-  const offerCards = Array.from({length : numberOfOfferCards}, OfferCard);
+  const offerCards = Array.from({length : numberOfOfferCards}, () => (<OfferCard key={crypto.randomUUID()}></OfferCard>));
   return (
     <div className="page page--gray page--main">
       <header className="header">
