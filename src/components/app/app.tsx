@@ -19,7 +19,7 @@ function App({numberOfOfferCards} : AppProps) : JSX.Element {
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
         <Route path={AppRoutes.Favorites} element=
           {
-            <PrivateRoute authStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute authStatus={AuthorizationStatus.Auth}>
               <FavoritePage/>
             </PrivateRoute>
           }
