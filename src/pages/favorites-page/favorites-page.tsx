@@ -1,9 +1,14 @@
-import FavoritesCard from '../../components/favorites-cards/favorites-card';
-import FavoriteListItem from '../../components/favorites-list-item/favorites-list-item';
+import FavoritesCard from '../../components/favorites-components/favorites-cards/favorites-card';
+import FavoriteListItem from '../../components/favorites-components/favorites-list-item/favorites-list-item';
 import Logo from '../../components/logo/logo';
-import { Cities } from '../../const';
+import { Offers } from '../../types';
 
-function FavoritePage() : JSX.Element {
+type FavoritePageProps = {
+  favoriteOffers: Offers;
+}
+
+function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
+  const cities = Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   return (
     <div className="page">
       <header className="header">
@@ -38,14 +43,13 @@ function FavoritePage() : JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoriteListItem city={Cities.Amsterdam}>
-                <FavoritesCard></FavoritesCard>
-                <FavoritesCard></FavoritesCard>
-              </FavoriteListItem>
-
-              <FavoriteListItem city={Cities.Cologne}>
-                <FavoritesCard></FavoritesCard>
-              </FavoriteListItem>
+              {cities.map((city) => (
+                <FavoriteListItem key={city} city={city}>
+                  {favoriteOffers.filter((offer) => offer.city.name === city).map((offer) => (
+                    <FavoritesCard key={offer.id} offer={offer}></FavoritesCard>
+                  ))}
+                </FavoriteListItem>
+              ))}
             </ul>
           </section>
         </div>

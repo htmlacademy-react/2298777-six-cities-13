@@ -1,14 +1,17 @@
 import Logo from '../../components/logo/logo';
-import OfferCard from '../../components/offer-card/offer-card';
 import { Cities } from '../../const';
 import LocationItem from '../../components/locations-item/location-item';
+import { Offers } from '../../types';
+import OfferList from '../../components/offer-components/offer-list/offer-list';
+import React from 'react';
 
 type MainPageProps = {
-  numberOfOfferCards: number;
+  offers: Offers;
 }
 
-function MainPage({numberOfOfferCards} : MainPageProps) : JSX.Element {
-  const offerCards = Array.from({length : numberOfOfferCards}, () => (<OfferCard key={crypto.randomUUID()}></OfferCard>));
+function MainPage({offers} : MainPageProps) : JSX.Element {
+  const [currentCity, setCurrentCity] = React.useState(Cities.Amsterdam);
+  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -43,7 +46,13 @@ function MainPage({numberOfOfferCards} : MainPageProps) : JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {Object.values(Cities).map((city) => (<LocationItem key={crypto.randomUUID()} city={city}></LocationItem>))}
+              {Object.values(Cities).map((city) => (
+                <LocationItem
+                  key={crypto.randomUUID()}
+                  city={city}
+                  currentCity={currentCity}
+                />
+              ))}
             </ul>
           </section>
         </div>
@@ -51,7 +60,7 @@ function MainPage({numberOfOfferCards} : MainPageProps) : JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offersInCurrentCity.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -67,9 +76,7 @@ function MainPage({numberOfOfferCards} : MainPageProps) : JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offerCards}
-              </div>
+              <OfferList offers={offersInCurrentCity}></OfferList>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
