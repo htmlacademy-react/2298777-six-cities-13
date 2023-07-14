@@ -1,7 +1,3 @@
-const Settings = {
-  NumberOfOfferCards: 5,
-} as const;
-
 const AppRoutes = {
   Main: '/',
   Login: '/login',
@@ -24,4 +20,12 @@ const Cities = {
   Dusseldorf: 'Dusseldorf',
 } as const;
 
-export {Settings, AppRoutes, AuthorizationStatus, Cities};
+const Stars = [
+  'terribly',
+  'badly',
+  'not bad',
+  'good',
+  'perfect',
+] as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars};

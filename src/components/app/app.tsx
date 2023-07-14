@@ -6,14 +6,13 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../private-route/private-route';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus } from '../../const';
-import { Comments, DetailedOffers, Offers, Users } from '../../types';
+import { Comments, DetailedOffers, Offers } from '../../types';
 import offers from '../../mocks/offers';
 
 type AppProps = {
   offers: Offers;
   detailedOffers: DetailedOffers;
   comments: Comments;
-  users: Users;
 }
 
 function App(props : AppProps) : JSX.Element {

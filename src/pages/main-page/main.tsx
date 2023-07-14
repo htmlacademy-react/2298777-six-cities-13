@@ -2,16 +2,24 @@ import Logo from '../../components/logo/logo';
 import { Cities } from '../../const';
 import LocationItem from '../../components/locations-item/location-item';
 import { Offers } from '../../types';
-import OfferList from '../../components/offer-components/offer-list/offer-list';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import MainOffersEmpty from '../../components/main-components/main-offers-empty/main-offers-empty';
+import MainOffers from '../../components/main-components/main-offers/main-offers';
 
 type MainPageProps = {
   offers: Offers;
+  city?: string;
 }
 
-function MainPage({offers} : MainPageProps) : JSX.Element {
-  const [currentCity, setCurrentCity] = React.useState(Cities.Amsterdam);
-  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity);
+function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
+  const location = useLocation().state as {city : string};
+  city = location?.city ?? city;
+  const [currentCity, setCurrentCity] = React.useState({city : city});
+  if (city !== currentCity.city) {
+    setCurrentCity({city : city});
+  }
+  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity.city);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -46,42 +54,20 @@ function MainPage({offers} : MainPageProps) : JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {Object.values(Cities).map((city) => (
+              {Object.values(Cities).map((c) => (
                 <LocationItem
                   key={crypto.randomUUID()}
-                  city={city}
-                  currentCity={currentCity}
+                  city={c}
+                  currentCity={currentCity.city}
                 />
               ))}
             </ul>
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersInCurrentCity.length} places to stay in {currentCity}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <OfferList offers={offersInCurrentCity}></OfferList>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
+          {offersInCurrentCity.length === 0 ?
+            <MainOffersEmpty/> :
+            <MainOffers city={currentCity.city} offersInCurrentCity={offersInCurrentCity}/>}
         </div>
       </main>
     </div>);
