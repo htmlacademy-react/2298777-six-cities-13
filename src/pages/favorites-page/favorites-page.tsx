@@ -2,10 +2,14 @@ import FavoritesCard from '../../components/favorites-cards/favorites-card';
 import FavoriteListItem from '../../components/favorites-list-item/favorites-list-item';
 import Logo from '../../components/logo/logo';
 import { Cities } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 function FavoritePage() : JSX.Element {
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities - Favorites</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
