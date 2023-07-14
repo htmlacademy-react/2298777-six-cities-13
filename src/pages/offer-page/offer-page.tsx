@@ -17,7 +17,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
   const detailedOffer = detailedOffers.find((offer) => offer.id === id);
   const otherPlaces = detailedOffers.filter((offer) => offer.id !== id && offer.city.name === detailedOffer?.city.name).map((offer) => (<OfferCard key={offer.id} offer={offer}/>));
   if (detailedOffer === undefined) {
-    return (<Navigate to="/404"></Navigate>);
+    return (<Navigate to="/404"/>);
   }
   return (
     <div className="page">
@@ -25,7 +25,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo></Logo>
+              <Logo/>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -123,7 +123,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
                 <ul className="reviews__list">
                   {comments.map((comment) => (<ReviewItem key={comment.id} comment={comment}/>))}
                 </ul>
-                <OfferForm></OfferForm>
+                <OfferForm/>
               </section>
             </div>
           </div>

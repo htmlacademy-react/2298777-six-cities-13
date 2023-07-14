@@ -8,7 +8,7 @@ function Page404 () : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo></Logo>
+              <Logo/>
             </div>
           </div>
         </div>

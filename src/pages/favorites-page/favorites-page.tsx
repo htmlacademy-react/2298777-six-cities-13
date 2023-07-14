@@ -15,7 +15,7 @@ function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo></Logo>
+              <Logo/>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -55,7 +55,7 @@ function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <Logo width={64} height={33}></Logo>
+        <Logo width={64} height={33}/>
       </footer>
     </div>
   );
