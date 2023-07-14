@@ -6,6 +6,7 @@ import OfferInsideItem from '../../components/offer-components/offer-inside-item
 import ReviewItem from '../../components/review-item/review-item';
 import OfferForm from '../../components/offer-components/offer-form/offer-form';
 import OfferCard from '../../components/offer-components/offer-card/offer-card';
+import { Helmet } from 'react-helmet-async';
 
 type OfferPageParams = {
   detailedOffers: DetailedOffers;
@@ -21,6 +22,9 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
   }
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities - Offer</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

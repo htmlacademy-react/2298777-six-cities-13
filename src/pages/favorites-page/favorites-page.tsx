@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import FavoritesCard from '../../components/favorites-components/favorites-cards/favorites-card';
 import FavoriteListItem from '../../components/favorites-components/favorites-list-item/favorites-list-item';
 import Logo from '../../components/logo/logo';
@@ -11,6 +12,9 @@ function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
   const cities = Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   return (
     <div className="page">
+      <Helmet>
+        <title>6 cities - Favorites</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

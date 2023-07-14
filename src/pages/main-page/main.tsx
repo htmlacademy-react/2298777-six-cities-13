@@ -6,6 +6,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import MainOffersEmpty from '../../components/main-components/main-offers-empty/main-offers-empty';
 import MainOffers from '../../components/main-components/main-offers/main-offers';
+import { Helmet } from 'react-helmet-async';
 
 type MainPageProps = {
   offers: Offers;
@@ -22,6 +23,9 @@ function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
   const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity.city);
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
