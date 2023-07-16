@@ -7,6 +7,9 @@ import ReviewItem from '../../components/review-item/review-item';
 import OfferForm from '../../components/offer-components/offer-form/offer-form';
 import OfferCard from '../../components/offer-components/offer-card/offer-card';
 import { Helmet } from 'react-helmet-async';
+import cn from 'classnames';
+import ProfileNavLink from '../../components/header-nav-links/profile-nav-link/profile-nav-link';
+import SignoutLink from '../../components/header-nav-links/signout-link/signout-link';
 
 type OfferPageParams = {
   detailedOffers: DetailedOffers;
@@ -33,19 +36,8 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
+                <ProfileNavLink/>
+                <SignoutLink/>
               </ul>
             </nav>
           </div>
@@ -61,7 +53,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className={`offer__mark ${detailedOffer.isPremium ? '' : 'visually-hidden'}`}>
+              <div className={cn('offer__mark', {'visually-hidden': !detailedOffer.isPremium})}>
                 <span>Premium</span>
               </div>
               <div className="offer__name-wrapper">
@@ -134,7 +126,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
           <section className="offer__map map"></section>
         </section>
         <div className="container">
-          <section className={`near-places places ${otherPlaces.length === 0 ? 'visually-hidden' : ''}`}>
+          <section className={cn('near-places places', {'visually-hidden': otherPlaces.length === 0})}>
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {otherPlaces}

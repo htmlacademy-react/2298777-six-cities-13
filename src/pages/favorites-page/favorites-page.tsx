@@ -3,6 +3,8 @@ import FavoritesCard from '../../components/favorites-components/favorites-cards
 import FavoriteListItem from '../../components/favorites-components/favorites-list-item/favorites-list-item';
 import Logo from '../../components/logo/logo';
 import { Offers } from '../../types';
+import ProfileNavLink from '../../components/header-nav-links/profile-nav-link/profile-nav-link';
+import SignoutLink from '../../components/header-nav-links/signout-link/signout-link';
 
 type FavoritePageProps = {
   favoriteOffers: Offers;
@@ -23,19 +25,8 @@ function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
+                <ProfileNavLink/>
+                <SignoutLink/>
               </ul>
             </nav>
           </div>

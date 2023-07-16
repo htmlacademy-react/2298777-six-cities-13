@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
+import cn from 'classnames';
 
 type LocationItemProps = {
   city : string;
@@ -10,7 +11,7 @@ function LocationItem({city, currentCity} : LocationItemProps) : JSX.Element {
   return (
     <li className="locations__item">
       <Link
-        className={`locations__item-link tabs__item ${currentCity === city ? 'tabs__item--active' : ''}`}
+        className={cn('locations__item-link tabs__item', {'tabs__item--active': currentCity === city})}
         to={AppRoutes.Main}
         state={{city : city}}
       >

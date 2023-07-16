@@ -1,4 +1,5 @@
 import {Offer} from '../../../types';
+import cn from 'classnames';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -7,7 +8,7 @@ type FavoritesCardProps = {
 function FavoritesCard({offer} : FavoritesCardProps) : JSX.Element {
   return (
     <article className="favorites__card place-card">
-      <div className={`place-card__mark ${offer.isPremium ? '' : 'visually-hidden'}`}>
+      <div className={cn('place-card__mark', {'visually-hidden': !offer.isPremium})}>
         <span>Premium</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">

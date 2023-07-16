@@ -7,6 +7,8 @@ import { useLocation } from 'react-router-dom';
 import MainOffersEmpty from '../../components/main-components/main-offers-empty/main-offers-empty';
 import MainOffers from '../../components/main-components/main-offers/main-offers';
 import { Helmet } from 'react-helmet-async';
+import ProfileNavLink from '../../components/header-nav-links/profile-nav-link/profile-nav-link';
+import SignoutLink from '../../components/header-nav-links/signout-link/signout-link';
 
 type MainPageProps = {
   offers: Offers;
@@ -34,19 +36,8 @@ function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
+                <ProfileNavLink/>
+                <SignoutLink/>
               </ul>
             </nav>
           </div>
