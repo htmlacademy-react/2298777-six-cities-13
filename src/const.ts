@@ -3,6 +3,7 @@ const AppRoutes = {
   Login: '/login',
   Favorites: '/favorites',
   Offer: '/offer',
+  NotFound: '/404',
 } as const;
 
 const AuthorizationStatus = {
@@ -33,4 +34,9 @@ const LoginData = {
   password: 'password',
 } as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData};
+const PinUrl = {
+  Default: 'public/img/pin.svg',
+  Active: 'public/img/pin-active.svg',
+} as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl};

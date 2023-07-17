@@ -55,14 +55,14 @@ const offers : Offers = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        latitude: 52.369204,
+        longitude: 4.901319,
         zoom: 13
       }
     },
     location: {
-      latitude: 52.37454,
-      longitude: 4.897976,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 13
     },
     isFavorite: true,
@@ -78,14 +78,14 @@ const offers : Offers = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        latitude: 52.369204,
+        longitude: 4.901319,
         zoom: 13
       }
     },
     location: {
-      latitude: 52.37454,
-      longitude: 4.897976,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 13
     },
     isFavorite: false,
@@ -114,6 +114,52 @@ const offers : Offers = [
     isFavorite: false,
     isPremium: false,
     rating: 4.2,
+    previewImage: 'img/room.jpg'
+  },
+  {
+    id: '6',
+    title: 'skuf apartment',
+    type: 'Apartment',
+    price: 322,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.369204,
+        longitude: 4.901319,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 13
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 2.2,
+    previewImage: 'img/apartment-01.jpg'
+  },
+  {
+    id: '7',
+    title: 'skuf room',
+    type: 'Private room',
+    price: 100,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.369204,
+        longitude: 4.901319,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 13
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 1.2,
     previewImage: 'img/room.jpg'
   },
 ];

@@ -1,9 +1,9 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { Comments, DetailedOffers } from '../../types';
-import OfferCard from '../../components/offer-components/offer-card';
 import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
+import { AppRoutes } from '../../const';
 
 type OfferPageParams = {
   detailedOffers: DetailedOffers;
@@ -12,10 +12,8 @@ type OfferPageParams = {
 
 function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
   const id = useParams().id;
-  const detailedOffer = detailedOffers.find((offer) => offer.id === id);
-  const otherPlaces = detailedOffers.filter((offer) => offer.id !== id && offer.city.name === detailedOffer?.city.name).map((offer) => (<OfferCard key={offer.id} offer={offer}/>));
-  if (detailedOffer === undefined) {
-    return (<Navigate to="/404"/>);
+  if (id === undefined) {
+    return (<Navigate to={AppRoutes.NotFound}/>);
   }
   return (
     <div className="page">
@@ -24,7 +22,7 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
       </Helmet>
       <HeaderContainer isNavShown/>
 
-      <OfferMain detailedOffer={detailedOffer} comments={comments} otherPlaces={otherPlaces}/>
+      <OfferMain detailedOffers={detailedOffers} id={id} comments={comments}/>
     </div>);
 }
 

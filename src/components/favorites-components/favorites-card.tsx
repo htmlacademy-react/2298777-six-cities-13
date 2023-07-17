@@ -1,5 +1,6 @@
 import {Offer} from '../../types';
 import cn from 'classnames';
+import OfferLink from '../other/offer-link';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -12,9 +13,9 @@ function FavoritesCard({offer} : FavoritesCardProps) : JSX.Element {
         <span>Premium</span>
       </div>
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <OfferLink offerId={offer.id}>
           <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
-        </a>
+        </OfferLink>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -31,12 +32,12 @@ function FavoritesCard({offer} : FavoritesCardProps) : JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${String(offer.rating / 5 * 100)}%`}}></span>
+            <span style={{width: `${Math.round(offer.rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <OfferLink offerId={offer.id}>{offer.title}</OfferLink>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

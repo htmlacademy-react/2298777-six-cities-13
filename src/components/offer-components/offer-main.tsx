@@ -1,17 +1,26 @@
-import { DetailedOffer, Comments } from '../../types';
+import { Comments, DetailedOffers } from '../../types';
 import OfferImage from './offer-image';
 import OfferInsideItem from './offer-inside-item';
 import OfferReview from './offer-review';
 import OfferForm from './offer-form';
 import cn from 'classnames';
+import Map from '../other/map';
+import OfferCard from './offer-card';
+import { Navigate } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 
 type OfferMainProps = {
-  detailedOffer: DetailedOffer;
   comments: Comments;
-  otherPlaces: JSX.Element[];
+  detailedOffers: DetailedOffers;
+  id: string;
 }
 
-function OfferMain({detailedOffer, comments, otherPlaces} : OfferMainProps) : JSX.Element {
+function OfferMain({comments, detailedOffers, id} : OfferMainProps) : JSX.Element {
+  const detailedOffer = detailedOffers.find((offer) => offer.id === id);
+  if (!detailedOffer) {
+    return (<Navigate to={AppRoutes.NotFound}/>);
+  }
+  const otherPlaces = detailedOffers.filter((offer) => offer.id !== id && offer.city.name === detailedOffer?.city.name);
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
@@ -38,7 +47,7 @@ function OfferMain({detailedOffer, comments, otherPlaces} : OfferMainProps) : JS
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{width: `${String(detailedOffer.rating / 5 * 100)}%`}}></span>
+                <span style={{width: `${Math.round(detailedOffer.rating) * 20}%`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{detailedOffer.rating}</span>
@@ -92,13 +101,18 @@ function OfferMain({detailedOffer, comments, otherPlaces} : OfferMainProps) : JS
             </section>
           </div>
         </div>
-        <section className="offer__map map"></section>
+        <Map
+          city={detailedOffer.city}
+          points={otherPlaces.map((offer) => offer.location)}
+          className={'offer__map'}
+          isHoverActive={false}
+        />
       </section>
       <div className="container">
         <section className={cn('near-places places', {'visually-hidden': otherPlaces.length === 0})}>
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {otherPlaces}
+            {otherPlaces.map((offer) => (<OfferCard key={offer.id} offer={offer}/>))}
           </div>
         </section>
       </div>

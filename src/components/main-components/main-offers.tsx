@@ -1,5 +1,8 @@
-import {Offers} from '../../types';
+import { Offers } from '../../types';
 import OfferList from '../offer-components/offer-list';
+import Map from '../other/map';
+import { useState } from 'react';
+import { Location } from '../../types';
 
 type MainOffersProps = {
   offersInCurrentCity: Offers;
@@ -7,6 +10,10 @@ type MainOffersProps = {
 }
 
 function MainOffers({offersInCurrentCity, city} : MainOffersProps) : JSX.Element {
+  const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
+  const onOfferHover = (id : string) => {
+    setSelectedPoint(offersInCurrentCity.find((offer) => offer.id === id)?.location);
+  };
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
@@ -27,10 +34,16 @@ function MainOffers({offersInCurrentCity, city} : MainOffersProps) : JSX.Element
             <li className="places__option" tabIndex={0}>Top rated first</li>
           </ul>
         </form>
-        <OfferList offers={offersInCurrentCity}/>
+        <OfferList offers={offersInCurrentCity} onOfferHover={onOfferHover}/>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <Map
+          city={offersInCurrentCity[0].city}
+          points={offersInCurrentCity.map((offer) => offer.location)}
+          className='cities__map'
+          isHoverActive
+          selectedPoint={selectedPoint}
+        />
       </div>
     </div>
   );

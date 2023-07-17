@@ -14,7 +14,7 @@ function OfferReview({comment} : {comment : Comment}) : JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${String(comment.rating / 5 * 100)}%`}}></span>
+            <span style={{width: `${Math.round(comment.rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

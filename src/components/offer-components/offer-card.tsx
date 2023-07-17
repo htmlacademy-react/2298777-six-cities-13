@@ -1,22 +1,27 @@
-import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
-import { AppRoutes } from '../../const';
 import cn from 'classnames';
+import OfferLink from '../other/offer-link';
 
 type OfferCardProps = {
   offer: Offer;
+  onOfferHover?: (id : string) => void;
 }
 
-function OfferCard({offer} : OfferCardProps) : JSX.Element {
+function OfferCard({offer, onOfferHover} : OfferCardProps) : JSX.Element {
+
+  const handleOfferHover = () => {
+    onOfferHover?.(offer.id);
+  };
+
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseEnter={handleOfferHover}>
       <div className={cn('place-card__mark', {'visually-hidden': !offer.isPremium})}>
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoutes.Offer}/${offer.id}`}>
+        <OfferLink offerId={offer.id}>
           <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
-        </Link>
+        </OfferLink>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -36,12 +41,12 @@ function OfferCard({offer} : OfferCardProps) : JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${String(offer.rating / 5 * 100)}%`}}></span>
+            <span style={{width: `${Math.round(offer.rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <OfferLink offerId={offer.id}>{offer.title}</OfferLink>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

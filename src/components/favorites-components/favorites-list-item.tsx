@@ -1,4 +1,6 @@
 import { PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 
 type FavoroteListItemProps = {
   city: string;
@@ -9,9 +11,9 @@ function FavoriteListItem({city, children} : PropsWithChildren<FavoroteListItemP
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to={AppRoutes.Main} state={{ city: city}}>
             <span>{city}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">
