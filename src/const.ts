@@ -28,4 +28,9 @@ const Stars = [
   'perfect',
 ] as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars};
+const LoginData = {
+  email: 'email',
+  password: 'password',
+} as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData};

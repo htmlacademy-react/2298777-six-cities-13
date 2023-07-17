@@ -2,12 +2,12 @@ import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import cn from 'classnames';
 
-type LocationItemProps = {
+type MainLocationsProps = {
   city : string;
   currentCity : string;
 }
 
-function LocationItem({city, currentCity} : LocationItemProps) : JSX.Element {
+function MainLocations({city, currentCity} : MainLocationsProps) : JSX.Element {
   return (
     <li className="locations__item">
       <Link
@@ -21,4 +21,4 @@ function LocationItem({city, currentCity} : LocationItemProps) : JSX.Element {
   );
 }
 
-export default LocationItem;
+export default MainLocations;

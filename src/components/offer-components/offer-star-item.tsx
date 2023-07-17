@@ -1,4 +1,4 @@
-import { Stars } from '../../../const';
+import { Stars } from '../../const';
 
 type OfferStarItemProps = {
   star: number;

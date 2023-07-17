@@ -3,13 +3,13 @@ import LoginPage from '../../pages/login-page/login-page';
 import Page404 from '../../pages/page-404/page-404';
 import FavoritePage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import PrivateRoute from '../private-route/private-route';
+import PrivateRoute from '../other/private-route';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus } from '../../const';
 import { Comments, DetailedOffers, Offers } from '../../types';
 import offers from '../../mocks/offers';
 import { HelmetProvider } from 'react-helmet-async';
-import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import ScrollToTop from '../other/scroll-to-top';
 
 type AppProps = {
   offers: Offers;

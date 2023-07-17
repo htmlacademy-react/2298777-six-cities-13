@@ -1,4 +1,4 @@
-import OfferStarItem from '../offer-star-item/offer-star-item';
+import OfferStarItem from './offer-star-item';
 import React from 'react';
 
 function OfferForm() : JSX.Element {

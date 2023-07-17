@@ -1,6 +1,6 @@
 import { Comment } from '../../types';
 
-function ReviewItem({comment} : {comment : Comment}) : JSX.Element {
+function OfferReview({comment} : {comment : Comment}) : JSX.Element {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -27,4 +27,4 @@ function ReviewItem({comment} : {comment : Comment}) : JSX.Element {
   );
 }
 
-export default ReviewItem;
+export default OfferReview;

@@ -1,5 +1,5 @@
-import {Offers} from '../../../types';
-import OfferList from '../../offer-components/offer-list/offer-list';
+import {Offers} from '../../types';
+import OfferList from '../offer-components/offer-list';
 
 type MainOffersProps = {
   offersInCurrentCity: Offers;
