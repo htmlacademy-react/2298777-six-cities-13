@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import MainMain from '../../components/main-components/main-main';
+import MainEmpty from '../../components/main-components/main-empty';
 
 type MainPageProps = {
   offers: Offers;
@@ -26,7 +27,9 @@ function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
       </Helmet>
       <HeaderContainer isNavShown/>
 
-      <MainMain offersInCurrentCity={offersInCurrentCity} city={currentCity.city}/>
+      {offersInCurrentCity.length === 0 ?
+        <MainEmpty city={currentCity.city}/> :
+        <MainMain offersInCurrentCity={offersInCurrentCity} city={currentCity.city}/>}
     </div>);
 }
 

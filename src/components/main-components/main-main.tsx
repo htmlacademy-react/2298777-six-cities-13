@@ -1,7 +1,6 @@
 import { Cities } from '../../const';
 import { Offers } from '../../types';
 import MainLocations from './main-locations';
-import MainOffersEmpty from './main-offers-empty';
 import MainOffers from './main-offers';
 
 type MainMainProps = {
@@ -28,9 +27,7 @@ function MainMain({offersInCurrentCity, city} : MainMainProps) : JSX.Element {
         </section>
       </div>
       <div className="cities">
-        {offersInCurrentCity.length === 0 ?
-          <MainOffersEmpty/> :
-          <MainOffers city={city} offersInCurrentCity={offersInCurrentCity}/>}
+        {<MainOffers city={city} offersInCurrentCity={offersInCurrentCity}/>}
       </div>
     </main>
   );
