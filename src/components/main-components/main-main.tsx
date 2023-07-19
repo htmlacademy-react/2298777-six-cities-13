@@ -1,12 +1,12 @@
 import { Cities } from '../../const';
-import { Offers } from '../../types';
+import { CityString, Offers } from '../../types';
 import MainLocations from './main-locations';
 import MainOffers from './main-offers';
 import { FC } from 'react';
 
 type MainMainProps = {
   offersInCurrentCity: Offers;
-  city: string;
+  city: CityString;
 }
 
 

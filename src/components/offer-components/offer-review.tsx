@@ -1,5 +1,6 @@
 import { Comment } from '../../types';
 import { FC } from 'react';
+import { getStarWidth } from '../../util';
 
 type OfferReviewProps = {
   comment: Comment;
@@ -18,7 +19,7 @@ const OfferReview : FC<OfferReviewProps> = ({comment}) => (
     <div className="reviews__info">
       <div className="reviews__rating rating">
         <div className="reviews__stars rating__stars">
-          <span style={{width: `${Math.round(comment.rating) * 20}%`}}></span>
+          <span style={{width: getStarWidth(comment.rating)}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

@@ -2,9 +2,10 @@ import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
+import { CityString } from '../../types';
 
 type FavoroteListItemProps = {
-  city: string;
+  city: CityString;
 }
 
 const FavoriteListItem : FC<PropsWithChildren<FavoroteListItemProps>> = ({city, children}) => (

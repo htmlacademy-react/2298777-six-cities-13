@@ -2,9 +2,10 @@ import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import cn from 'classnames';
 import {FC} from 'react';
+import { CityString } from '../../types';
 
 type MainLocationsProps = {
-  city : string;
+  city : CityString;
   currentCity : string;
 }
 

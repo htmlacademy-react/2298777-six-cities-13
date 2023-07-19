@@ -1,10 +1,11 @@
-import { Offers } from '../../types';
+import { CityString, Offers } from '../../types';
 import FavoritesCard from './favorites-card';
 import FavoriteListItem from './favorites-list-item';
 import { FC } from 'react';
+import { filterOfferByCity } from '../../util';
 
 type FavoritesMainProps = {
-  cities: string[];
+  cities: CityString[];
   favoriteOffers: Offers;
 }
 
@@ -16,7 +17,7 @@ const FavoritesMain : FC<FavoritesMainProps> = ({cities, favoriteOffers}) => (
         <ul className="favorites__list">
           {cities.map((city) => (
             <FavoriteListItem key={city} city={city}>
-              {favoriteOffers.filter((offer) => offer.city.name === city).map((offer) => (
+              {filterOfferByCity(favoriteOffers, city).map((offer) => (
                 <FavoritesCard key={offer.id} offer={offer}></FavoritesCard>
               ))}
             </FavoriteListItem>

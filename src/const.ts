@@ -54,4 +54,11 @@ const MapIcons = {
   }),
 } as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons};
+const SortOptions = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HighToLow: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
+} as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons, SortOptions};

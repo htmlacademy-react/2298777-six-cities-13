@@ -1,3 +1,5 @@
+import { Cities } from './const';
+
 type Offer = {
   id : string;
   title : string;
@@ -40,7 +42,7 @@ type UserInComment = {
 }
 
 type City = {
-  name: string;
+  name: CityString;
   location: Location;
 }
 
@@ -56,6 +58,8 @@ type Host = {
   isPro: boolean;
 }
 
+type CityString = keyof typeof Cities;
+
 type Users = User[];
 
 type Offers = Offer[];
@@ -64,4 +68,4 @@ type DetailedOffers = DetailedOffer[];
 
 type Comments = Comment[];
 
-export type {Offer, Offers, DetailedOffer, DetailedOffers, Comments, Comment, User, Users, City, Location};
+export type {Offer, Offers, DetailedOffer, DetailedOffers, Comments, Comment, User, Users, City, Location, CityString};

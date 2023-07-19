@@ -1,9 +1,10 @@
 import MainLocations from './main-locations';
 import { Cities } from '../../const';
 import { FC } from 'react';
+import { CityString } from '../../types';
 
 type MainEmptyProps = {
-  city: string;
+  city: CityString;
 }
 
 const MainEmpty : FC<MainEmptyProps> = ({city}) => (

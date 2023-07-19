@@ -7,7 +7,7 @@ type OfferStarItemProps = {
 }
 
 const OfferStarItem : FC<OfferStarItemProps> = ({star, onChange} : OfferStarItemProps) => (
-  <>
+  <div>
     <input
       className="form__rating-input visually-hidden"
       name="rating"
@@ -21,7 +21,7 @@ const OfferStarItem : FC<OfferStarItemProps> = ({star, onChange} : OfferStarItem
         <use xlinkHref="#icon-star"></use>
       </svg>
     </label>
-  </>
+  </div>
 );
 
 export default OfferStarItem;

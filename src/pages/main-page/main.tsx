@@ -1,5 +1,5 @@
 import { Cities } from '../../const';
-import { Offers } from '../../types';
+import { CityString, Offers } from '../../types';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -10,11 +10,11 @@ import { FC } from 'react';
 
 type MainPageProps = {
   offers: Offers;
-  city?: string;
+  city?: CityString;
 }
 
 const MainPage : FC<MainPageProps> = ({offers, city = Cities.Paris}) => {
-  const location = useLocation().state as {city : string};
+  const location = useLocation().state as {city : CityString};
   city = location?.city ?? city;
   const [currentCity, setCurrentCity] = React.useState({city : city});
   if (city !== currentCity.city) {
