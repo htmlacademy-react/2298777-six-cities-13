@@ -6,13 +6,14 @@ import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
+import { FC } from 'react';
 
 type MainPageProps = {
   offers: Offers;
   city?: string;
 }
 
-function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
+const MainPage : FC<MainPageProps> = ({offers, city = Cities.Paris}) => {
   const location = useLocation().state as {city : string};
   city = location?.city ?? city;
   const [currentCity, setCurrentCity] = React.useState({city : city});
@@ -31,6 +32,6 @@ function MainPage({offers, city = Cities.Paris} : MainPageProps) : JSX.Element {
         <MainEmpty city={currentCity.city}/> :
         <MainMain offersInCurrentCity={offersInCurrentCity} city={currentCity.city}/>}
     </div>);
-}
+};
 
 export default MainPage;

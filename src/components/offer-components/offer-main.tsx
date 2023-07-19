@@ -8,6 +8,7 @@ import Map from '../other/map';
 import OfferCard from './offer-card';
 import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
+import { FC } from 'react';
 
 type OfferMainProps = {
   comments: Comments;
@@ -15,7 +16,7 @@ type OfferMainProps = {
   id: string;
 }
 
-function OfferMain({comments, detailedOffers, id} : OfferMainProps) : JSX.Element {
+const OfferMain : FC<OfferMainProps> = ({comments, detailedOffers, id}) => {
   const detailedOffer = detailedOffers.find((offer) => offer.id === id);
   if (!detailedOffer) {
     return (<Navigate to={AppRoutes.NotFound}/>);
@@ -118,6 +119,6 @@ function OfferMain({comments, detailedOffers, id} : OfferMainProps) : JSX.Elemen
       </div>
     </main>
   );
-}
+};
 
 export default OfferMain;

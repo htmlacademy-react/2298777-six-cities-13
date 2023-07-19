@@ -3,13 +3,14 @@ import OfferList from '../offer-components/offer-list';
 import Map from '../other/map';
 import { useState } from 'react';
 import { Location } from '../../types';
+import { FC } from 'react';
 
 type MainOffersProps = {
   offersInCurrentCity: Offers;
   city: string;
 }
 
-function MainOffers({offersInCurrentCity, city} : MainOffersProps) : JSX.Element {
+const MainOffers : FC<MainOffersProps> = ({offersInCurrentCity, city}) => {
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
   const onOfferHover = (id : string) => {
     setSelectedPoint(offersInCurrentCity.find((offer) => offer.id === id)?.location);
@@ -47,6 +48,6 @@ function MainOffers({offersInCurrentCity, city} : MainOffersProps) : JSX.Element
       </div>
     </div>
   );
-}
+};
 
 export default MainOffers;

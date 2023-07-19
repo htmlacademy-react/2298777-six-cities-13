@@ -1,7 +1,8 @@
 import OfferStarItem from './offer-star-item';
 import React from 'react';
+import { FC } from 'react';
 
-function OfferForm() : JSX.Element {
+const OfferForm : FC = () => {
   const [review, setReview] = React.useState({
     id: crypto.randomUUID(),
     date: new Date(),
@@ -63,6 +64,6 @@ function OfferForm() : JSX.Element {
       </div>
     </form>
   );
-}
+};
 
 export default OfferForm;

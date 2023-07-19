@@ -1,3 +1,5 @@
+import { Icon } from 'leaflet';
+
 const AppRoutes = {
   Main: '/',
   Login: '/login',
@@ -39,4 +41,17 @@ const PinUrl = {
   Active: 'public/img/pin-active.svg',
 } as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl};
+const MapIcons = {
+  DefaultIcon: new Icon({
+    iconUrl: PinUrl.Default,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40]
+  }),
+  ActiveIcon: new Icon({
+    iconUrl: PinUrl.Active,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40]
+  }),
+} as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons};

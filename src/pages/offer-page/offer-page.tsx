@@ -4,13 +4,14 @@ import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
 import { AppRoutes } from '../../const';
+import { FC } from 'react';
 
 type OfferPageParams = {
   detailedOffers: DetailedOffers;
   comments: Comments;
 }
 
-function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
+const OfferPage : FC<OfferPageParams> = ({detailedOffers, comments}) => {
   const id = useParams().id;
   if (id === undefined) {
     return (<Navigate to={AppRoutes.NotFound}/>);
@@ -24,6 +25,6 @@ function OfferPage({detailedOffers, comments} : OfferPageParams) : JSX.Element {
 
       <OfferMain detailedOffers={detailedOffers} id={id} comments={comments}/>
     </div>);
-}
+};
 
 export default OfferPage;

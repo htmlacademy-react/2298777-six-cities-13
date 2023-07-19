@@ -1,15 +1,14 @@
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
+import { FC } from 'react';
 
 type OfferLinkProps = {
   offerId: string;
 }
 
-function OfferLink({offerId, children} : PropsWithChildren<OfferLinkProps>) : JSX.Element {
-  return (
-    <Link to={`${AppRoutes.Offer}/${offerId}`}>{children}</Link>
-  );
-}
+const OfferLink : FC<PropsWithChildren<OfferLinkProps>> = ({offerId, children}) =>(
+  <Link to={`${AppRoutes.Offer}/${offerId}`}>{children}</Link>
+);
 
 export default OfferLink;

@@ -1,13 +1,14 @@
 import { Offer } from '../../types';
 import cn from 'classnames';
 import OfferLink from '../other/offer-link';
+import { FC } from 'react';
 
 type OfferCardProps = {
   offer: Offer;
   onOfferHover?: (id : string) => void;
 }
 
-function OfferCard({offer, onOfferHover} : OfferCardProps) : JSX.Element {
+const OfferCard : FC<OfferCardProps> = ({offer, onOfferHover}) => {
 
   const handleOfferHover = () => {
     onOfferHover?.(offer.id);
@@ -51,6 +52,6 @@ function OfferCard({offer, onOfferHover} : OfferCardProps) : JSX.Element {
         <p className="place-card__type">{offer.type}</p>
       </div>
     </article>);
-}
+};
 
 export default OfferCard;

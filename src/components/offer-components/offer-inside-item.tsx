@@ -1,9 +1,13 @@
-function OfferInsideItem({item}: {item: string}) : JSX.Element {
-  return (
-    <li className="offer__inside-item">
-      {item}
-    </li>
-  );
+import { FC } from 'react';
+
+type OfferInsideItemProps = {
+  item: string;
 }
+
+const OfferInsideItem : FC<OfferInsideItemProps> = ({item}) => (
+  <li className="offer__inside-item">
+    {item}
+  </li>
+);
 
 export default OfferInsideItem;

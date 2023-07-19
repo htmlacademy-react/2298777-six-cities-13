@@ -3,12 +3,13 @@ import Logo from '../../components/other/logo';
 import { Offers } from '../../types';
 import HeaderContainer from '../../components/header/header-container';
 import FavoritesMain from '../../components/favorites-components/favorites-main';
+import { FC } from 'react';
 
 type FavoritePageProps = {
   favoriteOffers: Offers;
 }
 
-function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
+const FavoritePage : FC<FavoritePageProps> = ({favoriteOffers}) => {
   const cities = Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   return (
     <div className="page">
@@ -23,6 +24,6 @@ function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
       </footer>
     </div>
   );
-}
+};
 
 export default FavoritePage;

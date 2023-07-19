@@ -1,9 +1,10 @@
 import useMap from '../../hooks/use-map';
 import { useRef, useEffect, useState } from 'react';
 import { City, Location } from '../../types';
-import { layerGroup , Marker, Icon } from 'leaflet';
+import { layerGroup , Marker } from 'leaflet';
 import cn from 'classnames';
-import { PinUrl } from '../../const';
+import { MapIcons } from '../../const';
+import { FC } from 'react';
 
 type MapProps = {
   city: City;
@@ -13,19 +14,7 @@ type MapProps = {
   selectedPoint?: Location;
 }
 
-const defaultIcon = new Icon({
-  iconUrl: PinUrl.Default,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-const activeIcon = new Icon({
-  iconUrl: PinUrl.Active,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-function Map({city, points, className, isHoverActive, selectedPoint} : MapProps) : JSX.Element {
+const Map : FC<MapProps> = ({city, points, className, isHoverActive, selectedPoint}) => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const [currentCity, setCurrentCity] = useState(city);
@@ -42,8 +31,8 @@ function Map({city, points, className, isHoverActive, selectedPoint} : MapProps)
         marker
           .setIcon(
             isHoverActive && selectedPoint?.latitude === point.latitude && selectedPoint.longitude === point.longitude ?
-              activeIcon :
-              defaultIcon
+              MapIcons.ActiveIcon :
+              MapIcons.DefaultIcon
           )
           .addTo(markerLayer);
       });
@@ -62,6 +51,6 @@ function Map({city, points, className, isHoverActive, selectedPoint} : MapProps)
   return (
     <section className={cn(className, 'map')} ref={mapRef}></section>
   );
-}
+};
 
 export default Map;
