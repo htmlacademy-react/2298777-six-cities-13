@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
+import { Helmet } from 'react-helmet-async';
 
 function Page404 () : JSX.Element {
   return (
     <div className="page404">
+      <Helmet>
+        <title>6 cities - 404</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo></Logo>
+              <Logo/>
             </div>
           </div>
         </div>

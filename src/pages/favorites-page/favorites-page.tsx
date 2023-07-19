@@ -1,10 +1,15 @@
-import FavoritesCard from '../../components/favorites-cards/favorites-card';
-import FavoriteListItem from '../../components/favorites-list-item/favorites-list-item';
-import Logo from '../../components/logo/logo';
-import { Cities } from '../../const';
 import { Helmet } from 'react-helmet-async';
+import FavoritesCard from '../../components/favorites-components/favorites-cards/favorites-card';
+import FavoriteListItem from '../../components/favorites-components/favorites-list-item/favorites-list-item';
+import Logo from '../../components/logo/logo';
+import { Offers } from '../../types';
 
-function FavoritePage() : JSX.Element {
+type FavoritePageProps = {
+  favoriteOffers: Offers;
+}
+
+function FavoritePage({favoriteOffers} : FavoritePageProps) : JSX.Element {
+  const cities = Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   return (
     <div className="page">
       <Helmet>
@@ -14,7 +19,7 @@ function FavoritePage() : JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo></Logo>
+              <Logo/>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -42,20 +47,19 @@ function FavoritePage() : JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <FavoriteListItem city={Cities.Amsterdam}>
-                <FavoritesCard></FavoritesCard>
-                <FavoritesCard></FavoritesCard>
-              </FavoriteListItem>
-
-              <FavoriteListItem city={Cities.Cologne}>
-                <FavoritesCard></FavoritesCard>
-              </FavoriteListItem>
+              {cities.map((city) => (
+                <FavoriteListItem key={city} city={city}>
+                  {favoriteOffers.filter((offer) => offer.city.name === city).map((offer) => (
+                    <FavoritesCard key={offer.id} offer={offer}></FavoritesCard>
+                  ))}
+                </FavoriteListItem>
+              ))}
             </ul>
           </section>
         </div>
       </main>
       <footer className="footer container">
-        <Logo width={64} height={33}></Logo>
+        <Logo width={64} height={33}/>
       </footer>
     </div>
   );
