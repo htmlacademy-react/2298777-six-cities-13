@@ -23,11 +23,11 @@ const App : FC = () => {
         <FavoritePage favoriteOffers={offers.filter((offer) => offer.isFavorite)}/>
       </PrivateRoute>
       },
-      {path: AppRoutes.Offer, element:
-        <OfferPage detailedOffers={detailedOffers} comments={comments}/>,
-      children: [
-        {path: ':id', element: <OfferPage detailedOffers={detailedOffers} comments={comments}/>}
-      ]
+      {path: AppRoutes.Offer,
+        children: [
+          {index: true, element: <Page404/>},
+          {path: ':id', element: <OfferPage detailedOffers={detailedOffers} comments={comments}/>}
+        ]
       },
       {path: '*', element: <Page404/>}
     ]}
