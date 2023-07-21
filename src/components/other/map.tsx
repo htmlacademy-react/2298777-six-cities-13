@@ -46,7 +46,7 @@ const Map : FC<MapProps> = ({city, points, className, isHoverActive, selectedPoi
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint, isHoverActive, city]);
+  }, [map, points, selectedPoint, isHoverActive, city, currentCity]);
 
   return (
     <section className={cn(className, 'map')} ref={mapRef}></section>
