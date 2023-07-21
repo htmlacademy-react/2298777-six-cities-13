@@ -15,6 +15,7 @@ const OfferForm : FC = () => {
       <OfferStarItem
         key={star}
         star={star}
+        rating={review.rating}
         onChange={(evt) => {
           setReview({
             ...review,
@@ -49,6 +50,7 @@ const OfferForm : FC = () => {
             comment: evt.target.value,
           });
         }}
+        value={review.comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
