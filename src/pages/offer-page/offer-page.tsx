@@ -21,7 +21,7 @@ const OfferPage : FC<OfferPageParams> = ({detailedOffers, comments}) => {
       <Helmet>
         <title>6 cities - Offer</title>
       </Helmet>
-      <HeaderContainer isNavShown/>
+      <HeaderContainer isNavShown city={detailedOffers.find((offer) => offer.id === id)?.city.name}/>
 
       <OfferMain detailedOffers={detailedOffers} id={id} comments={comments}/>
     </div>);

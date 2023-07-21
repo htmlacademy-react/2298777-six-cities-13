@@ -26,7 +26,7 @@ const MainPage : FC<MainPageProps> = ({offers, city = Cities.Paris}) => {
       <Helmet>
         <title>6 cities</title>
       </Helmet>
-      <HeaderContainer isNavShown/>
+      <HeaderContainer isNavShown city={currentCity.city}/>
 
       {offersInCurrentCity.length === 0 ?
         <MainEmpty city={currentCity.city}/> :
