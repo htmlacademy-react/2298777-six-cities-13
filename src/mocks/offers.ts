@@ -157,7 +157,7 @@ const offers : Offers = [
       longitude: 4.939309666406198,
       zoom: 13
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 1.2,
     previewImage: 'img/room.jpg'

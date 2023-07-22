@@ -5,8 +5,12 @@ import { FC } from 'react';
 const NavContainer : FC = () => (
   <nav className="header__nav">
     <ul className="header__nav-list">
-      <ProfileNavLink/>
-      <SignoutLink/>
+      <li className="header__nav-item user">
+        <ProfileNavLink/>
+      </li>
+      <li className="header__nav-item">
+        <SignoutLink/>
+      </li>
     </ul>
   </nav>
 );

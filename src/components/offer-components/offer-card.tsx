@@ -1,8 +1,8 @@
 import { Offer } from '../../types';
-import cn from 'classnames';
-import OfferLink from '../other/offer-link';
 import { FC } from 'react';
 import OfferCardInfo from './offer-card-info';
+import OfferPremiumMark from './offer-premium-mark';
+import OfferImageWrapper from './offer-image-wrapper';
 
 type OfferCardProps = {
   offer: Offer;
@@ -17,14 +17,8 @@ const OfferCard : FC<OfferCardProps> = ({offer, onOfferHover}) => {
 
   return (
     <article className="cities__card place-card" onMouseEnter={handleOfferHover}>
-      <div className={cn('place-card__mark', {'visually-hidden': !offer.isPremium})}>
-        <span>Premium</span>
-      </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <OfferLink offerId={offer.id}>
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image"/>
-        </OfferLink>
-      </div>
+      <OfferPremiumMark isPremium={offer.isPremium}/>
+      <OfferImageWrapper offer={offer}/>
       <OfferCardInfo offer={offer}/>
     </article>);
 };

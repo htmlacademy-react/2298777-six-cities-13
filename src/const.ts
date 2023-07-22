@@ -61,4 +61,6 @@ const SortOptions = {
   TopRatedFirst: 'Top rated first',
 } as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons, SortOptions};
+const REVIEW_DATE_FORMAT = 'MMMM YYYY';
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons, SortOptions, REVIEW_DATE_FORMAT};
