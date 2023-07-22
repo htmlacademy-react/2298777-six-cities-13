@@ -1,8 +1,11 @@
+import { Icon } from 'leaflet';
+
 const AppRoutes = {
   Main: '/',
   Login: '/login',
   Favorites: '/favorites',
   Offer: '/offer',
+  NotFound: '/404',
 } as const;
 
 const AuthorizationStatus = {
@@ -28,4 +31,34 @@ const Stars = [
   'perfect',
 ] as const;
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars};
+const LoginData = {
+  email: 'email',
+  password: 'password',
+} as const;
+
+const PinUrl = {
+  Default: 'public/img/pin.svg',
+  Active: 'public/img/pin-active.svg',
+} as const;
+
+const MapIcons = {
+  DefaultIcon: new Icon({
+    iconUrl: PinUrl.Default,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40]
+  }),
+  ActiveIcon: new Icon({
+    iconUrl: PinUrl.Active,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40]
+  }),
+} as const;
+
+const SortOptions = {
+  Popular: 'Popular',
+  LowToHigh: 'Price: low to high',
+  HighToLow: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
+} as const;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons, SortOptions};

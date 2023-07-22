@@ -3,55 +3,36 @@ import LoginPage from '../../pages/login-page/login-page';
 import Page404 from '../../pages/page-404/page-404';
 import FavoritePage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
-import PrivateRoute from '../private-route/private-route';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import PrivateRoute from '../other/private-route';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus } from '../../const';
-import { Comments, DetailedOffers, Offers } from '../../types';
 import offers from '../../mocks/offers';
-import { HelmetProvider } from 'react-helmet-async';
+import comments from '../../mocks/comments';
+import detailedOffers from '../../mocks/detailedOffers';
+import { FC } from 'react';
+import Layout from '../layout/layout';
 
-type AppProps = {
-  offers: Offers;
-  detailedOffers: DetailedOffers;
-  comments: Comments;
-}
 
-function App(props : AppProps) : JSX.Element {
-  return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={AppRoutes.Main} element=
-            {
-              <MainPage
-                offers={props.offers}
-              />
-            }
-          />
-          <Route path={AppRoutes.Login} element={<LoginPage/>}/>
-          <Route path={AppRoutes.Favorites} element=
-            {
-              <PrivateRoute authStatus={AuthorizationStatus.Auth}>
-                <FavoritePage favoriteOffers={offers.filter((offer) => offer.isFavorite)}/>
-              </PrivateRoute>
-            }
-          />
-          <Route path={AppRoutes.Offer}>
-            <Route index element={<Page404/>}/>
-            <Route path=':id' element=
-              {
-                <OfferPage
-                  detailedOffers={props.detailedOffers}
-                  comments={props.comments}
-                />
-              }
-            />
-          </Route>
-          <Route path='*' element={<Page404/>}/>
-        </Routes>
-      </BrowserRouter>
-    </HelmetProvider>
-  );
-}
+const App : FC = () => {
+  const router = createBrowserRouter([
+    {path: '', element: <Layout/>, children: [
+      {path: AppRoutes.Main, element: <MainPage offers={offers}/>},
+      {path: AppRoutes.Login, element: <LoginPage/>},
+      {path: AppRoutes.Favorites, element:
+      <PrivateRoute authStatus={AuthorizationStatus.Auth}>
+        <FavoritePage favoriteOffers={offers.filter((offer) => offer.isFavorite)}/>
+      </PrivateRoute>
+      },
+      {path: AppRoutes.Offer,
+        children: [
+          {index: true, element: <Page404/>},
+          {path: ':id', element: <OfferPage detailedOffers={detailedOffers} comments={comments}/>}
+        ]
+      },
+      {path: '*', element: <Page404/>}
+    ]}
+  ]);
+  return <RouterProvider router={router}/>;
+};
 
 export default App;
