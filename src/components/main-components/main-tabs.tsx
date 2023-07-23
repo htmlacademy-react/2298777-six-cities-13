@@ -1,15 +1,10 @@
 import { FC } from 'react';
 import MainLocations from './main-locations';
-import { CityString } from '../../types/app-type';
 
-type MainTabsProps = {
-  city: CityString;
-}
-
-const MainTabs : FC<MainTabsProps> = ({city}) => (
+const MainTabs : FC = () => (
   <div className="tabs">
     <section className="locations container">
-      <MainLocations currentCity={city}/>
+      <MainLocations/>
     </section>
   </div>
 );

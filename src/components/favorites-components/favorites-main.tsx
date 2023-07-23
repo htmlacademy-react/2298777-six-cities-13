@@ -1,18 +1,13 @@
-import { CityString, Offers } from '../../types/app-type';
 import { FC } from 'react';
 import FavoritesCitiesList from './favorites-cities-list';
 
-type FavoritesMainProps = {
-  cities: CityString[];
-  favoriteOffers: Offers;
-}
 
-const FavoritesMain : FC<FavoritesMainProps> = ({cities, favoriteOffers}) => (
+const FavoritesMain : FC = () => (
   <main className="page__main page__main--favorites">
     <div className="page__favorites-container container">
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>
-        <FavoritesCitiesList cities={cities} favoriteOffers={favoriteOffers}/>
+        <FavoritesCitiesList/>
       </section>
     </div>
   </main>

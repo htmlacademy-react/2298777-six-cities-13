@@ -1,4 +1,3 @@
-import { Comments, DetailedOffers } from '../../types/app-type';
 import OfferGallery from './offer-gallery';
 import cn from 'classnames';
 import Map from '../other/map';
@@ -7,26 +6,26 @@ import { Navigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import OfferAbout from './offer-about';
+import { useAppSelector } from '../../hooks/use-store';
+import { useAppDispatch } from '../../hooks/use-store';
+import { setCurrentCity, setCurrentOffer } from '../../store/action';
 
-type OfferMainProps = {
-  comments: Comments;
-  detailedOffers: DetailedOffers;
-  id: string;
-}
-
-const OfferMain : FC<OfferMainProps> = ({comments, detailedOffers, id}) => {
+const OfferMain : FC<{id: string}> = ({id}) => {
+  const dispatch = useAppDispatch();
+  const detailedOffers = useAppSelector((state) => state.detailedOffers);
   const detailedOffer = detailedOffers.find((offer) => offer.id === id);
   if (!detailedOffer) {
     return (<Navigate to={AppRoutes.NotFound}/>);
   }
+  dispatch(setCurrentCity({city: detailedOffer.city.name}));
+  dispatch(setCurrentOffer({id}));
   const otherPlaces = detailedOffers.filter((offer) => offer.id !== id && offer.city.name === detailedOffer?.city.name);
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
         <OfferGallery images={detailedOffer.images}/>
-        <OfferAbout offer={detailedOffer} comments={comments}/>
+        <OfferAbout offer={detailedOffer}/>
         <Map
-          city={detailedOffer.city}
           points={otherPlaces.map((offer) => offer.location)}
           className={'offer__map'}
           isHoverActive={false}

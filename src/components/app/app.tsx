@@ -6,9 +6,6 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import PrivateRoute from '../other/private-route';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { AppRoutes, AuthorizationStatus } from '../../const';
-import offers from '../../mocks/offers';
-import comments from '../../mocks/comments';
-import detailedOffers from '../../mocks/detailedOffers';
 import { FC } from 'react';
 import Layout from '../layout/layout';
 
@@ -16,17 +13,17 @@ import Layout from '../layout/layout';
 const App : FC = () => {
   const router = createBrowserRouter([
     {path: '', element: <Layout/>, children: [
-      {path: AppRoutes.Main, element: <MainPage offers={offers}/>},
+      {path: AppRoutes.Main, element: <MainPage/>},
       {path: AppRoutes.Login, element: <LoginPage/>},
       {path: AppRoutes.Favorites, element:
       <PrivateRoute authStatus={AuthorizationStatus.Auth}>
-        <FavoritePage favoriteOffers={offers.filter((offer) => offer.isFavorite)}/>
+        <FavoritePage/>
       </PrivateRoute>
       },
       {path: AppRoutes.Offer,
         children: [
           {index: true, element: <Page404/>},
-          {path: ':id', element: <OfferPage detailedOffers={detailedOffers} comments={comments}/>}
+          {path: ':id', element: <OfferPage/>}
         ]
       },
       {path: '*', element: <Page404/>}

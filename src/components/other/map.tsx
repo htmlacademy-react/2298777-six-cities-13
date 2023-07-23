@@ -1,21 +1,22 @@
 import useMap from '../../hooks/use-map';
 import { useRef, useEffect, useState } from 'react';
-import { City, Location } from '../../types/app-type';
+import { Location } from '../../types/app-type';
 import { layerGroup , Marker } from 'leaflet';
 import cn from 'classnames';
 import { MapIcons } from '../../const';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/use-store';
 
 type MapProps = {
-  city: City;
   points: Location[];
   className: string;
   isHoverActive: boolean;
   selectedPoint?: Location;
 }
 
-const Map : FC<MapProps> = ({city, points, className, isHoverActive, selectedPoint}) => {
+const Map : FC<MapProps> = ({points, className, isHoverActive, selectedPoint}) => {
   const mapRef = useRef(null);
+  const city = useAppSelector((state) => state.currentCityOffers[0].city);
   const map = useMap(mapRef, city);
   const [currentCity, setCurrentCity] = useState(city);
 

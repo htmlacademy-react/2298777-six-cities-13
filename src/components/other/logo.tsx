@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
-import { CityString } from '../../types/app-type';
 
 type LogoProps = {
   width?: number;
   height?: number;
-  city?: CityString;
 }
 
-const Logo : FC<LogoProps> = ({width = 81, height = 41, city}) => {
+const Logo : FC<LogoProps> = ({width = 81, height = 41}) => {
   const handleLogoClick = (evt? : React.MouseEvent<HTMLAnchorElement>) => {
     if (evt) {
       evt.preventDefault();
@@ -18,7 +16,7 @@ const Logo : FC<LogoProps> = ({width = 81, height = 41, city}) => {
   return(
     <Link
       className="header__logo-link"
-      to={AppRoutes.Main} state={{city}}
+      to={AppRoutes.Main}
       onMouseDown={handleLogoClick}
       onKeyUp={(evt) => {
         if (evt.key === 'Enter' || evt.key === 'Space') {

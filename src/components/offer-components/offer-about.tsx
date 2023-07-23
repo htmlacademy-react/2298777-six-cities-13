@@ -1,4 +1,4 @@
-import { Comments, DetailedOffer } from '../../types/app-type';
+import { DetailedOffer } from '../../types/app-type';
 import OfferHost from './offer-host';
 import { FC } from 'react';
 import OfferPremiumMark from './offer-premium-mark';
@@ -11,10 +11,9 @@ import OfferAboutReviews from './offer-about-reviews';
 
 type OfferAboutProps = {
   offer: DetailedOffer;
-  comments: Comments;
 };
 
-const OfferAbout : FC<OfferAboutProps> = ({offer, comments}) => (
+const OfferAbout : FC<OfferAboutProps> = ({offer}) => (
   <div className="offer__container container">
     <div className="offer__wrapper">
       <OfferPremiumMark isPremium={offer.isPremium} isOfferMark/>
@@ -24,7 +23,7 @@ const OfferAbout : FC<OfferAboutProps> = ({offer, comments}) => (
       <OfferAboutPrice price={offer.price}/>
       <OfferAboutInside goods={offer.goods}/>
       <OfferHost offer={offer}/>
-      <OfferAboutReviews comments={comments}/>
+      <OfferAboutReviews/>
     </div>
   </div>
 );

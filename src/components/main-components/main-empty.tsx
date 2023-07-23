@@ -1,18 +1,15 @@
 import { FC } from 'react';
-import { CityString } from '../../types/app-type';
 import MainTabs from './main-tabs';
 import MainOffersEmpty from './main-offers-empty';
 
-type MainEmptyProps = {
-  city: CityString;
-}
 
-const MainEmpty : FC<MainEmptyProps> = ({city}) => (
+const MainEmpty : FC = () => (
   <main className="page__main page__main--index page__main--index-empty">
     <h1 className="visually-hidden">Cities</h1>
-    <MainTabs city={city}/>
+    <MainTabs/>
     <MainOffersEmpty/>
   </main>
 );
+
 
 export default MainEmpty;

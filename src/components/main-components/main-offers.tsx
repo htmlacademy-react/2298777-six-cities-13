@@ -1,25 +1,17 @@
-import { CityString, Offers } from '../../types/app-type';
 import Map from '../other/map';
 import { useState } from 'react';
 import { Location } from '../../types/app-type';
 import { FC } from 'react';
-import { SortOptions } from '../../const';
 import MainPlaces from './main-places';
+import { useAppSelector } from '../../hooks/use-store';
 
-type MainOffersProps = {
-  offersInCurrentCity: Offers;
-  city: CityString;
-}
 
-const MainOffers : FC<MainOffersProps> = ({offersInCurrentCity, city}) => {
+const MainOffers : FC = () => {
+  const offersInCurrentCity = useAppSelector((state) => state.currentCityOffers);
   const [selectedPoint, setSelectedPoint] = useState<Location | undefined>(undefined);
-  const [selectedSort, setSelectedSort] = useState<keyof typeof SortOptions>(SortOptions.Popular);
 
   const onOfferHover = (id : string) => {
     setSelectedPoint(offersInCurrentCity.find((offer) => offer.id === id)?.location);
-  };
-  const onSortChange = (sort: keyof typeof SortOptions) => {
-    setSelectedSort(sort);
   };
 
   return (
@@ -27,14 +19,10 @@ const MainOffers : FC<MainOffersProps> = ({offersInCurrentCity, city}) => {
       <div className="cities__places-container container">
         <MainPlaces
           offersInCurrentCity={offersInCurrentCity}
-          city={city}
-          selectedSort={selectedSort}
-          onSortChange={onSortChange}
           onOfferHover={onOfferHover}
         />
         <div className="cities__right-section">
           <Map
-            city={offersInCurrentCity[0].city}
             points={offersInCurrentCity.map((offer) => offer.location)}
             className='cities__map'
             isHoverActive
