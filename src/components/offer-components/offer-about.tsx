@@ -1,4 +1,4 @@
-import { Comments, DetailedOffer } from '../../types';
+import { Comments, DetailedOffer } from '../../types/app-type';
 import OfferHost from './offer-host';
 import { FC } from 'react';
 import OfferPremiumMark from './offer-premium-mark';

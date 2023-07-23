@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import MainLocations from './main-locations';
-import { CityString } from '../../types';
+import { CityString } from '../../types/app-type';
 
 type MainTabsProps = {
   city: CityString;

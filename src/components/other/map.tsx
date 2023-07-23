@@ -1,6 +1,6 @@
 import useMap from '../../hooks/use-map';
 import { useRef, useEffect, useState } from 'react';
-import { City, Location } from '../../types';
+import { City, Location } from '../../types/app-type';
 import { layerGroup , Marker } from 'leaflet';
 import cn from 'classnames';
 import { MapIcons } from '../../const';

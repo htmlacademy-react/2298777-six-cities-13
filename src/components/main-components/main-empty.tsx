@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CityString } from '../../types';
+import { CityString } from '../../types/app-type';
 import MainTabs from './main-tabs';
 import MainOffersEmpty from './main-offers-empty';
 

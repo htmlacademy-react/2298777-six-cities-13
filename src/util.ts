@@ -1,4 +1,4 @@
-import { Offers } from './types';
+import { Offers } from './types/app-type';
 import moment from 'moment';
 
 const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);

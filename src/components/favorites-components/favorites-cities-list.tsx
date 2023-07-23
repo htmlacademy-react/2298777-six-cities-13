@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CityString, Offers } from '../../types';
+import { CityString, Offers } from '../../types/app-type';
 import FavoriteListItem from './favorites-list-item';
 import FavoriteCardList from './favorites-card-list';
 

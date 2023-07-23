@@ -1,7 +1,7 @@
-import { CityString, Offers } from '../../types';
+import { CityString, Offers } from '../../types/app-type';
 import Map from '../other/map';
 import { useState } from 'react';
-import { Location } from '../../types';
+import { Location } from '../../types/app-type';
 import { FC } from 'react';
 import { SortOptions } from '../../const';
 import MainPlaces from './main-places';

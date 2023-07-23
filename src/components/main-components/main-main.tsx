@@ -1,4 +1,4 @@
-import { CityString, Offers } from '../../types';
+import { CityString, Offers } from '../../types/app-type';
 import MainOffers from './main-offers';
 import { FC } from 'react';
 import MainTabs from './main-tabs';

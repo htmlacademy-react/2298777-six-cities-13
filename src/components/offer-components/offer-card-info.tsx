@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Offer } from '../../types';
+import { Offer } from '../../types/app-type';
 import OfferPrice from '../offer-components/offer-price';
 import OfferRating from './offer-rating';
 import OfferName from './offer-name';

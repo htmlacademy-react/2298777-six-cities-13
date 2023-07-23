@@ -1,4 +1,4 @@
-import { DetailedOffers } from '../types';
+import { DetailedOffers } from '../types/app-type';
 import offers from './offers';
 
 const additionalInfo = [

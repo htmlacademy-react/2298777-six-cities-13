@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Comments } from '../../types';
+import { Comments } from '../../types/app-type';
 import OfferForm from './offer-form';
 import OfferReviews from './offer-reviews';
 

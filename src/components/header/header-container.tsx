@@ -1,7 +1,7 @@
 import Logo from '../other/logo';
 import NavContainer from './nav-container';
 import { FC } from 'react';
-import { CityString } from '../../types';
+import { CityString } from '../../types/app-type';
 
 type HeaderContainerProps = {
   isNavShown: boolean;

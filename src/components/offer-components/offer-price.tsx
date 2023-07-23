@@ -1,4 +1,4 @@
-import { Offer } from '../../types';
+import { Offer } from '../../types/app-type';
 import OfferBookmarkButton from './offer-bookmark-button';
 import { FC } from 'react';
 

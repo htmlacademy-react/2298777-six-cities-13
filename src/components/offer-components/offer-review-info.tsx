@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Comment } from '../../types';
+import { Comment } from '../../types/app-type';
 import { getStarWidth, humanizeDate } from '../../util';
 import { REVIEW_DATE_FORMAT } from '../../const';
 

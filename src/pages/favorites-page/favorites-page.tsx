@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/other/logo';
-import { Offers } from '../../types';
+import { Offers } from '../../types/app-type';
 import HeaderContainer from '../../components/header/header-container';
 import FavoritesMain from '../../components/favorites-components/favorites-main';
 import { FC } from 'react';

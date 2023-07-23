@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { Comment } from '../../types';
+import { Comment } from '../../types/app-type';
 
 
 const OfferReviewUser : FC<{comment: Comment}> = ({comment}) => (

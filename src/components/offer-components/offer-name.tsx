@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Offer } from '../../types';
+import { Offer } from '../../types/app-type';
 import OfferLink from '../other/offer-link';
 
 type OfferNameProps = {

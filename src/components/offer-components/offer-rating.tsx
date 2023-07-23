@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Offer } from '../../types';
+import { Offer } from '../../types/app-type';
 import { getStarWidth } from '../../util';
 
 type OfferRatingProps = {

@@ -1,4 +1,4 @@
-import { Offer } from '../../types';
+import { Offer } from '../../types/app-type';
 import { FC } from 'react';
 import OfferCardInfo from './offer-card-info';
 import OfferPremiumMark from './offer-premium-mark';

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import MainSort from './main-sort';
 import OfferList from '../offer-components/offer-list';
-import { CityString, Offers } from '../../types';
+import { CityString, Offers } from '../../types/app-type';
 import { SortOptions } from '../../const';
 
 type MainPlacesProps = {

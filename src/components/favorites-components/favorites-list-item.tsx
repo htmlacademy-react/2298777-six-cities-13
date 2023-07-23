@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
-import { CityString } from '../../types';
+import { CityString } from '../../types/app-type';
 
 type FavoroteListItemProps = {
   city: CityString;

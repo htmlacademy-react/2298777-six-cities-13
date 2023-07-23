@@ -1,4 +1,4 @@
-import { CityString, Offers } from '../../types';
+import { CityString, Offers } from '../../types/app-type';
 import { FC } from 'react';
 import FavoritesCitiesList from './favorites-cities-list';
 

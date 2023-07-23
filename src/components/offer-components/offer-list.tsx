@@ -1,5 +1,5 @@
 import OfferCard from './offer-card';
-import { Offers } from '../../types';
+import { Offers } from '../../types/app-type';
 import { FC } from 'react';
 
 type OfferListProps = {

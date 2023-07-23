@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { DetailedOffer } from '../../types';
+import { DetailedOffer } from '../../types/app-type';
 
 const OfferAboutFeatures : FC<{offer : DetailedOffer}> = ({offer}) => (
   <ul className="offer__features">

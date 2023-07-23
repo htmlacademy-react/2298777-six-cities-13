@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { DetailedOffer } from '../../types';
+import { DetailedOffer } from '../../types/app-type';
 
 type OfferHostProps = {
   offer: DetailedOffer;

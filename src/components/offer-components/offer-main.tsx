@@ -1,4 +1,4 @@
-import { Comments, DetailedOffers } from '../../types';
+import { Comments, DetailedOffers } from '../../types/app-type';
 import OfferGallery from './offer-gallery';
 import cn from 'classnames';
 import Map from '../other/map';

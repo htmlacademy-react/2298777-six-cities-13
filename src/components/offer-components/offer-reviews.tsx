@@ -1,4 +1,4 @@
-import { Comments } from '../../types';
+import { Comments } from '../../types/app-type';
 import { FC } from 'react';
 import OfferReviewInfo from './offer-review-info';
 import OfferReviewUser from './offer-review-user';

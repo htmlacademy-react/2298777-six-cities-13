@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { Comments, DetailedOffers } from '../../types';
+import { Comments, DetailedOffers } from '../../types/app-type';
 import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
