@@ -1,8 +1,8 @@
-import {Offer} from '../../types';
-import cn from 'classnames';
-import OfferLink from '../other/offer-link';
+import {Offer} from '../../types/app-type';
 import {FC} from 'react';
-import FavoriteCardInfo from './favorite-card-info';
+import OfferCardInfo from '../offer-components/offer-card-info';
+import OfferPremiumMark from '../offer-components/offer-premium-mark';
+import OfferImageWrapper from '../offer-components/offer-image-wrapper';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -10,15 +10,9 @@ type FavoritesCardProps = {
 
 const FavoritesCard : FC<FavoritesCardProps> = ({offer}) => (
   <article className="favorites__card place-card">
-    <div className={cn('place-card__mark', {'visually-hidden': !offer.isPremium})}>
-      <span>Premium</span>
-    </div>
-    <div className="favorites__image-wrapper place-card__image-wrapper">
-      <OfferLink offerId={offer.id}>
-        <img className="place-card__image" src={offer.previewImage} width="150" height="110" alt="Place image"/>
-      </OfferLink>
-    </div>
-    <FavoriteCardInfo offer={offer}/>
+    <OfferPremiumMark isPremium={offer.isPremium}/>
+    <OfferImageWrapper offer={offer} isFavoriteCard/>
+    <OfferCardInfo offer={offer} isFavoriteCard/>
   </article>
 );
 

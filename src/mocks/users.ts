@@ -1,4 +1,4 @@
-import { Users } from '../types';
+import { Users } from '../types/app-type';
 
 const users : Users = [
   {

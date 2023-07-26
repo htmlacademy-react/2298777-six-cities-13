@@ -1,37 +1,25 @@
-import { Cities } from '../../const';
-import { CityString, Offers } from '../../types';
-import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/use-store';
 
-type MainPageProps = {
-  offers: Offers;
-  city?: CityString;
-}
 
-const MainPage : FC<MainPageProps> = ({offers, city = Cities.Paris}) => {
-  const location = useLocation().state as {city : CityString};
-  city = location?.city ?? city;
-  const [currentCity, setCurrentCity] = React.useState({city : city});
-  if (city !== currentCity.city) {
-    setCurrentCity({city : city});
-  }
-  const offersInCurrentCity = offers.filter((offer) => offer.city.name === currentCity.city);
+const MainPage : FC = () => {
+  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 cities</title>
       </Helmet>
-      <HeaderContainer isNavShown city={currentCity.city}/>
+      <HeaderContainer isNavShown/>
 
-      {offersInCurrentCity.length === 0 ?
-        <MainEmpty city={currentCity.city}/> :
-        <MainMain offersInCurrentCity={offersInCurrentCity} city={currentCity.city}/>}
+      {currentCityOffers?.length === 0 ?
+        <MainEmpty/> :
+        <MainMain/>}
     </div>);
 };
+
 
 export default MainPage;

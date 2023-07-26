@@ -1,40 +1,15 @@
-import MainLocations from './main-locations';
-import { Cities } from '../../const';
 import { FC } from 'react';
-import { CityString } from '../../types';
+import MainTabs from './main-tabs';
+import MainOffersEmpty from './main-offers-empty';
 
-type MainEmptyProps = {
-  city: CityString;
-}
 
-const MainEmpty : FC<MainEmptyProps> = ({city}) => (
+const MainEmpty : FC = () => (
   <main className="page__main page__main--index page__main--index-empty">
     <h1 className="visually-hidden">Cities</h1>
-    <div className="tabs">
-      <section className="locations container">
-        <ul className="locations__list tabs__list">
-          {Object.values(Cities).map((c) => (
-            <MainLocations
-              key={c}
-              city={c}
-              currentCity={city}
-            />
-          ))}
-        </ul>
-      </section>
-    </div>
-    <div className="cities">
-      <div className="cities__places-container cities__places-container--empty container">
-        <section className="cities__no-places">
-          <div className="cities__status-wrapper tabs__content">
-            <b className="cities__status">No places to stay available</b>
-            <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
-          </div>
-        </section>
-        <div className="cities__right-section"></div>
-      </div>
-    </div>
+    <MainTabs/>
+    <MainOffersEmpty/>
   </main>
 );
+
 
 export default MainEmpty;

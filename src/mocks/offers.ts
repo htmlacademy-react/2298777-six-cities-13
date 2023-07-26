@@ -1,4 +1,4 @@
-import { Offers } from '../types';
+import { Offers } from '../types/app-type';
 
 const offers : Offers = [
   {
@@ -157,7 +157,7 @@ const offers : Offers = [
       longitude: 4.939309666406198,
       zoom: 13
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     rating: 1.2,
     previewImage: 'img/room.jpg'
