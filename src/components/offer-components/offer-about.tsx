@@ -17,7 +17,7 @@ const OfferAbout : FC<OfferAboutProps> = ({offer}) => (
   <div className="offer__container container">
     <div className="offer__wrapper">
       <OfferPremiumMark isPremium={offer.isPremium} isOfferMark/>
-      <OfferAboutName title={offer.title} isFavorite={offer.isFavorite}/>
+      <OfferAboutName offer={offer} isFavorite={offer.isFavorite}/>
       <OfferAboutRating rating={offer.rating}/>
       <OfferAboutFeatures offer={offer}/>
       <OfferAboutPrice price={offer.price}/>

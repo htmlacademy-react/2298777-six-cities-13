@@ -4,12 +4,17 @@ import HeaderContainer from '../../components/header/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/use-store';
+import Loading from '../../components/other/loading/loading';
 
 const OfferPage : FC = () => {
   const id = useParams().id;
+  const isLoading = useAppSelector((state) => state.currentOfferLoading);
   if (id === undefined) {
     return (<Navigate to={AppRoutes.NotFound}/>);
   }
+
+
   return (
     <div className="page">
       <Helmet>
@@ -17,7 +22,7 @@ const OfferPage : FC = () => {
       </Helmet>
       <HeaderContainer isNavShown/>
 
-      <OfferMain id={id}/>
+      {isLoading ? <Loading/> : <OfferMain/>}
     </div>);
 };
 

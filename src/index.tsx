@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import store from './store';
+import { checkAuthAction, fetchOffersAction } from './store/api-action';
 import { Provider } from 'react-redux';
-import store from './store/index';
+
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
       <App/>
-    </React.StrictMode>
-  </Provider>
+    </Provider>
+  </React.StrictMode>
 );

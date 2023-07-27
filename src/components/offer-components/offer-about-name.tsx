@@ -1,17 +1,18 @@
 import { FC } from 'react';
 import OfferBookmarkButton from './offer-bookmark-button';
+import { Offer } from '../../types/app-type';
 
 type OfferAboutNameProps = {
-  title : string;
+  offer : Offer;
   isFavorite : boolean;
 };
 
-const OfferAboutName : FC<OfferAboutNameProps> = ({title, isFavorite}) => (
+const OfferAboutName : FC<OfferAboutNameProps> = ({offer, isFavorite}) => (
   <div className="offer__name-wrapper">
     <h1 className="offer__name">
-      {title}
+      {offer.title}
     </h1>
-    <OfferBookmarkButton isFavorite={isFavorite} width={31} height={33}/>
+    <OfferBookmarkButton isFavorite={isFavorite} width={31} height={33} id={offer.id}/>
   </div>
 );
 

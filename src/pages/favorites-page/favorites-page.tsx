@@ -3,20 +3,25 @@ import Logo from '../../components/other/logo';
 import HeaderContainer from '../../components/header/header-container';
 import FavoritesMain from '../../components/favorites-components/favorites-main';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/use-store';
+import FavoritesEmpty from '../../components/favorites-components/favorites-empty';
 
-const FavoritePage : FC = () => (
-  <div className="page">
-    <Helmet>
-      <title>6 cities - Favorites</title>
-    </Helmet>
-    <HeaderContainer isNavShown/>
+const FavoritePage : FC = () => {
+  const favorites = useAppSelector((state) => state.favorites);
+  return(
+    <div className="page page--favorites-empty">
+      <Helmet>
+        <title>6 cities - Favorites</title>
+      </Helmet>
+      <HeaderContainer isNavShown/>
 
-    <FavoritesMain/>
-    <footer className="footer container">
-      <Logo width={64} height={33}/>
-    </footer>
-  </div>
-);
+      {favorites.length ? <FavoritesMain/> : <FavoritesEmpty/>}
+      <footer className="footer container">
+        <Logo width={64} height={33}/>
+      </footer>
+    </div>
+  );
+};
 
 
 export default FavoritePage;

@@ -11,8 +11,12 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
   const [classButton, classIcon, classActive] = width === 18 ?
     ['place-card__bookmark-button', 'place-card__bookmark-icon', 'place-card__bookmark-button--active'] :
     ['offer__bookmark-button', 'offer__bookmark-icon', 'offer__bookmark-button--active'];
+
   return (
-    <button className={cn(classButton, 'button', {[classActive]: isFavorite})} type="button">
+    <button
+      className={cn(classButton, 'button', {[classActive]: isFavorite})}
+      type="button"
+    >
       <svg className={classIcon} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>
