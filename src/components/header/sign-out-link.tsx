@@ -8,7 +8,8 @@ import { removeToken } from '../../services/token';
 const SignOutLink : FC = () => {
   const dispatch = useAppDispatch();
   return (
-    <Link className="header__nav-link" to={AppRoutes.Main} onClick={() => {
+    <Link className="header__nav-link" to={AppRoutes.Main} onClick={(evt) => {
+      evt.preventDefault();
       dispatch(requireAuthorization('NO_AUTH'));
       removeToken();
     }}

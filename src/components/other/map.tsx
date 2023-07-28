@@ -50,7 +50,7 @@ const Map : FC<MapProps> = ({points, className, isHoverActive, selectedPoint}) =
   }, [map, points, selectedPoint, isHoverActive, city, currentCity]);
 
   return (
-    <section className={cn(className, 'map')} ref={mapRef}></section>
+    <section className={cn(className, 'map')}ref={mapRef}/>
   );
 };
 

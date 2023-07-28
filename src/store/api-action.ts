@@ -6,6 +6,7 @@ import { loadOffers, requireAuthorization, setUserAction, setError, setOffersLoa
 import { AuthData, Comments, DetailedOffer, Offers, User } from '../types/app-type';
 import { getToken, removeToken, setToken } from '../services/token';
 import store from '.';
+import processErrorHandle from '../services/process-error-handle';
 
 const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -59,8 +60,12 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
   'fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersLoadingAction(true));
-    const {data} = await api.get<Offers>(APIRoute.Offers);
-    dispatch(loadOffers(data));
+    try {
+      const {data} = await api.get<Offers>(APIRoute.Offers);
+      dispatch(loadOffers(data));
+    } catch {
+      processErrorHandle('error while loading offers');
+    }
     dispatch(setOffersLoadingAction(false));
   }
 );
@@ -84,13 +89,17 @@ const fetchCurrentOfferAction = createAsyncThunk<void, string, {
     const token = getToken();
     let response : AxiosResponse<DetailedOffer>;
     dispatch(setOffersLoadingAction(true));
-    if (token) {
-      response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id), {headers: {'X-Token': getToken()}});
-    } else {
-      response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id));
+    try {
+      if (token) {
+        response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id), {headers: {'X-Token': getToken()}});
+      } else {
+        response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id));
+      }
+      dispatch(setCurrentOfferAction(response.data));
+    } catch {
+      processErrorHandle('error while loading offer');
     }
     dispatch(setOffersLoadingAction(false));
-    dispatch(setCurrentOfferAction(response.data));
   }
 );
 
@@ -119,8 +128,12 @@ const fetchCommentsAction = createAsyncThunk<void, string, {
 }>(
   'fetchComments',
   async (id, {dispatch, extra: api}) => {
-    const response = await api.get<Comments>(APIRoute.Comments(id));
-    dispatch(setCommentsAction(response.data));
+    try {
+      const response = await api.get<Comments>(APIRoute.Comments(id));
+      dispatch(setCommentsAction(response.data));
+    } catch {
+      processErrorHandle('error while loading comments');
+    }
   }
 );
 
