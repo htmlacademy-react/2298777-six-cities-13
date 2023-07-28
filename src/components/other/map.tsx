@@ -1,6 +1,6 @@
 import useMap from '../../hooks/use-map';
 import { useRef, useEffect, useState } from 'react';
-import { Location } from '../../types/app-type';
+import { City, Location } from '../../types/app-type';
 import { layerGroup , Marker } from 'leaflet';
 import cn from 'classnames';
 import { MapIcons } from '../../const';
@@ -16,12 +16,12 @@ type MapProps = {
 
 const Map : FC<MapProps> = ({points, className, isHoverActive, selectedPoint}) => {
   const mapRef = useRef(null);
-  const city = useAppSelector((state) => state.currentCityOffers[0].city);
-  const map = useMap(mapRef, city);
+  const city = useAppSelector((state) => isHoverActive ? state.currentCityOffers[0].city : state.currentOffer?.city);
+  const map = useMap(mapRef, city as City);
   const [currentCity, setCurrentCity] = useState(city);
 
   useEffect(() => {
-    if (map) {
+    if (map && city) {
       const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {
         const marker = new Marker({

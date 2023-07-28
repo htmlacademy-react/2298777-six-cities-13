@@ -14,7 +14,7 @@ const StatusCodeMapping: Record<number, boolean> = {
 };
 
 const URL = 'https://13.design.pages.academy/six-cities';
-const REQUEST_TIMEOUT = 2000;
+const REQUEST_TIMEOUT = 5000;
 
 const shouldDisplayError = (response: AxiosResponse) => !StatusCodeMapping[response.status];
 

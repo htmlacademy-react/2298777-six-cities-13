@@ -9,13 +9,9 @@ import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import Layout from '../layout/layout';
 import ErrorMessage from '../other/error-message/error-message';
-import { useAppSelector } from '../../hooks/use-store';
-import Loading from '../other/loading/loading';
 
 
 const App : FC = () => {
-  const authStatus = useAppSelector((state) => state.authStatus);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
 
   const router = createBrowserRouter([
     {path: '', element: <Layout/>, children: [
@@ -42,7 +38,7 @@ const App : FC = () => {
   return (
     <>
       <ErrorMessage/>
-      {isOffersLoading || authStatus === 'UNKNOWN' ? <Loading/> : <RouterProvider router={router}/>}
+      <RouterProvider router={router}/>
     </>
   );
 };

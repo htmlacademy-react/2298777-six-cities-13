@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/store';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { APIRoute, AppRoutes, AuthorizationStatus, TIMEOUT_ERROR } from '../const';
-import { loadOffers, requireAuthorization, setUserAction, setError, setOffersLoadingAction, setCurrentOfferAction, setNearByOffersAction, setCommentsAction } from './action';
+import * as action from './action';
 import { AuthData, Comments, DetailedOffer, Offers, User } from '../types/app-type';
 import { getToken, removeToken, setToken } from '../services/token';
 import store from '.';
@@ -17,10 +17,10 @@ const checkAuthAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     try {
       const response = await api.get<User>(APIRoute.Login, {headers: {'X-Token': getToken()}});
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(setUserAction(response.data));
+      dispatch(action.requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(action.setUserAction(response.data));
     } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      dispatch(action.requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
 );
@@ -33,9 +33,9 @@ const loginAction = createAsyncThunk<void, AuthData, {
   'login',
   async ({email, password}, {dispatch, extra: api}) => {
     const response = await api.post<User>(AppRoutes.Login, {email, password});
-    dispatch(setUserAction(response.data));
+    dispatch(action.setUserAction(response.data));
     setToken(response.data.token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(action.requireAuthorization(AuthorizationStatus.Auth));
   }
 );
 
@@ -48,7 +48,7 @@ const logoutAction = createAsyncThunk<void, {
   async ({dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout, {headers: {'X-Token': getToken()}});
     removeToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(action.requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
 
@@ -59,21 +59,27 @@ const fetchOffersAction = createAsyncThunk<void, undefined, {
 }>(
   'fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersLoadingAction(true));
+    dispatch(action.setOffersLoadingAction(true));
+    let response : AxiosResponse<Offers>;
+    const token = getToken();
     try {
-      const {data} = await api.get<Offers>(APIRoute.Offers);
-      dispatch(loadOffers(data));
+      if (token) {
+        response = await api.get<Offers>(APIRoute.Offers, {headers: {'X-Token': token}});
+      } else {
+        response = await api.get<Offers>(APIRoute.Offers);
+      }
+      dispatch(action.loadOffers(response.data));
     } catch {
       processErrorHandle('error while loading offers');
     }
-    dispatch(setOffersLoadingAction(false));
+    dispatch(action.setOffersLoadingAction(false));
   }
 );
 
 const clearErrorAction = createAsyncThunk(
   'clearError',
   () => {
-    setTimeout(() => store.dispatch(setError(null)),
+    setTimeout(() => store.dispatch(action.setError(null)),
       TIMEOUT_ERROR,
     );
   },
@@ -88,18 +94,18 @@ const fetchCurrentOfferAction = createAsyncThunk<void, string, {
   async (id, {dispatch, extra: api}) => {
     const token = getToken();
     let response : AxiosResponse<DetailedOffer>;
-    dispatch(setOffersLoadingAction(true));
+    dispatch(action.setCurrentOfferLoadingAction(true));
     try {
       if (token) {
-        response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id), {headers: {'X-Token': getToken()}});
+        response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id), {headers: {'X-Token': token}});
       } else {
         response = await api.get<DetailedOffer>(APIRoute.DetailedOffer(id));
       }
-      dispatch(setCurrentOfferAction(response.data));
+      dispatch(action.setCurrentOfferAction(response.data));
     } catch {
       processErrorHandle('error while loading offer');
     }
-    dispatch(setOffersLoadingAction(false));
+    dispatch(action.setCurrentOfferLoadingAction(false));
   }
 );
 
@@ -113,11 +119,11 @@ const fetchNearByPlacesAction = createAsyncThunk<void, string, {
     const token = getToken();
     let response : AxiosResponse<Offers>;
     if (token) {
-      response = await api.get<Offers>(APIRoute.OffersNearby(id), {headers: {'X-Token': getToken()}});
+      response = await api.get<Offers>(APIRoute.OffersNearby(id), {headers: {'X-Token': token}});
     } else {
       response = await api.get<Offers>(APIRoute.OffersNearby(id));
     }
-    dispatch(setNearByOffersAction(response.data));
+    dispatch(action.setNearByOffersAction(response.data));
   }
 );
 
@@ -130,12 +136,52 @@ const fetchCommentsAction = createAsyncThunk<void, string, {
   async (id, {dispatch, extra: api}) => {
     try {
       const response = await api.get<Comments>(APIRoute.Comments(id));
-      dispatch(setCommentsAction(response.data));
+      dispatch(action.setCommentsAction(response.data));
     } catch {
       processErrorHandle('error while loading comments');
     }
   }
 );
 
+const fetchFavoritesAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'fetchFavorites',
+  async (_arg, {dispatch, extra: api}) => {
+    const token = getToken();
+    if (token) {
+      try {
+        const response = await api.get<Offers>(APIRoute.Favorite, {headers: {'X-Token': token}});
+        dispatch(action.setFavoritesAction(response.data));
+      } catch {
+        processErrorHandle('error while loading favorites');
+      }
+    }
+  }
+);
+
+const postFavoriteAction = createAsyncThunk<void, {offerId: string; status: boolean}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'postFavorite',
+  async ({offerId, status}, {dispatch, extra: api}) => {
+    const token = getToken();
+    if (token) {
+      try {
+        const response = await api.post<DetailedOffer>(APIRoute.postFavorite(offerId, +status), {headers: {'X-Token': token}});
+        dispatch(action.setFavoriteAction(response.data));
+      } catch {
+        processErrorHandle('error');
+      }
+    }
+  }
+);
+
+
 export {checkAuthAction, loginAction, logoutAction, fetchOffersAction, clearErrorAction,
-  fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction};
+  fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction, fetchFavoritesAction,
+  postFavoriteAction };

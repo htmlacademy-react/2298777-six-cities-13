@@ -4,10 +4,16 @@ import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
+import Loading from '../../components/other/loading/loading';
 
 
 const MainPage : FC = () => {
+  const authStatus = useAppSelector((state) => state.authStatus);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
   const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
+  if (authStatus === 'UNKNOWN' || isOffersLoading) {
+    return <Loading/>;
+  }
   return (
     <div className="page page--gray page--main">
       <Helmet>

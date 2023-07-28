@@ -10,7 +10,7 @@ const LoginLocation : FC = () => {
   return (
     <section className="locations locations--login locations--current">
       <div className="locations__item">
-        <Link className="locations__item-link" to={AppRoutes.Main} onClick={() => dispatch(setCurrentCity({city: Cities.Amsterdam}))}>
+        <Link className="locations__item-link" to={AppRoutes.Main} onClick={() => dispatch(setCurrentCity(Cities.Amsterdam))}>
           <span>Amsterdam</span>
         </Link>
       </div>

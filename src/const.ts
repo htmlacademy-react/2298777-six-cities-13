@@ -70,7 +70,8 @@ const APIRoute = {
   Favorite: '/favorite',
   Comments: (offerId : string) => `/comments/${offerId}`,
   Login: '/login',
-  Logout: '/logout'
+  Logout: '/logout',
+  postFavorite: (offerId: string, status: number) =>`/favorite/${offerId}/${status}`,
 } as const;
 
 const TIMEOUT_ERROR = 2000;

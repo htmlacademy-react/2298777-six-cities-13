@@ -20,7 +20,7 @@ const initialState = {
   error: null,
   isOffersLoading: false,
   user: null,
-  currentOfferLoading: false,
+  isCurrentOfferLoading: false,
 } as {
   offers: Offers;
   currentCityOffers: Offers;
@@ -34,20 +34,20 @@ const initialState = {
   error: null | string;
   isOffersLoading: boolean;
   user: null | User;
-  currentOfferLoading: boolean;
+  isCurrentOfferLoading: boolean;
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(actions.setCurrentCity, (state, action) => {
-      state.currentCity = action.payload.city;
-      state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload.city);
+      state.currentCity = action.payload;
+      state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload);
       state.currentSort = 'Popular';
     })
     .addCase(actions.setCurrentSort, (state, action) => {
-      state.currentSort = action.payload.sort;
-      if (action.payload.sort !== 'Popular') {
-        state.currentCityOffers = sort(state.currentCityOffers, action.payload.sort);
+      state.currentSort = action.payload;
+      if (action.payload !== 'Popular') {
+        state.currentCityOffers = sort(state.currentCityOffers, action.payload);
       } else {
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
       }
@@ -68,12 +68,6 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(actions.setUserAction, (state, action) => {
       state.user = action.payload;
     })
-    .addCase(actions.setFavoriteAction, (state, action) => {
-      const offer = state.offers.find((o) => o.id === action.payload);
-      if (offer) {
-        offer.isFavorite = !offer.isFavorite;
-      }
-    })
     .addCase(actions.setCurrentOfferAction, (state, action) => {
       state.currentOffer = action.payload;
       state.currentCity = action.payload.city.name;
@@ -84,8 +78,18 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(actions.setCommentsAction, (state, action) => {
       state.comments = action.payload;
     })
+    .addCase(actions.setFavoritesAction, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(actions.setFavoriteAction, (state, action) => {
+      const offer = state.offers.find((o) => o.id === action.payload.id);
+      if (offer) {
+        offer.isPremium = action.payload.isPremium;
+        state.favorites.push(offer);
+      }
+    })
     .addCase(actions.setCurrentOfferLoadingAction, (state, action) => {
-      state.currentOfferLoading = action.payload;
+      state.isCurrentOfferLoading = action.payload;
     });
 });
 

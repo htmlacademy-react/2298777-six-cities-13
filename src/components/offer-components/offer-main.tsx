@@ -2,18 +2,17 @@ import OfferGallery from './offer-gallery';
 import cn from 'classnames';
 import Map from '../other/map';
 import OfferCard from './offer-card';
-import { Navigate } from 'react-router-dom';
-import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import OfferAbout from './offer-about';
 import { useAppSelector } from '../../hooks/use-store';
+import Loading from '../other/loading/loading';
 
 const OfferMain : FC = () => {
   const detailedOffer = useAppSelector((state) => state.currentOffer);
   const otherPlaces = useAppSelector((state) => state.nearByOffers);
 
   if (!detailedOffer) {
-    return (<Navigate to={AppRoutes.NotFound}/>);
+    return <Loading/>;
   }
 
   return (

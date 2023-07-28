@@ -19,7 +19,7 @@ const MainLocations : FC = () => {
             to={AppRoutes.Main}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch(setCurrentCity({city}));
+              dispatch(setCurrentCity(city));
             }}
           >
             <span>{city}</span>

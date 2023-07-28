@@ -22,7 +22,7 @@ const MainSortOptions : FC<MainSortOptionsProps> = ({selectedSort, isOpened, set
           className={cn('places__option', {'places__option--active': selectedSort === option})}
           tabIndex={0}
           onClick={() => {
-            dispatch(setCurrentSort({sort: option}));
+            dispatch(setCurrentSort(option));
             setOpenedState(!isOpened);
           }}
         >
