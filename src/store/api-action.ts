@@ -25,20 +25,6 @@ const checkAuthAction = createAsyncThunk<void, undefined, {
   },
 );
 
-const loginAction = createAsyncThunk<void, AuthData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'login',
-  async ({email, password}, {dispatch, extra: api}) => {
-    const response = await api.post<User>(AppRoutes.Login, {email, password});
-    dispatch(action.setUserAction(response.data));
-    setToken(response.data.token);
-    dispatch(action.requireAuthorization(AuthorizationStatus.Auth));
-  }
-);
-
 const logoutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -48,6 +34,8 @@ const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout, {headers: {'X-Token': getToken()}});
     removeToken();
+    dispatch(action.setUserAction(null));
+    dispatch(action.setDefaultOffersAction());
     dispatch(action.requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
@@ -199,6 +187,21 @@ const postCommentAction = createAsyncThunk<void, {comment: string; rating: numbe
       }
     }
     dispatch(action.setCommentLoadingAction(false));
+  }
+);
+
+const loginAction = createAsyncThunk<void, AuthData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'login',
+  async ({email, password}, {dispatch, extra: api}) => {
+    const response = await api.post<User>(AppRoutes.Login, {email, password});
+    dispatch(action.setUserAction(response.data));
+    setToken(response.data.token);
+    dispatch(fetchFavoritesAction());
+    dispatch(action.requireAuthorization(AuthorizationStatus.Auth));
   }
 );
 

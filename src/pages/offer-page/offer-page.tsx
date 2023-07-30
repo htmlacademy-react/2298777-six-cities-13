@@ -24,7 +24,7 @@ const OfferPage : FC = () => {
       dispatch(fetchNearByPlacesAction(id));
       dispatch(fetchCommentsAction(id));
     }
-  }, []);
+  }, [id]);
 
   if (isLoading) {
     return <Loading/>;

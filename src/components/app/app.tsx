@@ -9,6 +9,13 @@ import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import Layout from '../layout/layout';
 import ErrorMessage from '../other/error-message/error-message';
+import { Provider } from 'react-redux';
+import store from '../../store';
+import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../../store/api-action';
+
+store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
+store.dispatch(fetchFavoritesAction());
 
 
 const App : FC = () => {
@@ -36,10 +43,10 @@ const App : FC = () => {
     ]}
   ]);
   return (
-    <>
+    <Provider store={store}>
       <ErrorMessage/>
       <RouterProvider router={router}/>
-    </>
+    </Provider>
   );
 };
 

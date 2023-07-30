@@ -60,6 +60,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.requireAuthorization, (state, action) => {
       state.authStatus = action.payload;
+      if (action.payload === AuthorizationStatus.NoAuth) {
+        state.favorites = [];
+      }
     })
     .addCase(actions.setError, (state, action) => {
       state.error = action.payload;
@@ -82,6 +85,14 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.setFavoritesAction, (state, action) => {
       state.favorites = action.payload;
+      state.offers = state.offers.map((offer) => ({
+        ...offer,
+        isFavorite: action.payload.some((o) => o.id === offer.id),
+      }));
+      state.currentCityOffers = state.currentCityOffers.map((offer) => ({
+        ...offer,
+        isFavorite: action.payload.some((o) => o.id === offer.id),
+      }));
     })
     .addCase(actions.setFavoriteAction, (state, action) => {
       const offer = state.offers.find((o) => o.id === action.payload.id);
@@ -98,6 +109,16 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.setCommentLoadingAction, (state, action) => {
       state.isCommentLoading = action.payload;
+    })
+    .addCase(actions.setDefaultOffersAction, (state) => {
+      state.offers = state.offers.map((offer) => ({
+        ...offer,
+        isFavorite: false,
+      }));
+      state.currentCityOffers = state.currentCityOffers.map((offer) => ({
+        ...offer,
+        isFavorite: false,
+      }));
     });
 });
 
