@@ -13,18 +13,24 @@ const OfferPage : FC = () => {
   const id = useParams().id;
   const navigate = useNavigate();
   const isLoading = useAppSelector((state) => state.isCurrentOfferLoading);
+  const city = useAppSelector((state) => state.currentCity);
 
   if (id === undefined) {
     navigate(AppRoutes.NotFound);
   }
 
   useEffect(() => {
-    if (id !== undefined && !isLoading) {
+    if (id && !isLoading) {
       dispatch(fetchCurrentOfferAction(id));
-      dispatch(fetchNearByPlacesAction(id));
       dispatch(fetchCommentsAction(id));
     }
   }, [id]);
+
+  useEffect(() => {
+    if (city && id && !isLoading) {
+      dispatch(fetchNearByPlacesAction(id));
+    }
+  }, [city]);
 
   if (isLoading) {
     return <Loading/>;
