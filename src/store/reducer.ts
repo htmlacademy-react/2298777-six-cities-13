@@ -21,6 +21,7 @@ const initialState = {
   isOffersLoading: false,
   user: null,
   isCurrentOfferLoading: false,
+  isCommentLoading: false,
 } as {
   offers: Offers;
   currentCityOffers: Offers;
@@ -35,6 +36,7 @@ const initialState = {
   isOffersLoading: boolean;
   user: null | User;
   isCurrentOfferLoading: boolean;
+  isCommentLoading: boolean;
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -90,6 +92,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.setCurrentOfferLoadingAction, (state, action) => {
       state.isCurrentOfferLoading = action.payload;
+    })
+    .addCase(actions.setCommentAction, (state, action) => {
+      state.comments.push(action.payload);
+    })
+    .addCase(actions.setCommentLoadingAction, (state, action) => {
+      state.isCommentLoading = action.payload;
     });
 });
 

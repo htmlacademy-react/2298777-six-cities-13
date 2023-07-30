@@ -3,7 +3,7 @@ import { AppDispatch, State } from '../types/store';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { APIRoute, AppRoutes, AuthorizationStatus, TIMEOUT_ERROR } from '../const';
 import * as action from './action';
-import { AuthData, Comments, DetailedOffer, Offers, User } from '../types/app-type';
+import { AuthData, Comments, DetailedOffer, Offers, User, Comment } from '../types/app-type';
 import { getToken, removeToken, setToken } from '../services/token';
 import store from '.';
 import processErrorHandle from '../services/process-error-handle';
@@ -39,13 +39,13 @@ const loginAction = createAsyncThunk<void, AuthData, {
   }
 );
 
-const logoutAction = createAsyncThunk<void, {
+const logoutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'logout',
-  async ({dispatch, extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout, {headers: {'X-Token': getToken()}});
     removeToken();
     dispatch(action.requireAuthorization(AuthorizationStatus.NoAuth));
@@ -181,7 +181,28 @@ const postFavoriteAction = createAsyncThunk<void, {offerId: string; status: bool
   }
 );
 
+const postCommentAction = createAsyncThunk<void, {comment: string; rating: number; offerId: string}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'postComment',
+  async ({comment, rating, offerId}, {dispatch, extra: api}) => {
+    dispatch(action.setCommentLoadingAction(true));
+    const token = getToken();
+    if (token) {
+      try {
+        const response = await api.post<Comment>(APIRoute.Comments(offerId), {comment, rating}, {headers: {'X-Token': token}});
+        dispatch(action.setCommentAction(response.data));
+      } catch {
+        processErrorHandle('error while posting comment');
+      }
+    }
+    dispatch(action.setCommentLoadingAction(false));
+  }
+);
+
 
 export {checkAuthAction, loginAction, logoutAction, fetchOffersAction, clearErrorAction,
   fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction, fetchFavoritesAction,
-  postFavoriteAction };
+  postFavoriteAction, postCommentAction };

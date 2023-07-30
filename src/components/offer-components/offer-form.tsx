@@ -1,11 +1,14 @@
 import OfferStarItem from './offer-star-item';
 import React from 'react';
 import { FC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
+import { postCommentAction } from '../../store/api-action';
 
 const OfferForm : FC = () => {
+  const dispatch = useAppDispatch();
+  const offerId = useAppSelector((state) => state.currentOffer?.id)!;
+  const isLoading = useAppSelector((state) => state.isCommentLoading);
   const [review, setReview] = React.useState({
-    id: crypto.randomUUID(),
-    date: new Date(),
     rating: 0,
     comment: '',
   });
@@ -33,6 +36,11 @@ const OfferForm : FC = () => {
       method="post"
       onSubmit={(evt) => {
         evt.preventDefault();
+        dispatch(postCommentAction({offerId, comment: review.comment, rating: review.rating}));
+        setReview({
+          rating: 0,
+          comment: '',
+        });
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
@@ -60,7 +68,10 @@ const OfferForm : FC = () => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={review.comment.length < 49}
+          disabled={review.comment.length < 49
+            || review.comment.length > 300
+            || review.rating === 0
+            || isLoading}
         >Submit
         </button>
       </div>

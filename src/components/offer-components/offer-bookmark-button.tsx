@@ -26,7 +26,7 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
       className={cn(classButton, 'button', {[classActive]: isFavorite})}
       type="button"
       onClick={() => {
-        dispatch(postFavoriteAction({offerId: offer.id, status: !isFavorite}));
+        dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
       }}
       onMouseDown={handleBookmarkClick}
       onKeyUp={(evt) => {

@@ -2,15 +2,15 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { useAppDispatch } from '../../hooks/use-store';
-import { requireAuthorization } from '../../store/action';
 import { removeToken } from '../../services/token';
+import { logoutAction } from '../../store/api-action';
 
 const SignOutLink : FC = () => {
   const dispatch = useAppDispatch();
   return (
     <Link className="header__nav-link" to={AppRoutes.Main} onClick={(evt) => {
       evt.preventDefault();
-      dispatch(requireAuthorization('NO_AUTH'));
+      dispatch(logoutAction());
       removeToken();
     }}
     >

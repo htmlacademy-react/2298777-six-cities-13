@@ -14,7 +14,6 @@ const OfferPage : FC = () => {
   const navigate = useNavigate();
   const isLoading = useAppSelector((state) => state.isCurrentOfferLoading);
 
-
   if (id === undefined) {
     navigate(AppRoutes.NotFound);
   }
