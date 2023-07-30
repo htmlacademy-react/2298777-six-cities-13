@@ -10,7 +10,6 @@ import Loading from '../../components/other/loading/loading';
 const MainPage : FC = () => {
   const authStatus = useAppSelector((state) => state.authStatus);
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
   if (authStatus === 'UNKNOWN' || isOffersLoading) {
     return <Loading/>;
   }
@@ -21,9 +20,8 @@ const MainPage : FC = () => {
       </Helmet>
       <HeaderContainer isNavShown/>
 
-      {currentCityOffers?.length === 0 ?
-        <MainEmpty/> :
-        <MainMain/>}
+      <MainEmpty/>
+      <MainMain/>
     </div>);
 };
 

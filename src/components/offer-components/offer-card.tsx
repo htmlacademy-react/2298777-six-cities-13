@@ -3,16 +3,18 @@ import { FC } from 'react';
 import OfferCardInfo from './offer-card-info';
 import OfferPremiumMark from './offer-premium-mark';
 import OfferImageWrapper from './offer-image-wrapper';
+import { useAppDispatch } from '../../hooks/use-store';
+import { setSelectedPointAction } from '../../store/action';
 
 type OfferCardProps = {
   offer: Offer;
-  onOfferHover?: (id : string) => void;
 }
 
-const OfferCard : FC<OfferCardProps> = ({offer, onOfferHover}) => {
+const OfferCard : FC<OfferCardProps> = ({offer}) => {
+  const dispatch = useAppDispatch();
 
   const handleOfferHover = () => {
-    onOfferHover?.(offer.id);
+    dispatch(setSelectedPointAction(offer.location));
   };
 
   return (

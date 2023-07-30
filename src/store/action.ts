@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityString, Comments, DetailedOffer, Offers, User, ValueOf, Comment } from '../types/app-type';
+import { CityString, Comments, DetailedOffer, Offers, User, ValueOf, Comment, Location } from '../types/app-type';
 import { SortOptions } from '../const';
 import { AuthorizationStatus } from '../const';
 
@@ -19,8 +19,10 @@ const setCurrentOfferLoadingAction = createAction<boolean>('setCurrentOfferLoadi
 const setCommentAction = createAction<Comment>('setComment');
 const setCommentLoadingAction = createAction<boolean>('setCommentLoading');
 const setDefaultOffersAction = createAction('setDefaultOffers');
+const setSelectedPointAction = createAction<Location | null>('setSelectedPoint');
 
 export { setCurrentCity, setCurrentSort, loadOffers, requireAuthorization,
   setError, setOffersLoadingAction, setUserAction, setCurrentOfferAction,
   setNearByOffersAction, setCommentsAction, setFavoritesAction, setCurrentOfferLoadingAction,
-  setFavoriteAction, setCommentAction, setCommentLoadingAction, setDefaultOffersAction };
+  setFavoriteAction, setCommentAction, setCommentLoadingAction, setDefaultOffersAction,
+  setSelectedPointAction };

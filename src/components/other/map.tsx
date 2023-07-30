@@ -1,6 +1,6 @@
 import useMap from '../../hooks/use-map';
 import { useRef, useEffect, useState } from 'react';
-import { City, Location } from '../../types/app-type';
+import { City } from '../../types/app-type';
 import { layerGroup , Marker } from 'leaflet';
 import cn from 'classnames';
 import { MapIcons } from '../../const';
@@ -8,17 +8,17 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 
 type MapProps = {
-  points: Location[];
   className: string;
   isHoverActive: boolean;
-  selectedPoint?: Location;
 }
 
-const Map : FC<MapProps> = ({points, className, isHoverActive, selectedPoint}) => {
+const Map : FC<MapProps> = ({className, isHoverActive}) => {
   const mapRef = useRef(null);
   const city = useAppSelector((state) => isHoverActive ? state.currentCityOffers[0].city : state.currentOffer?.city);
   const map = useMap(mapRef, city as City);
   const [currentCity, setCurrentCity] = useState(city);
+  const selectedPoint = useAppSelector((state) => state.selectedPoint);
+  const points = useAppSelector((state) => state.currentCityOffers).map((offer) => offer.location);
 
   useEffect(() => {
     if (map && city) {

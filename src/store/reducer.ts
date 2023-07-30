@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './action';
-import { Offers, DetailedOffer, CityString, ValueOf, User, Comments } from '../types/app-type';
+import { Offers, DetailedOffer, CityString, ValueOf, User, Comments, Location } from '../types/app-type';
 import { Cities, SortOptions } from '../const';
 import { getCurrentCityOffers } from '../util';
 import sort from '../sort';
@@ -22,6 +22,8 @@ const initialState = {
   user: null,
   isCurrentOfferLoading: false,
   isCommentLoading: false,
+  selectedPoint: null,
+  currentCityOffersLength: 0,
 } as {
   offers: Offers;
   currentCityOffers: Offers;
@@ -37,6 +39,8 @@ const initialState = {
   user: null | User;
   isCurrentOfferLoading: boolean;
   isCommentLoading: boolean;
+  selectedPoint: null | Location;
+  currentCityOffersLength: number;
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -44,6 +48,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(actions.setCurrentCity, (state, action) => {
       state.currentCity = action.payload;
       state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload);
+      state.currentCityOffersLength = state.currentCityOffers.length;
       state.currentSort = 'Popular';
     })
     .addCase(actions.setCurrentSort, (state, action) => {
@@ -57,6 +62,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(actions.loadOffers, (state, action) => {
       state.offers = action.payload;
       state.currentCityOffers = getCurrentCityOffers(action.payload, state.currentCity);
+      state.currentCityOffersLength = state.currentCityOffers.length;
     })
     .addCase(actions.requireAuthorization, (state, action) => {
       state.authStatus = action.payload;
@@ -119,6 +125,9 @@ const reducer = createReducer(initialState, (builder) => {
         ...offer,
         isFavorite: false,
       }));
+    })
+    .addCase(actions.setSelectedPointAction, (state, action) => {
+      state.selectedPoint = action.payload;
     });
 });
 
