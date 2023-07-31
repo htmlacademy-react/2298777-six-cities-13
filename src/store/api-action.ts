@@ -160,7 +160,7 @@ const postFavoriteAction = createAsyncThunk<void, {offerId: string; status: bool
     const token = getToken();
     if (token) {
       try {
-        const response = await api.post<DetailedOffer>(APIRoute.postFavorite(offerId, +status), {headers: {'X-Token': token}});
+        const response = await api.post<DetailedOffer>(APIRoute.postFavorite(offerId, +status), {}, {headers: {'X-Token': token}});
         dispatch(action.setFavoriteAction(response.data));
       } catch {
         processErrorHandle('error');

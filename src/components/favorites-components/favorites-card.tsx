@@ -12,7 +12,7 @@ const FavoritesCard : FC<FavoritesCardProps> = ({offer}) => (
   <article className="favorites__card place-card">
     <OfferPremiumMark isPremium={offer.isPremium}/>
     <OfferImageWrapper offer={offer} isFavoriteCard/>
-    <OfferCardInfo offer={offer} isFavoriteCard/>
+    <OfferCardInfo offer={offer} isFavoriteCard isFavoriteButtonDisabled={false}/>
   </article>
 );
 

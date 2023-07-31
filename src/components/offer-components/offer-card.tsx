@@ -8,9 +8,10 @@ import { setSelectedPointAction } from '../../store/action';
 
 type OfferCardProps = {
   offer: Offer;
+  isFavoriteButtonDisabled: boolean;
 }
 
-const OfferCard : FC<OfferCardProps> = ({offer}) => {
+const OfferCard : FC<OfferCardProps> = ({offer, isFavoriteButtonDisabled}) => {
   const dispatch = useAppDispatch();
 
   const handleOfferHover = () => {
@@ -21,7 +22,7 @@ const OfferCard : FC<OfferCardProps> = ({offer}) => {
     <article className="cities__card place-card" onMouseEnter={handleOfferHover}>
       <OfferPremiumMark isPremium={offer.isPremium}/>
       <OfferImageWrapper offer={offer}/>
-      <OfferCardInfo offer={offer}/>
+      <OfferCardInfo offer={offer} isFavoriteButtonDisabled={isFavoriteButtonDisabled}/>
     </article>);
 };
 

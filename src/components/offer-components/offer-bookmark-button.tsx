@@ -9,9 +9,10 @@ type OfferBookmarkButtonProps = {
   width?: number;
   height?: number;
   offer: Offer;
+  isFavoriteButtonDisabled: boolean;
 }
 
-const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width = 18, height = 19, offer}) => {
+const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width = 18, height = 19, offer, isFavoriteButtonDisabled}) => {
   const [classButton, classIcon, classActive] = width === 18 ?
     ['place-card__bookmark-button', 'place-card__bookmark-icon', 'place-card__bookmark-button--active'] :
     ['offer__bookmark-button', 'offer__bookmark-icon', 'offer__bookmark-button--active'];
@@ -26,7 +27,9 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
       className={cn(classButton, 'button', {[classActive]: isFavorite})}
       type="button"
       onClick={() => {
-        dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
+        if (!isFavoriteButtonDisabled) {
+          dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
+        }
       }}
       onMouseDown={handleBookmarkClick}
       onKeyUp={(evt) => {

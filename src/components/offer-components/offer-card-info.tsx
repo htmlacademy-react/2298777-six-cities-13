@@ -8,11 +8,12 @@ import cn from 'classnames';
 type OfferCardInfoProps = {
   offer: Offer;
   isFavoriteCard? : boolean;
+  isFavoriteButtonDisabled: boolean;
 };
 
-const OfferCardInfo : FC<OfferCardInfoProps> = ({offer, isFavoriteCard = false}) => (
+const OfferCardInfo : FC<OfferCardInfoProps> = ({offer, isFavoriteCard = false, isFavoriteButtonDisabled}) => (
   <div className={cn({'favorites__card-info': isFavoriteCard}, 'place-card__info')}>
-    <OfferPrice offer={offer}/>
+    <OfferPrice offer={offer} isFavoriteButtonDisabled={isFavoriteButtonDisabled}/>
     <OfferRating offer={offer}/>
     <OfferName offer={offer}/>
     <p className="place-card__type">{offer.type}</p>

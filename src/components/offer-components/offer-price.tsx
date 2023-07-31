@@ -4,15 +4,16 @@ import { FC } from 'react';
 
 type OfferPriceProps = {
   offer: Offer;
+  isFavoriteButtonDisabled: boolean;
 }
 
-const OfferPrice : FC<OfferPriceProps> = ({offer}) => (
+const OfferPrice : FC<OfferPriceProps> = ({offer, isFavoriteButtonDisabled}) => (
   <div className="place-card__price-wrapper">
     <div className="place-card__price">
       <b className="place-card__price-value">&euro;{offer.price}</b>
       <span className="place-card__price-text">&#47;&nbsp;night</span>
     </div>
-    <OfferBookmarkButton isFavorite={offer.isFavorite} offer={offer}/>
+    <OfferBookmarkButton isFavorite={offer.isFavorite} offer={offer} isFavoriteButtonDisabled={isFavoriteButtonDisabled}/>
   </div>
 );
 

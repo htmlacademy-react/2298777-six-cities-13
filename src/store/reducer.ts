@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import * as actions from './action';
-import { Offers, DetailedOffer, CityString, ValueOf, User, Comments, Location } from '../types/app-type';
+import { Offers, DetailedOffer, CityString, ValueOf, User, Comments, Location, City } from '../types/app-type';
 import { Cities, SortOptions } from '../const';
 import { getCurrentCityOffers } from '../util';
 import sort from '../sort';
@@ -24,6 +24,8 @@ const initialState = {
   isCommentLoading: false,
   selectedPoint: null,
   currentCityOffersLength: 0,
+  points: [],
+  cityDetailed: null,
 } as {
   offers: Offers;
   currentCityOffers: Offers;
@@ -41,6 +43,8 @@ const initialState = {
   isCommentLoading: boolean;
   selectedPoint: null | Location;
   currentCityOffersLength: number;
+  points: Location[];
+  cityDetailed: null | City;
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -50,6 +54,8 @@ const reducer = createReducer(initialState, (builder) => {
       state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload);
       state.currentCityOffersLength = state.currentCityOffers.length;
       state.currentSort = 'Popular';
+      state.points = state.currentCityOffers.map((offer) => offer.location);
+      state.cityDetailed = state.currentCityOffers[0].city;
     })
     .addCase(actions.setCurrentSort, (state, action) => {
       state.currentSort = action.payload;
@@ -63,11 +69,19 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
       state.currentCityOffers = getCurrentCityOffers(action.payload, state.currentCity);
       state.currentCityOffersLength = state.currentCityOffers.length;
+      state.points = state.currentCityOffers.map((offer) => offer.location);
+      state.cityDetailed = state.currentCityOffers[0].city;
     })
     .addCase(actions.requireAuthorization, (state, action) => {
       state.authStatus = action.payload;
       if (action.payload === AuthorizationStatus.NoAuth) {
         state.favorites = [];
+        if (state.currentOffer) {
+          state.currentOffer = {
+            ...state.currentOffer,
+            isFavorite: false,
+          };
+        }
       }
     })
     .addCase(actions.setError, (state, action) => {
@@ -102,9 +116,18 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(actions.setFavoriteAction, (state, action) => {
       const offer = state.offers.find((o) => o.id === action.payload.id);
-      if (offer) {
-        offer.isPremium = action.payload.isPremium;
-        state.favorites.push(offer);
+      if (!offer) {
+        return;
+      }
+      state.offers = state.offers.map((o) => o.id === offer.id ? action.payload : o);
+      state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
+      if (action.payload.isFavorite) {
+        state.favorites.push(action.payload);
+      } else {
+        state.favorites = state.favorites.filter((o) => o.id !== offer.id);
+      }
+      if (state.currentOffer?.id === offer.id) {
+        state.currentOffer = action.payload;
       }
     })
     .addCase(actions.setCurrentOfferLoadingAction, (state, action) => {
