@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/use-store';
 
 
 const OfferAboutReviews : FC = () => {
-  let comments = useAppSelector((state) => state.comments)
+  let comments = useAppSelector((state) => state.commentsData.comments)
     .slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const originalLength = comments.length;
 

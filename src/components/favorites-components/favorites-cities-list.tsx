@@ -4,7 +4,7 @@ import FavoriteCardList from './favorites-card-list';
 import { useAppSelector } from '../../hooks/use-store';
 
 const FavoritesCitiesList : FC = () => {
-  const favoriteOffers = useAppSelector((state) => state.favorites);
+  const favoriteOffers = useAppSelector((state) => state.favoriteData.favorites);
   const cities = Array.from(new Set(favoriteOffers.map((offer) => offer.city.name)));
   return (
     <section className="favorites">

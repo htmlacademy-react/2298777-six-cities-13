@@ -5,7 +5,7 @@ import OfferOtherPlaces from './offer-other-places';
 import OfferInfo from './offer-main-main';
 
 const OfferMain : FC = () => {
-  const loading = useAppSelector((state) => state.isCurrentOfferLoading);
+  const loading = useAppSelector((state) => state.offerData.isCurrentOfferLoading);
 
   if (loading) {
     return <Loading/>;

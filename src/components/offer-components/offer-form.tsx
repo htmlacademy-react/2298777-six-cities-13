@@ -6,8 +6,8 @@ import { postCommentAction } from '../../store/api-action';
 
 const OfferForm : FC = () => {
   const dispatch = useAppDispatch();
-  const offerId = useAppSelector((state) => state.currentOffer?.id)!;
-  const isLoading = useAppSelector((state) => state.isCommentLoading);
+  const offerId = useAppSelector((state) => state.offerData.currentOffer?.id)!;
+  const isLoading = useAppSelector((state) => state.commentsData.isCommentsLoading);
   const [review, setReview] = React.useState({
     rating: 0,
     comment: '',

@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/use-store';
 
 
 const MainEmpty : FC = () => {
-  const currentCityOffersLength = useAppSelector((state) => state.currentCityOffersLength);
+  const currentCityOffersLength = useAppSelector((state) => state.offersData.currentCityOffersLength);
   if (currentCityOffersLength) {
     return null;
   }

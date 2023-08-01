@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 
 const PrivateRoute : FC<PropsWithChildren<{isAuthNeeded: boolean}>> = ({children, isAuthNeeded}) => {
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector((state) => state.userData.authStatus);
 
   if (isAuthNeeded) {
     return (

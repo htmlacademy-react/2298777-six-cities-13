@@ -4,7 +4,7 @@ import OfferCard from './offer-card';
 import cn from 'classnames';
 
 const OfferOtherPlaces : FC = () => {
-  const otherPlaces = useAppSelector((state) => state.nearByOffers);
+  const otherPlaces = useAppSelector((state) => state.nearByData.nearByOffers);
   return (
     <div className="container">
       <section className={cn('near-places places', {'visually-hidden': otherPlaces.length === 0})}>

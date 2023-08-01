@@ -76,5 +76,15 @@ const APIRoute = {
 
 const TIMEOUT_ERROR = 2000;
 
+const NameSpace = {
+  Favorites: 'favoriteData',
+  Offers: 'offersData',
+  Offer: 'offerData',
+  Comments: 'commentsData',
+  User: 'userData',
+  NearBy: 'nearByData',
+  App: 'appData',
+} as const;
+
 export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,
-  SortOptions, REVIEW_DATE_FORMAT, APIRoute, TIMEOUT_ERROR};
+  SortOptions, REVIEW_DATE_FORMAT, APIRoute, TIMEOUT_ERROR, NameSpace };

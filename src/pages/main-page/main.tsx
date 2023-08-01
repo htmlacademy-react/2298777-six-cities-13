@@ -8,7 +8,7 @@ import Loading from '../../components/other/loading/loading';
 
 
 const MainPage : FC = () => {
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const isOffersLoading = useAppSelector((state) => state.offersData.isOffersLoading);
   if (isOffersLoading) {
     return <Loading/>;
   }

@@ -4,7 +4,7 @@ import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import { CityString } from '../../types/app-type';
 import { useAppDispatch } from '../../hooks/use-store';
-import { setCurrentCity } from '../../store/action';
+import { offersData } from '../../store/slices/offers-data';
 
 type FavoroteListItemProps = {
   city: CityString;
@@ -16,7 +16,9 @@ const FavoriteListItem : FC<PropsWithChildren<FavoroteListItemProps>> = ({city, 
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link className="locations__item-link" to={AppRoutes.Main} onClick={() => dispatch(setCurrentCity(city))}>
+          <Link className="locations__item-link" to={AppRoutes.Main} onClick={() =>
+            dispatch(offersData.actions.setCurrentCity(city))}
+          >
             <span>{city}</span>
           </Link>
         </div>

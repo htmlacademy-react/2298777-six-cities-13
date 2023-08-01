@@ -4,7 +4,7 @@ import { FC } from 'react';
 
 
 const OfferList : FC<{isFavoriteButtonDisabled : boolean}> = ({isFavoriteButtonDisabled}) => {
-  const offers = useAppSelector((state) => state.currentCityOffers);
+  const offers = useAppSelector((state) => state.offersData.currentCityOffers);
 
   return (
     <div className="cities__places-list places__list tabs__content">

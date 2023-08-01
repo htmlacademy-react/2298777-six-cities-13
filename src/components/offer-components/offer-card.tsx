@@ -4,7 +4,7 @@ import OfferCardInfo from './offer-card-info';
 import OfferPremiumMark from './offer-premium-mark';
 import OfferImageWrapper from './offer-image-wrapper';
 import { useAppDispatch } from '../../hooks/use-store';
-import { setSelectedPointAction } from '../../store/action';
+import { offersData } from '../../store/slices/offers-data';
 
 type OfferCardProps = {
   offer: Offer;
@@ -15,7 +15,7 @@ const OfferCard : FC<OfferCardProps> = ({offer, isFavoriteButtonDisabled}) => {
   const dispatch = useAppDispatch();
 
   const handleOfferHover = () => {
-    dispatch(setSelectedPointAction(offer.location));
+    dispatch(offersData.actions.setSelectedPoint(offer.location));
   };
 
   return (

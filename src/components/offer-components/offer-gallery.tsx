@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 
 const OfferGallery : FC = () => {
-  const offer = useAppSelector((state) => state.currentOffer);
+  const offer = useAppSelector((state) => state.offerData.currentOffer);
 
   if (!offer) {
     return null;

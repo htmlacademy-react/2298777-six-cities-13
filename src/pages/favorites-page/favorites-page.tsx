@@ -8,7 +8,7 @@ import FavoritesEmpty from '../../components/favorites-components/favorites-empt
 import cn from 'classnames';
 
 const FavoritePage : FC = () => {
-  const favorites = useAppSelector((state) => state.favorites);
+  const favorites = useAppSelector((state) => state.favoriteData.favorites);
   return(
     <div className={cn('page', {'page--favorites-empty': favorites.length === 0})}>
       <Helmet>

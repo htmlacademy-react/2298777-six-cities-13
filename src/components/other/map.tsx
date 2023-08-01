@@ -13,11 +13,11 @@ type MapProps = {
 
 const Map : FC<MapProps> = ({className, isHoverActive}) => {
   const mapRef = useRef(null);
-  const city = useAppSelector((state) => state.cityDetailed);
+  const city = useAppSelector((state) => state.offersData.cityDetailed);
   const map = useMap(mapRef, city!);
   const [currentCity, setCurrentCity] = useState(city);
-  const selectedPoint = useAppSelector((state) => state.selectedPoint);
-  const points = useAppSelector((state) => state.points);
+  const selectedPoint = useAppSelector((state) => state.offersData.selectedPoint);
+  const points = useAppSelector((state) => state.offersData.points);
 
   useEffect(() => {
     if (map && city) {

@@ -10,8 +10,8 @@ import OfferAboutReviews from './offer-about-reviews';
 import { useAppSelector } from '../../hooks/use-store';
 
 const OfferAbout : FC = () => {
-  const authStatus = useAppSelector((state) => state.authStatus);
-  const offer = useAppSelector((state) => state.currentOffer);
+  const authStatus = useAppSelector((state) => state.userData.authStatus);
+  const offer = useAppSelector((state) => state.offerData.currentOffer);
 
   if (!offer) {
     return null;

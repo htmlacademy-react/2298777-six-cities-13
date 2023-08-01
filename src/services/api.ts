@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import processErrorHandle from './process-error-handle';
+import { getToken } from './token';
 
 type DetailMessageType = {
   type: string;
@@ -22,6 +23,16 @@ const createAPI = () : AxiosInstance => {
   const api = axios.create({
     baseURL: URL,
     timeout: REQUEST_TIMEOUT,
+  });
+
+  api.interceptors.request.use((config) => {
+    const token = getToken();
+
+    if (token && config.headers) {
+      config.headers['X-Token'] = token;
+    }
+
+    return config;
   });
 
   api.interceptors.response.use(
