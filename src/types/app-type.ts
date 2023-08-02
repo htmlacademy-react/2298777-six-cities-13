@@ -13,11 +13,6 @@ type Offer = {
   previewImage: string;
 }
 
-type User = {
-  email: string;
-  token: string;
-} & UserInComment;
-
 type DetailedOffer = {
   description: string;
   bedrooms: number;
@@ -41,6 +36,11 @@ type UserInComment = {
   isPro: boolean;
 }
 
+type User = {
+  email: string;
+  token: string;
+} & UserInComment
+
 type City = {
   name: CityString;
   location: Location;
@@ -58,14 +58,17 @@ type Host = {
   isPro: boolean;
 }
 
-type CityString = keyof typeof Cities;
+type AuthData = {
+  email: string;
+  password: string;
+}
 
-type Users = User[];
+type CityString = ValueOf<typeof Cities>;
 
 type Offers = Offer[];
 
-type DetailedOffers = DetailedOffer[];
-
 type Comments = Comment[];
 
-export type {Offer, Offers, DetailedOffer, DetailedOffers, Comments, Comment, User, Users, City, Location, CityString};
+type ValueOf<T> = T[keyof T];
+
+export type {Offer, Offers, DetailedOffer, Comments, Comment, City, Location, CityString, ValueOf, AuthData, User};

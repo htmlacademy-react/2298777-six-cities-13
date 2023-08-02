@@ -3,10 +3,11 @@ import { SortOptions } from '../../const';
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks/use-store';
 import { setCurrentSort } from '../../store/action';
+import { ValueOf } from '../../types/app-type';
 
 
 type MainSortOptionsProps = {
-  selectedSort: keyof typeof SortOptions;
+  selectedSort: ValueOf<typeof SortOptions>;
   isOpened: boolean;
   setOpenedState: (value: React.SetStateAction<boolean>) => void;
 }
@@ -21,7 +22,7 @@ const MainSortOptions : FC<MainSortOptionsProps> = ({selectedSort, isOpened, set
           className={cn('places__option', {'places__option--active': selectedSort === option})}
           tabIndex={0}
           onClick={() => {
-            dispatch(setCurrentSort({sort: option as keyof typeof SortOptions}));
+            dispatch(setCurrentSort(option));
             setOpenedState(!isOpened);
           }}
         >

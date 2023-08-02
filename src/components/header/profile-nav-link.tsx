@@ -1,12 +1,19 @@
 import {FC} from 'react';
+import { useAppSelector } from '../../hooks/use-store';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../const';
 
-const ProfileNavLink : FC = () => (
-  <a className="header__nav-link header__nav-link--profile" href="#">
-    <div className="header__avatar-wrapper user__avatar-wrapper">
-    </div>
-    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-    <span className="header__favorite-count">3</span>
-  </a>
-);
+const ProfileNavLink : FC = () => {
+  const favoritesCount = useAppSelector((state) => state.favorites).length;
+  const email = useAppSelector((state) => state.user)?.email;
+  return (
+    <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.Favorites}>
+      <div className="header__avatar-wrapper user__avatar-wrapper">
+      </div>
+      <span className="header__user-name user__name">{email}</span>
+      <span className="header__favorite-count">{favoritesCount}</span>
+    </Link>
+  );
+};
 
 export default ProfileNavLink;

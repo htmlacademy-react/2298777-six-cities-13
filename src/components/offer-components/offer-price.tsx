@@ -12,7 +12,7 @@ const OfferPrice : FC<OfferPriceProps> = ({offer}) => (
       <b className="place-card__price-value">&euro;{offer.price}</b>
       <span className="place-card__price-text">&#47;&nbsp;night</span>
     </div>
-    <OfferBookmarkButton isFavorite={offer.isFavorite}/>
+    <OfferBookmarkButton isFavorite={offer.isFavorite} offer={offer}/>
   </div>
 );
 

@@ -8,7 +8,7 @@ type OfferLinkProps = {
   offerId: string;
 }
 
-const OfferLink : FC<PropsWithChildren<OfferLinkProps>> = ({offerId, children}) =>(
+const OfferLink : FC<PropsWithChildren<OfferLinkProps>> = ({offerId, children}) => (
   <Link to={createRoute(AppRoutes.Offer, offerId)}>{children}</Link>
 );
 

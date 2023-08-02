@@ -63,4 +63,18 @@ const SortOptions = {
 
 const REVIEW_DATE_FORMAT = 'MMMM YYYY';
 
-export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons, SortOptions, REVIEW_DATE_FORMAT};
+const APIRoute = {
+  Offers: '/offers',
+  DetailedOffer: (offerId: string) => `/offers/${offerId}`,
+  OffersNearby: (offerId: string) => `/offers/${offerId}/nearby`,
+  Favorite: '/favorite',
+  Comments: (offerId : string) => `/comments/${offerId}`,
+  Login: '/login',
+  Logout: '/logout',
+  postFavorite: (offerId: string, status: number) =>`/favorite/${offerId}/${status}`,
+} as const;
+
+const TIMEOUT_ERROR = 2000;
+
+export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,
+  SortOptions, REVIEW_DATE_FORMAT, APIRoute, TIMEOUT_ERROR};

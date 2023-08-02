@@ -1,4 +1,4 @@
-import LoginForm from './login-form';
+import LoginForm from './login-form/login-form';
 import { FC } from 'react';
 import LoginLocation from './login-location';
 

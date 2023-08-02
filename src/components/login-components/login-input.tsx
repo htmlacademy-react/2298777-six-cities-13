@@ -4,9 +4,10 @@ import { FC } from 'react';
 
 type LoginInputProps = {
   label: string;
+  onFormDataChange: (data : string) => void;
 }
 
-const LoginInput : FC<LoginInputProps> = ({label}) => (
+const LoginInput : FC<LoginInputProps> = ({label, onFormDataChange}) => (
   <div className="login__input-wrapper form__input-wrapper">
     <label className="visually-hidden">{label === LoginData.email ? 'E-mail' : capitalizeFirstLetter(label)}</label>
     <input
@@ -15,6 +16,7 @@ const LoginInput : FC<LoginInputProps> = ({label}) => (
       name={label}
       placeholder={capitalizeFirstLetter(label)}
       required
+      onChange={(evt) => onFormDataChange(evt.target.value)}
     />
   </div>
 );

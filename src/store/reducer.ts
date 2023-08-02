@@ -1,50 +1,133 @@
 import { createReducer } from '@reduxjs/toolkit';
-import offers from '../mocks/offers';
-import detailedOffers from '../mocks/detailedOffers';
 import * as actions from './action';
-import { Offers, DetailedOffers, CityString, User } from '../types/app-type';
-import { SortOptions } from '../const';
+import { Offers, DetailedOffer, CityString, ValueOf, User, Comments, Location } from '../types/app-type';
+import { Cities, SortOptions } from '../const';
 import { getCurrentCityOffers } from '../util';
 import sort from '../sort';
+import { AuthorizationStatus } from '../const';
 
 
 const initialState = {
-  offers: offers,
-  detailedOffers: detailedOffers,
-  currentCityOffers: getCurrentCityOffers(offers, 'Paris'),
+  offers: [],
+  currentCityOffers: [],
   currentOffer: null,
-  currentCity: 'Paris',
-  currentSort: 'Popular',
-  isAuthorized: false,
+  nearByOffers: [],
+  comments: [],
+  favorites: [],
+  currentCity: Cities.Paris,
+  currentSort: SortOptions.Popular,
+  authStatus: AuthorizationStatus.Unknown,
+  error: null,
+  isOffersLoading: false,
   user: null,
+  isCurrentOfferLoading: false,
+  isCommentLoading: false,
+  selectedPoint: null,
+  currentCityOffersLength: 0,
 } as {
   offers: Offers;
-  detailedOffers: DetailedOffers;
   currentCityOffers: Offers;
-  currentOffer: string | null;
+  currentOffer: null | DetailedOffer;
+  nearByOffers: Offers;
+  comments: Comments;
+  favorites: Offers;
   currentCity: CityString;
-  currentSort: keyof typeof SortOptions;
-  isAuthorized: boolean;
+  currentSort: ValueOf<typeof SortOptions>;
+  authStatus: ValueOf<typeof AuthorizationStatus>;
+  error: null | string;
+  isOffersLoading: boolean;
   user: null | User;
+  isCurrentOfferLoading: boolean;
+  isCommentLoading: boolean;
+  selectedPoint: null | Location;
+  currentCityOffersLength: number;
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(actions.setCurrentCity, (state, action) => {
-      state.currentCity = action.payload.city;
-      state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload.city);
+      state.currentCity = action.payload;
+      state.currentCityOffers = getCurrentCityOffers(state.offers, action.payload);
+      state.currentCityOffersLength = state.currentCityOffers.length;
       state.currentSort = 'Popular';
     })
     .addCase(actions.setCurrentSort, (state, action) => {
-      state.currentSort = action.payload.sort;
-      if (action.payload.sort !== 'Popular') {
-        state.currentCityOffers = sort(state.currentCityOffers, action.payload.sort);
+      state.currentSort = action.payload;
+      if (action.payload !== 'Popular') {
+        state.currentCityOffers = sort(state.currentCityOffers, action.payload);
       } else {
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
       }
     })
-    .addCase(actions.setCurrentOffer, (state, action) => {
-      state.currentOffer = action.payload.id;
+    .addCase(actions.loadOffers, (state, action) => {
+      state.offers = action.payload;
+      state.currentCityOffers = getCurrentCityOffers(action.payload, state.currentCity);
+      state.currentCityOffersLength = state.currentCityOffers.length;
+    })
+    .addCase(actions.requireAuthorization, (state, action) => {
+      state.authStatus = action.payload;
+      if (action.payload === AuthorizationStatus.NoAuth) {
+        state.favorites = [];
+      }
+    })
+    .addCase(actions.setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(actions.setOffersLoadingAction, (state, action) => {
+      state.isOffersLoading = action.payload;
+    })
+    .addCase(actions.setUserAction, (state, action) => {
+      state.user = action.payload;
+    })
+    .addCase(actions.setCurrentOfferAction, (state, action) => {
+      state.currentOffer = action.payload;
+      state.currentCity = action.payload.city.name;
+    })
+    .addCase(actions.setNearByOffersAction, (state, action) => {
+      state.nearByOffers = action.payload;
+    })
+    .addCase(actions.setCommentsAction, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(actions.setFavoritesAction, (state, action) => {
+      state.favorites = action.payload;
+      state.offers = state.offers.map((offer) => ({
+        ...offer,
+        isFavorite: action.payload.some((o) => o.id === offer.id),
+      }));
+      state.currentCityOffers = state.currentCityOffers.map((offer) => ({
+        ...offer,
+        isFavorite: action.payload.some((o) => o.id === offer.id),
+      }));
+    })
+    .addCase(actions.setFavoriteAction, (state, action) => {
+      const offer = state.offers.find((o) => o.id === action.payload.id);
+      if (offer) {
+        offer.isPremium = action.payload.isPremium;
+        state.favorites.push(offer);
+      }
+    })
+    .addCase(actions.setCurrentOfferLoadingAction, (state, action) => {
+      state.isCurrentOfferLoading = action.payload;
+    })
+    .addCase(actions.setCommentAction, (state, action) => {
+      state.comments.push(action.payload);
+    })
+    .addCase(actions.setCommentLoadingAction, (state, action) => {
+      state.isCommentLoading = action.payload;
+    })
+    .addCase(actions.setDefaultOffersAction, (state) => {
+      state.offers = state.offers.map((offer) => ({
+        ...offer,
+        isFavorite: false,
+      }));
+      state.currentCityOffers = state.currentCityOffers.map((offer) => ({
+        ...offer,
+        isFavorite: false,
+      }));
+    })
+    .addCase(actions.setSelectedPointAction, (state, action) => {
+      state.selectedPoint = action.payload;
     });
 });
 

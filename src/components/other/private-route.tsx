@@ -3,14 +3,21 @@ import { AuthorizationStatus } from '../../const';
 import { PropsWithChildren } from 'react';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
+import { useAppSelector } from '../../hooks/use-store';
 
-type PrivateRouteProps = {
-  authStatus: string;
+const PrivateRoute : FC<PropsWithChildren<{isAuthNeeded: boolean}>> = ({children, isAuthNeeded}) => {
+  const authStatus = useAppSelector((state) => state.authStatus);
+
+  if (isAuthNeeded) {
+    return (
+      authStatus === AuthorizationStatus.Auth ? children as JSX.Element : <Navigate to={AppRoutes.Login}/>
+    );
+  }
+
+  return (
+    authStatus === AuthorizationStatus.NoAuth ? children as JSX.Element : <Navigate to={AppRoutes.Main}/>
+  );
 };
-
-const PrivateRoute : FC<PropsWithChildren<PrivateRouteProps>> = ({authStatus, children}) => (
-  authStatus === AuthorizationStatus.Auth ? children as JSX.Element : <Navigate to={AppRoutes.Login}/>
-);
 
 
 export default PrivateRoute;

@@ -4,10 +4,15 @@ import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
+import Loading from '../../components/other/loading/loading';
 
 
 const MainPage : FC = () => {
-  const currentCityOffers = useAppSelector((state) => state.currentCityOffers);
+  const authStatus = useAppSelector((state) => state.authStatus);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  if (authStatus === 'UNKNOWN' || isOffersLoading) {
+    return <Loading/>;
+  }
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -15,9 +20,8 @@ const MainPage : FC = () => {
       </Helmet>
       <HeaderContainer isNavShown/>
 
-      {currentCityOffers?.length === 0 ?
-        <MainEmpty/> :
-        <MainMain/>}
+      <MainEmpty/>
+      <MainMain/>
     </div>);
 };
 
