@@ -2,13 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { DetailedOffer } from '../../types/app-type';
 import { fetchCurrentOfferAction, logoutAction, postFavoriteAction } from '../api-action';
+import { toast } from 'react-toastify';
 
 const initialState = {
   currentOffer: null,
   isCurrentOfferLoading: false,
+  error: null,
 } as {
   currentOffer: null | DetailedOffer;
   isCurrentOfferLoading: boolean;
+  error: null | string;
 };
 
 export const offerData = createSlice({
@@ -27,10 +30,13 @@ export const offerData = createSlice({
       .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
         state.currentOffer = action.payload;
         state.isCurrentOfferLoading = false;
+        state.error = null;
       })
       .addCase(fetchCurrentOfferAction.rejected, (state) => {
         state.currentOffer = null;
         state.isCurrentOfferLoading = false;
+        toast.warn('Error while fetching current offer');
+        state.error = 'Error while fetching current offer';
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         if (state.currentOffer?.id === action.payload.id) {

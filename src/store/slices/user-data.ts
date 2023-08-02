@@ -3,6 +3,9 @@ import { AuthorizationStatus, NameSpace } from '../../const';
 import { User, ValueOf } from '../../types/app-type';
 import { checkAuthAction, loginAction, logoutAction } from '../api-action';
 import { removeToken } from '../../services/token';
+import { toast } from 'react-toastify';
+import { parseStatusCode } from '../../util';
+import { StatusCodes } from 'http-status-codes';
 
 const initialState = {
   user: null,
@@ -22,25 +25,28 @@ export const userData = createSlice({
         state.user = action.payload;
         state.authStatus = 'AUTH';
       })
-      .addCase(loginAction.rejected, (state) => {
+      .addCase(loginAction.rejected, (state, action) => {
         state.user = null;
         state.authStatus = 'NO_AUTH';
+        if (action.error.message && parseStatusCode(action.error.message) !== StatusCodes.BAD_REQUEST) {
+          toast.warn('Error while logging in');
+        }
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.user = null;
         state.authStatus = 'NO_AUTH';
         removeToken();
       })
-      .addCase(logoutAction.rejected, () => {
-        true;
-      })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.user = action.payload;
         state.authStatus = 'AUTH';
       })
-      .addCase(checkAuthAction.rejected, (state) => {
+      .addCase(checkAuthAction.rejected, (state, action) => {
         state.user = null;
         state.authStatus = 'NO_AUTH';
+        if (action.error.message && parseStatusCode(action.error.message) !== StatusCodes.UNAUTHORIZED) {
+          toast.warn('Error while checking authorization');
+        }
       });
   },
 });

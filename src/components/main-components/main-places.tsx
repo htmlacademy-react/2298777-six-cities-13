@@ -8,7 +8,7 @@ const MainPlaces : FC = () => (
     <h2 className="visually-hidden">Places</h2>
     <MainPlacesFound/>
     <MainSort/>
-    <OfferList isFavoriteButtonDisabled/>
+    <OfferList/>
   </section>
 );
 

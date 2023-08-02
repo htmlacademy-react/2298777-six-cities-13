@@ -12,7 +12,7 @@ const OfferAboutName : FC<OfferAboutNameProps> = ({offer, isFavorite}) => (
     <h1 className="offer__name">
       {offer.title}
     </h1>
-    <OfferBookmarkButton isFavorite={isFavorite} width={31} height={33} offer={offer} isFavoriteButtonDisabled={false}/>
+    <OfferBookmarkButton isFavorite={isFavorite} width={31} height={33} offer={offer}/>
   </div>
 );
 

@@ -83,7 +83,6 @@ const NameSpace = {
   Comments: 'commentsData',
   User: 'userData',
   NearBy: 'nearByData',
-  App: 'appData',
 } as const;
 
 export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,

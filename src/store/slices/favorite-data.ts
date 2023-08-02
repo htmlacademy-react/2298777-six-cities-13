@@ -2,13 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { fetchFavoritesAction, logoutAction, postFavoriteAction } from '../api-action';
 import { Offers } from '../../types/app-type';
+import { toast } from 'react-toastify';
+import { StatusCodes } from 'http-status-codes';
+import { parseStatusCode } from '../../util';
 
 const initialState = {
   favorites: [],
   isFavoritesLoading: false,
+  error: null,
 } as {
   favorites: Offers;
   isFavoritesLoading: boolean;
+  error: null | string;
 };
 
 export const favoriteData = createSlice({
@@ -23,10 +28,15 @@ export const favoriteData = createSlice({
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
         state.isFavoritesLoading = false;
+        state.error = null;
       })
-      .addCase(fetchFavoritesAction.rejected, (state) => {
+      .addCase(fetchFavoritesAction.rejected, (state, action) => {
         state.favorites = [];
         state.isFavoritesLoading = false;
+        if (action.error.message && parseStatusCode(action.error.message) !== StatusCodes.UNAUTHORIZED) {
+          toast.warn('Error while fetching favorites');
+          state.error = 'Error while fetching favorites';
+        }
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         if (action.payload.isFavorite) {
@@ -36,7 +46,7 @@ export const favoriteData = createSlice({
         }
       })
       .addCase(postFavoriteAction.rejected, () => {
-        true;
+        toast.warn('Error while posting favorite');
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.favorites = [];

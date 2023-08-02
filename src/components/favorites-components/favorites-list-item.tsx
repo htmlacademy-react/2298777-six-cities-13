@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
@@ -6,28 +5,21 @@ import { CityString } from '../../types/app-type';
 import { useAppDispatch } from '../../hooks/use-store';
 import { offersData } from '../../store/slices/offers-data';
 
-type FavoroteListItemProps = {
-  city: CityString;
-}
-
-const FavoriteListItem : FC<PropsWithChildren<FavoroteListItemProps>> = ({city, children}) => {
+const FavoriteLocation : FC<{city: CityString}> = ({city}) => {
   const dispatch = useAppDispatch();
   return (
-    <li className="favorites__locations-items">
-      <div className="favorites__locations locations locations--current">
-        <div className="locations__item">
-          <Link className="locations__item-link" to={AppRoutes.Main} onClick={() =>
-            dispatch(offersData.actions.setCurrentCity(city))}
-          >
-            <span>{city}</span>
-          </Link>
-        </div>
+    <div className="favorites__locations locations locations--current">
+      <div className="locations__item">
+        <Link
+          className="locations__item-link"
+          to={AppRoutes.Main}
+          onClick={() => dispatch(offersData.actions.setCurrentCity(city))}
+        >
+          <span>{city}</span>
+        </Link>
       </div>
-      <div className="favorites__places">
-        {children}
-      </div>
-    </li>
+    </div>
   );
 };
 
-export default FavoriteListItem;
+export default FavoriteLocation;

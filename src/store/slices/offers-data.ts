@@ -2,8 +2,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace, SortOptions } from '../../const';
 import { City, CityString, Offers, ValueOf, Location } from '../../types/app-type';
 import { fetchOffersAction, fetchFavoritesAction, logoutAction, postFavoriteAction } from '../api-action';
-import { getCurrentCityOffers } from '../../util';
+import { getCurrentCityOffers, parseStatusCode } from '../../util';
 import sort from '../../sort';
+import { StatusCodes } from 'http-status-codes';
+import { toast } from 'react-toastify';
 
 const initialState = {
   currentCity: 'Paris',
@@ -15,6 +17,7 @@ const initialState = {
   cityDetailed: null,
   currentCityOffersLength: 0,
   isOffersLoading: false,
+  error: null,
 } as {
   currentCity: CityString;
   currentSort: ValueOf<typeof SortOptions>;
@@ -25,6 +28,7 @@ const initialState = {
   cityDetailed: null | City;
   currentCityOffersLength: number;
   isOffersLoading: boolean;
+  error: null | string;
 };
 
 export const offersData = createSlice({
@@ -63,14 +67,19 @@ export const offersData = createSlice({
         state.points = state.currentCityOffers.map((offer) => offer.location);
         state.cityDetailed = state.currentCityOffers[0].city;
         state.isOffersLoading = false;
+        state.error = null;
       })
-      .addCase(fetchOffersAction.rejected, (state) => {
+      .addCase(fetchOffersAction.rejected, (state, action) => {
         state.offers = [];
         state.currentCityOffers = [];
         state.currentCityOffersLength = 0;
         state.points = [];
         state.cityDetailed = null;
         state.isOffersLoading = false;
+        if (action.error.message && parseStatusCode(action.error.message) !== StatusCodes.UNAUTHORIZED) {
+          state.error = 'Error while fetching offers';
+          toast.warn('Error while fetching offers');
+        }
       })
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.offers = state.offers.map((offer) => ({

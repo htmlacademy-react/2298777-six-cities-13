@@ -7,13 +7,24 @@ import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import Loading from '../../components/other/loading/loading';
 import { fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction } from '../../store/api-action';
+import ErrorMessage from '../../components/other/error-message/error-message';
 
 const OfferPage : FC = () => {
   const dispatch = useAppDispatch();
   const id = useParams().id;
   const navigate = useNavigate();
+  const error = useAppSelector((state) => state.offerData.error);
   const isLoading = useAppSelector((state) => state.offerData.isCurrentOfferLoading);
   const city = useAppSelector((state) => state.offersData.currentCity);
+
+  const onTryAgain = () => {
+    if (id) {
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchCommentsAction(id));
+      dispatch(fetchNearByPlacesAction(id));
+    }
+  };
+
 
   if (id === undefined) {
     navigate(AppRoutes.NotFound);
@@ -34,6 +45,10 @@ const OfferPage : FC = () => {
 
   if (isLoading) {
     return <Loading/>;
+  }
+
+  if (error) {
+    return <ErrorMessage message={error} onTryAgain={onTryAgain}/>;
   }
 
   return (

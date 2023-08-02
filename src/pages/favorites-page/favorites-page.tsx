@@ -3,12 +3,26 @@ import Logo from '../../components/other/logo';
 import HeaderContainer from '../../components/header/header-container';
 import FavoritesMain from '../../components/favorites-components/favorites-main';
 import { FC } from 'react';
-import { useAppSelector } from '../../hooks/use-store';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import FavoritesEmpty from '../../components/favorites-components/favorites-empty';
 import cn from 'classnames';
+import { checkAuthAction, fetchFavoritesAction } from '../../store/api-action';
+import ErrorMessage from '../../components/other/error-message/error-message';
 
 const FavoritePage : FC = () => {
   const favorites = useAppSelector((state) => state.favoriteData.favorites);
+  const error = useAppSelector((state) => state.favoriteData.error);
+  const dispatch = useAppDispatch();
+
+  const onTryAgain = () => {
+    dispatch(checkAuthAction());
+    dispatch(fetchFavoritesAction());
+  };
+
+  if (error) {
+    return <ErrorMessage message={error} onTryAgain={onTryAgain}/>;
+  }
+
   return(
     <div className={cn('page', {'page--favorites-empty': favorites.length === 0})}>
       <Helmet>
