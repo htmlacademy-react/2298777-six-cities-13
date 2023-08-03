@@ -6,8 +6,9 @@ import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import FavoritesEmpty from '../../components/favorites-components/favorites-empty';
 import cn from 'classnames';
-import { checkAuthAction, fetchFavoritesAction } from '../../store/api-action';
 import ErrorMessage from '../../components/other/error-message/error-message';
+import { fetchFavoritesAction } from '../../store/api-actions/favorite';
+import { checkAuthAction } from '../../store/api-actions/user';
 
 const FavoritePage : FC = () => {
   const favorites = useAppSelector((state) => state.favoriteData.favorites);

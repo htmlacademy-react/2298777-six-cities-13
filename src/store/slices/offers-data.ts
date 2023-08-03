@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace, SortOptions } from '../../const';
 import { City, CityString, Offers, ValueOf, Location } from '../../types/app-type';
-import { fetchOffersAction, fetchFavoritesAction, logoutAction, postFavoriteAction } from '../api-action';
+import { logoutAction } from '../api-actions/user';
 import { getCurrentCityOffers, parseStatusCode } from '../../util';
 import sort from '../../sort';
 import { StatusCodes } from 'http-status-codes';
 import { toast } from 'react-toastify';
+import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
+import { fetchOffersAction } from '../api-actions/offer';
 
 const initialState = {
   currentCity: 'Paris',

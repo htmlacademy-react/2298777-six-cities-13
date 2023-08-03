@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { fetchFavoritesAction, logoutAction, postFavoriteAction } from '../api-action';
+import { logoutAction } from '../api-actions/user';
 import { Offers } from '../../types/app-type';
 import { toast } from 'react-toastify';
 import { StatusCodes } from 'http-status-codes';
 import { parseStatusCode } from '../../util';
+import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
 
 const initialState = {
   favorites: [],

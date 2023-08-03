@@ -2,7 +2,7 @@ import OfferStarItem from './offer-star-item';
 import React from 'react';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import { postCommentAction } from '../../store/api-action';
+import { postCommentAction } from '../../store/api-actions/comment';
 
 const OfferForm : FC = () => {
   const dispatch = useAppDispatch();

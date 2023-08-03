@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { Offers } from '../../types/app-type';
-import { fetchNearByPlacesAction } from '../api-action';
 import { toast } from 'react-toastify';
+import { fetchNearByPlacesAction } from '../api-actions/offer';
 
 const initialState = {
   nearByOffers: [],

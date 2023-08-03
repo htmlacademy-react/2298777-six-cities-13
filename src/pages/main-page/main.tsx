@@ -6,7 +6,9 @@ import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import Loading from '../../components/other/loading/loading';
 import ErrorMessage from '../../components/other/error-message/error-message';
-import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../../store/api-action';
+import { fetchFavoritesAction } from '../../store/api-actions/favorite';
+import { fetchOffersAction } from '../../store/api-actions/offer';
+import { checkAuthAction } from '../../store/api-actions/user';
 
 
 const MainPage : FC = () => {

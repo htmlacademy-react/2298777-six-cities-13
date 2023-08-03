@@ -2,9 +2,9 @@ import { FC } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import { Offer } from '../../types/app-type';
-import { postFavoriteAction } from '../../store/api-action';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
+import { postFavoriteAction } from '../../store/api-actions/favorite';
 
 type OfferBookmarkButtonProps = {
   isFavorite: boolean;

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../const';
 import { User, ValueOf } from '../../types/app-type';
-import { checkAuthAction, loginAction, logoutAction } from '../api-action';
+import { checkAuthAction, loginAction, logoutAction } from '../api-actions/user';
 import { removeToken } from '../../services/token';
 import { toast } from 'react-toastify';
 import { parseStatusCode } from '../../util';

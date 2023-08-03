@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { DetailedOffer } from '../../types/app-type';
-import { fetchCurrentOfferAction, logoutAction, postFavoriteAction } from '../api-action';
+import { logoutAction } from '../api-actions/user';
 import { toast } from 'react-toastify';
+import { postFavoriteAction } from '../api-actions/favorite';
+import { fetchCurrentOfferAction } from '../api-actions/offer';
 
 const initialState = {
   currentOffer: null,

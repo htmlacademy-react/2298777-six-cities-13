@@ -10,7 +10,6 @@ import OfferAboutReviews from './offer-about-reviews';
 import { useAppSelector } from '../../hooks/use-store';
 
 const OfferAbout : FC = () => {
-  const authStatus = useAppSelector((state) => state.userData.authStatus);
   const offer = useAppSelector((state) => state.offerData.currentOffer);
 
   if (!offer) {
@@ -27,7 +26,7 @@ const OfferAbout : FC = () => {
         <OfferAboutPrice price={offer.price}/>
         <OfferAboutInside goods={offer.goods}/>
         <OfferHost host={offer.host} description={offer.description}/>
-        { authStatus === 'AUTH' ? <OfferAboutReviews/> : null}
+        <OfferAboutReviews/>
       </div>
     </div>
   );

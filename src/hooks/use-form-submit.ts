@@ -1,5 +1,5 @@
 import { toast } from 'react-toastify';
-import { loginAction } from '../store/api-action';
+import { loginAction } from '../store/api-actions/user';
 import passwordSchema from '../components/login-components/login-form/password-schema';
 import React, { MutableRefObject, useEffect } from 'react';
 import store from '../store';

@@ -6,8 +6,9 @@ import { AppRoutes } from '../../const';
 import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import Loading from '../../components/other/loading/loading';
-import { fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction } from '../../store/api-action';
 import ErrorMessage from '../../components/other/error-message/error-message';
+import { fetchCommentsAction } from '../../store/api-actions/comment';
+import { fetchCurrentOfferAction, fetchNearByPlacesAction } from '../../store/api-actions/offer';
 
 const OfferPage : FC = () => {
   const dispatch = useAppDispatch();
