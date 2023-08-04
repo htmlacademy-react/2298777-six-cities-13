@@ -1,4 +1,4 @@
-import OfferStarItem from './offer-star-item';
+import OfferStarList from './offer-star-list';
 import React from 'react';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
@@ -12,22 +12,6 @@ const OfferForm : FC = () => {
     rating: 0,
     comment: '',
   });
-
-  const offerStarItems = [5, 4, 3, 2, 1].map((star) =>
-    (
-      <OfferStarItem
-        key={star}
-        star={star}
-        rating={review.rating}
-        onChange={(evt) => {
-          setReview({
-            ...review,
-            rating: Number(evt.target.value),
-          });
-        }}
-      />
-    )
-  );
 
   return (
     <form
@@ -44,9 +28,11 @@ const OfferForm : FC = () => {
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        {offerStarItems}
-      </div>
+      <OfferStarList rating={review.rating} onChange={(evt) => setReview({
+        ...review,
+        rating: Number(evt.target.value),
+      })}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
