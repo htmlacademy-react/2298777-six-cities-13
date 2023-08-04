@@ -4,11 +4,10 @@ import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import Loading from '../../components/other/loading/loading';
-import ErrorMessage from '../../components/other/error-message/error-message';
 import { fetchFavoritesAction } from '../../store/api-actions/favorite';
 import { fetchOffersAction } from '../../store/api-actions/offer';
 import { checkAuthAction } from '../../store/api-actions/user';
+import CheckError from '../../components/other/check-error';
 
 
 const MainPage : FC = () => {
@@ -22,12 +21,8 @@ const MainPage : FC = () => {
     dispatch(fetchFavoritesAction());
   };
 
-  if (error) {
-    return <ErrorMessage message={error} onTryAgain={onTryAgain}/>;
-  }
-
-  if (isOffersLoading) {
-    return <Loading/>;
+  if (error || isOffersLoading) {
+    return <CheckError isLoading={isOffersLoading} error={error} onTryAgain={onTryAgain}/>;
   }
 
   return (

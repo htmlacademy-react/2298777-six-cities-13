@@ -6,12 +6,13 @@ import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import FavoritesEmpty from '../../components/favorites-components/favorites-empty';
 import cn from 'classnames';
-import ErrorMessage from '../../components/other/error-message/error-message';
 import { fetchFavoritesAction } from '../../store/api-actions/favorite';
 import { checkAuthAction } from '../../store/api-actions/user';
+import CheckError from '../../components/other/check-error';
 
 const FavoritePage : FC = () => {
   const favorites = useAppSelector((state) => state.favoriteData.favorites);
+  const isLoading = useAppSelector((state) => state.favoriteData.isFavoritesLoading);
   const error = useAppSelector((state) => state.favoriteData.error);
   const dispatch = useAppDispatch();
 
@@ -20,8 +21,8 @@ const FavoritePage : FC = () => {
     dispatch(fetchFavoritesAction());
   };
 
-  if (error) {
-    return <ErrorMessage message={error} onTryAgain={onTryAgain}/>;
+  if (error || isLoading) {
+    return <CheckError isLoading={isLoading} error={error} onTryAgain={onTryAgain}/>;
   }
 
   return(

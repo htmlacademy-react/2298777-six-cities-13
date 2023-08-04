@@ -5,9 +5,8 @@ import { logoutAction } from '../api-actions/user';
 import { getCurrentCityOffers, parseStatusCode } from '../../util';
 import sort from '../../sort';
 import { StatusCodes } from 'http-status-codes';
-import { toast } from 'react-toastify';
 import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
-import { fetchOffersAction } from '../api-actions/offer';
+import { fetchCurrentOfferAction, fetchOffersAction } from '../api-actions/offer';
 
 const initialState = {
   currentCity: 'Paris',
@@ -80,7 +79,6 @@ export const offersData = createSlice({
         state.isOffersLoading = false;
         if (action.error.message && parseStatusCode(action.error.message) !== StatusCodes.UNAUTHORIZED) {
           state.error = 'Error while fetching offers';
-          toast.warn('Error while fetching offers');
         }
       })
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
@@ -105,11 +103,19 @@ export const offersData = createSlice({
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const offer = state.offers.find((o) => o.id === action.payload.id);
-        if (!offer) {
+        const currentCityOffer = state.currentCityOffers.find((o) => o.id === action.payload.id);
+        if (!offer || !currentCityOffer) {
           return;
         }
-        state.offers = state.offers.map((o) => o.id === offer.id ? action.payload : o);
+        offer.isFavorite = action.payload.isFavorite;
+        currentCityOffer.isFavorite = action.payload.isFavorite;
+      })
+      .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
+        state.currentCity = action.payload.city.name;
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
+        state.currentCityOffersLength = state.currentCityOffers.length;
+        state.points = state.currentCityOffers.map((offer) => offer.location);
+        state.cityDetailed = state.currentCityOffers[0].city;
       });
   },
 });
