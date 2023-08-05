@@ -14,4 +14,7 @@ const humanizeDate = (date: Date | string, format: string) => moment(date).forma
 
 const getCurrentCityOffers = (offers : Offers, city: CityString) => offers.filter((offer) => offer.city.name === city);
 
-export { capitalizeFirstLetter, createRoute, getStarWidth, filterOfferByCity, humanizeDate, getCurrentCityOffers };
+const parseStatusCode = (message: string) => Number(message.split(' ').pop());
+
+export { capitalizeFirstLetter, createRoute, getStarWidth, filterOfferByCity,
+  humanizeDate, getCurrentCityOffers, parseStatusCode };

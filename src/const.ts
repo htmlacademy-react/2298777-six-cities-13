@@ -74,7 +74,14 @@ const APIRoute = {
   postFavorite: (offerId: string, status: number) =>`/favorite/${offerId}/${status}`,
 } as const;
 
-const TIMEOUT_ERROR = 2000;
+const NameSpace = {
+  Favorites: 'favoriteData',
+  Offers: 'offersData',
+  Offer: 'offerData',
+  Comments: 'commentsData',
+  User: 'userData',
+  NearBy: 'nearByData',
+} as const;
 
 export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,
-  SortOptions, REVIEW_DATE_FORMAT, APIRoute, TIMEOUT_ERROR};
+  SortOptions, REVIEW_DATE_FORMAT, APIRoute, NameSpace };

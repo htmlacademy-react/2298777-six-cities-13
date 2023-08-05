@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import cn from 'classnames';
-import { useAppDispatch } from '../../hooks/use-store';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import { Offer } from '../../types/app-type';
-import { postFavoriteAction } from '../../store/api-action';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../const';
+import { postFavoriteAction } from '../../store/api-actions/favorite';
 
 type OfferBookmarkButtonProps = {
   isFavorite: boolean;
@@ -16,6 +18,8 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
     ['place-card__bookmark-button', 'place-card__bookmark-icon', 'place-card__bookmark-button--active'] :
     ['offer__bookmark-button', 'offer__bookmark-icon', 'offer__bookmark-button--active'];
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authStatus = useAppSelector((state) => state.userData.authStatus);
   const handleBookmarkClick = (evt? : React.MouseEvent<HTMLButtonElement>) => {
     if (evt) {
       evt.preventDefault();
@@ -26,7 +30,11 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
       className={cn(classButton, 'button', {[classActive]: isFavorite})}
       type="button"
       onClick={() => {
-        dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
+        if (authStatus === 'AUTH') {
+          dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
+        } else {
+          navigate(AppRoutes.Login);
+        }
       }}
       onMouseDown={handleBookmarkClick}
       onKeyUp={(evt) => {

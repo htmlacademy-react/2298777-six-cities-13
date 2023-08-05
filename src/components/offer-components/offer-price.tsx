@@ -2,11 +2,7 @@ import { Offer } from '../../types/app-type';
 import OfferBookmarkButton from './offer-bookmark-button';
 import { FC } from 'react';
 
-type OfferPriceProps = {
-  offer: Offer;
-}
-
-const OfferPrice : FC<OfferPriceProps> = ({offer}) => (
+const OfferPrice : FC<{offer: Offer}> = ({offer}) => (
   <div className="place-card__price-wrapper">
     <div className="place-card__price">
       <b className="place-card__price-value">&euro;{offer.price}</b>

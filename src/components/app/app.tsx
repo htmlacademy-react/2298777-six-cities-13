@@ -8,18 +8,13 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import Layout from '../layout/layout';
-import ErrorMessage from '../other/error-message/error-message';
+import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from '../../store';
-import { checkAuthAction, fetchFavoritesAction, fetchOffersAction } from '../../store/api-action';
-
-store.dispatch(checkAuthAction());
-store.dispatch(fetchOffersAction());
-store.dispatch(fetchFavoritesAction());
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App : FC = () => {
-
   const router = createBrowserRouter([
     {path: '', element: <Layout/>, children: [
       {path: AppRoutes.Main, element: <MainPage/>},
@@ -42,9 +37,10 @@ const App : FC = () => {
       {path: '*', element: <Page404/>}
     ]}
   ]);
+
   return (
     <Provider store={store}>
-      <ErrorMessage/>
+      <ToastContainer/>
       <RouterProvider router={router}/>
     </Provider>
   );

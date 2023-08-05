@@ -1,9 +1,21 @@
+/* make nice css for error message component */
 .error-message {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  padding: 10px;
-  background-color: #d96666;
+  color: #4481c3;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-message__button {
+  background-color: #4481c3;
+  border: none;
+  border-radius: 0.5rem;
   color: white;
-  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  width: 50%;
 }

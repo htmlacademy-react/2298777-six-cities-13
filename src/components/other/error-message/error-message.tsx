@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../../hooks/use-store';
 import './error-message.css';
 
-const ErrorMessage : FC = () => {
-  const error = useAppSelector((state) => state.error);
+const ErrorMessage : FC<{message: string; onTryAgain: () => void}> = ({message, onTryAgain}) => (
+  <div className="error-message">
+    <p className="error-message__text">{message}</p>
+    <button className="error-message__button" type="button" onClick={onTryAgain}>try again</button>
+  </div>
+);
 
-  return (error) ? <div className='error-message'>{error}</div>
-    : null;
-};
 
 export default ErrorMessage;

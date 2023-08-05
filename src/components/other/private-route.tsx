@@ -6,16 +6,16 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 
 const PrivateRoute : FC<PropsWithChildren<{isAuthNeeded: boolean}>> = ({children, isAuthNeeded}) => {
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector((state) => state.userData.authStatus);
 
   if (isAuthNeeded) {
     return (
-      authStatus === AuthorizationStatus.Auth ? children as JSX.Element : <Navigate to={AppRoutes.Login}/>
+      authStatus === AuthorizationStatus.Auth ? children : <Navigate to={AppRoutes.Login}/>
     );
   }
 
   return (
-    authStatus === AuthorizationStatus.NoAuth ? children as JSX.Element : <Navigate to={AppRoutes.Main}/>
+    authStatus === AuthorizationStatus.NoAuth ? children : <Navigate to={AppRoutes.Main}/>
   );
 };
 

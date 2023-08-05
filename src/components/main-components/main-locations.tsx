@@ -4,10 +4,10 @@ import cn from 'classnames';
 import {FC} from 'react';
 import { Cities } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks/use-store';
-import { setCurrentCity } from '../../store/action';
+import { offersData } from '../../store/slices/offers-data';
 
 const MainLocations : FC = () => {
-  const currentCity = useAppSelector((state) => state.currentCity);
+  const currentCity = useAppSelector((state) => state.offersData.currentCity);
   const dispatch = useAppDispatch();
 
   return (
@@ -19,7 +19,7 @@ const MainLocations : FC = () => {
             to={AppRoutes.Main}
             onClick={(evt) => {
               evt.preventDefault();
-              dispatch(setCurrentCity(city));
+              dispatch(offersData.actions.setCurrentCity(city));
             }}
           >
             <span>{city}</span>

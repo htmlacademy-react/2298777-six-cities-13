@@ -1,33 +1,17 @@
-import OfferStarItem from './offer-star-item';
+import OfferStarList from './offer-star-list';
 import React from 'react';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import { postCommentAction } from '../../store/api-action';
+import { postCommentAction } from '../../store/api-actions/comment';
 
 const OfferForm : FC = () => {
   const dispatch = useAppDispatch();
-  const offerId = useAppSelector((state) => state.currentOffer?.id)!;
-  const isLoading = useAppSelector((state) => state.isCommentLoading);
+  const offerId = useAppSelector((state) => state.offerData.currentOffer?.id)!;
+  const isLoading = useAppSelector((state) => state.commentsData.isCommentsLoading);
   const [review, setReview] = React.useState({
     rating: 0,
     comment: '',
   });
-
-  const offerStarItems = [5, 4, 3, 2, 1].map((star) =>
-    (
-      <OfferStarItem
-        key={star}
-        star={star}
-        rating={review.rating}
-        onChange={(evt) => {
-          setReview({
-            ...review,
-            rating: Number(evt.target.value),
-          });
-        }}
-      />
-    )
-  );
 
   return (
     <form
@@ -44,9 +28,11 @@ const OfferForm : FC = () => {
       }}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <div className="reviews__rating-form form__rating">
-        {offerStarItems}
-      </div>
+      <OfferStarList rating={review.rating} onChange={(evt) => setReview({
+        ...review,
+        rating: Number(evt.target.value),
+      })}
+      />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"

@@ -1,16 +1,21 @@
 import { FC } from 'react';
-import { DetailedOffer } from '../../types/app-type';
 
-const OfferAboutFeatures : FC<{offer : DetailedOffer}> = ({offer}) => (
+type OfferAboutFeaturesProps = {
+  type: string;
+  bedrooms: number;
+  maxAdults: number;
+}
+
+const OfferAboutFeatures : FC<OfferAboutFeaturesProps> = ({type, bedrooms, maxAdults}) => (
   <ul className="offer__features">
     <li className="offer__feature offer__feature--entire">
-      {offer.type}
+      {type}
     </li>
     <li className="offer__feature offer__feature--bedrooms">
-      {offer.bedrooms} Bedrooms
+      {bedrooms} Bedrooms
     </li>
     <li className="offer__feature offer__feature--adults">
-                  Max {offer.maxAdults} adults
+                  Max {maxAdults} adults
     </li>
   </ul>
 );

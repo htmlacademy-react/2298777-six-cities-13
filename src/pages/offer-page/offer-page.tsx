@@ -3,37 +3,36 @@ import { Helmet } from 'react-helmet-async';
 import HeaderContainer from '../../components/header/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
 import { AppRoutes } from '../../const';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import Loading from '../../components/other/loading/loading';
-import { fetchCurrentOfferAction, fetchNearByPlacesAction, fetchCommentsAction } from '../../store/api-action';
+import { fetchCommentsAction } from '../../store/api-actions/comment';
+import { fetchCurrentOfferAction, fetchNearByPlacesAction } from '../../store/api-actions/offer';
+import useOfferPage from '../../hooks/use-offer-page';
+import CheckError from '../../components/other/check-error';
 
 const OfferPage : FC = () => {
   const dispatch = useAppDispatch();
   const id = useParams().id;
   const navigate = useNavigate();
-  const isLoading = useAppSelector((state) => state.isCurrentOfferLoading);
-  const city = useAppSelector((state) => state.currentCity);
+  const error = useAppSelector((state) => state.offerData.error);
+  const isLoading = useAppSelector((state) => state.offerData.isCurrentOfferLoading);
+  const city = useAppSelector((state) => state.offersData.currentCity);
+  useOfferPage(city, isLoading, id);
+
+  const onTryAgain = () => {
+    if (id) {
+      dispatch(fetchCurrentOfferAction(id));
+      dispatch(fetchCommentsAction(id));
+      dispatch(fetchNearByPlacesAction(id));
+    }
+  };
 
   if (id === undefined) {
     navigate(AppRoutes.NotFound);
   }
 
-  useEffect(() => {
-    if (id && !isLoading) {
-      dispatch(fetchCurrentOfferAction(id));
-      dispatch(fetchCommentsAction(id));
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (city && id && !isLoading) {
-      dispatch(fetchNearByPlacesAction(id));
-    }
-  }, [city]);
-
-  if (isLoading) {
-    return <Loading/>;
+  if (error || isLoading) {
+    return <CheckError isLoading={isLoading} error={error} onTryAgain={onTryAgain}/>;
   }
 
   return (

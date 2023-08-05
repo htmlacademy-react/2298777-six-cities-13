@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks/use-store';
 
 
 const MainSort : FC = () => {
-  const sort = useAppSelector((state) => state.currentSort);
+  const sort = useAppSelector((state) => state.offersData.currentSort);
   const ref = useRef(null);
   const [isOpened, setOpenedState] = useState(false);
   useOutside(ref, () => setOpenedState(false));

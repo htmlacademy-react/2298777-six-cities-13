@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { SortOptions } from '../../const';
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks/use-store';
-import { setCurrentSort } from '../../store/action';
 import { ValueOf } from '../../types/app-type';
+import { offersData } from '../../store/slices/offers-data';
 
 
 type MainSortOptionsProps = {
@@ -22,7 +22,7 @@ const MainSortOptions : FC<MainSortOptionsProps> = ({selectedSort, isOpened, set
           className={cn('places__option', {'places__option--active': selectedSort === option})}
           tabIndex={0}
           onClick={() => {
-            dispatch(setCurrentSort(option));
+            dispatch(offersData.actions.setCurrentSort(option));
             setOpenedState(!isOpened);
           }}
         >

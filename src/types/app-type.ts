@@ -71,4 +71,5 @@ type Comments = Comment[];
 
 type ValueOf<T> = T[keyof T];
 
-export type {Offer, Offers, DetailedOffer, Comments, Comment, City, Location, CityString, ValueOf, AuthData, User};
+export type {Offer, Offers, DetailedOffer, Comments, Comment, Host,
+  City, Location, CityString, ValueOf, AuthData, User};

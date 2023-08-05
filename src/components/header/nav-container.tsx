@@ -6,7 +6,7 @@ import SignInLink from './sign-in-link';
 import { AuthorizationStatus } from '../../const';
 
 const NavContainer : FC = () => {
-  const authStatus = useAppSelector((state) => state.authStatus);
+  const authStatus = useAppSelector((state) => state.userData.authStatus);
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
