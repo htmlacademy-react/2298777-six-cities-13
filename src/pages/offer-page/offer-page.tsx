@@ -9,14 +9,16 @@ import { fetchCommentsAction } from '../../store/api-actions/comment';
 import { fetchCurrentOfferAction, fetchNearByPlacesAction } from '../../store/api-actions/offer';
 import useOfferPage from '../../hooks/use-offer-page';
 import CheckError from '../../components/other/check-error';
+import { getCurrentOfferError, getIsCurrentOfferLoading } from '../../store/slices/offer-data/selectors';
+import { getCurrentCity } from '../../store/slices/offers-data/selectors';
 
 const OfferPage : FC = () => {
   const dispatch = useAppDispatch();
   const id = useParams().id;
   const navigate = useNavigate();
-  const error = useAppSelector((state) => state.offerData.error);
-  const isLoading = useAppSelector((state) => state.offerData.isCurrentOfferLoading);
-  const city = useAppSelector((state) => state.offersData.currentCity);
+  const error = useAppSelector(getCurrentOfferError);
+  const isLoading = useAppSelector(getIsCurrentOfferLoading);
+  const city = useAppSelector(getCurrentCity);
   useOfferPage(city, isLoading, id);
 
   const onTryAgain = () => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { useAppDispatch } from '../../hooks/use-store';
 import { Cities } from '../../const';
-import { offersData } from '../../store/slices/offers-data';
+import { offersData } from '../../store/slices/offers-data/offers-data';
 
 const LoginLocation : FC = () => {
   const dispatch = useAppDispatch();

@@ -8,9 +8,10 @@ import OfferAboutPrice from './offer-about-price';
 import OfferAboutInside from './offer-about-inside';
 import OfferAboutReviews from './offer-about-reviews';
 import { useAppSelector } from '../../hooks/use-store';
+import { getCurrentOffer } from '../../store/slices/offer-data/selectors';
 
 const OfferAbout : FC = () => {
-  const offer = useAppSelector((state) => state.offerData.currentOffer);
+  const offer = useAppSelector(getCurrentOffer);
 
   if (!offer) {
     return null;

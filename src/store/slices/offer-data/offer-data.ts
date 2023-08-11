@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { DetailedOffer } from '../../types/app-type';
-import { logoutAction } from '../api-actions/user';
-import { postFavoriteAction } from '../api-actions/favorite';
-import { fetchCurrentOfferAction } from '../api-actions/offer';
+import { NameSpace } from '../../../const';
+import { DetailedOffer } from '../../../types/app-type';
+import { logoutAction } from '../../api-actions/user';
+import { postFavoriteAction } from '../../api-actions/favorite';
+import { fetchCurrentOfferAction } from '../../api-actions/offer';
 
 const initialState = {
   currentOffer: null,

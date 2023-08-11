@@ -4,7 +4,7 @@ import OfferCardInfo from './offer-card-info';
 import OfferPremiumMark from './offer-premium-mark';
 import OfferImageWrapper from './offer-image-wrapper';
 import { useAppDispatch } from '../../hooks/use-store';
-import { offersData } from '../../store/slices/offers-data';
+import { offersData } from '../../store/slices/offers-data/offers-data';
 
 
 const OfferCard : FC<{offer: Offer}> = ({offer}) => {

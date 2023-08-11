@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus, NameSpace } from '../../const';
-import { User, ValueOf } from '../../types/app-type';
-import { checkAuthAction, loginAction, logoutAction } from '../api-actions/user';
-import { removeToken } from '../../services/token';
+import { AuthorizationStatus, NameSpace } from '../../../const';
+import { User, ValueOf } from '../../../types/app-type';
+import { checkAuthAction, loginAction, logoutAction } from '../../api-actions/user';
+import { removeToken } from '../../../services/token';
 import { toast } from 'react-toastify';
-import { parseStatusCode } from '../../util/util';
+import { parseStatusCode } from '../../../util/util';
 import { StatusCodes } from 'http-status-codes';
 
 const initialState = {

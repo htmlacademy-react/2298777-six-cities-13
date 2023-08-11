@@ -1,8 +1,9 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
+import { getCurrentOffer } from '../../store/slices/offer-data/selectors';
 
 const OfferGallery : FC = () => {
-  const offer = useAppSelector((state) => state.offerData.currentOffer);
+  const offer = useAppSelector(getCurrentOffer);
 
   if (!offer) {
     return null;

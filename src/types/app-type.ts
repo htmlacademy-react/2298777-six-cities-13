@@ -20,7 +20,7 @@ type DetailedOffer = {
   host: Host;
   images: string[];
   maxAdults: number;
-} & Offer;
+} & Omit<Offer, 'previewImage'>;
 
 type Comment = {
   id: string;

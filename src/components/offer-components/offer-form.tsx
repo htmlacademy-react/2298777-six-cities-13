@@ -4,10 +4,11 @@ import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import { postCommentAction } from '../../store/api-actions/comment';
 import { getIsCommentsLoading } from '../../store/slices/comments-data/selectors';
+import { getCurrentOffer } from '../../store/slices/offer-data/selectors';
 
 const OfferForm : FC = () => {
   const dispatch = useAppDispatch();
-  const offerId = useAppSelector((state) => state.offerData.currentOffer?.id)!;
+  const offerId = useAppSelector(getCurrentOffer)!.id;
   const isLoading = useAppSelector(getIsCommentsLoading);
   const [review, setReview] = React.useState({
     rating: 0,

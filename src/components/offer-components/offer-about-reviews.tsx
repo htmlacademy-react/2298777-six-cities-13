@@ -3,10 +3,11 @@ import OfferForm from './offer-form';
 import OfferReviews from './offer-reviews';
 import OfferReviewsLength from './offer-reviews-length';
 import { useAppSelector } from '../../hooks/use-store';
+import { getAuthStatus } from '../../store/slices/user-data/selectors';
 
 
 const OfferAboutReviews : FC = () => {
-  const authStatus = useAppSelector((state) => state.userData.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   return (
     <section className="offer__reviews reviews">
       <OfferReviewsLength/>

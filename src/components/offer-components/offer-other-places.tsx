@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 import OfferCard from './offer-card';
 import cn from 'classnames';
+import { getNearByOffers } from '../../store/slices/near-by-data/selectors';
 
 const OfferOtherPlaces : FC = () => {
-  const otherPlaces = useAppSelector((state) => state.nearByData.nearByOffers);
+  const otherPlaces = useAppSelector(getNearByOffers);
   return (
     <div className="container">
       <section className={cn('near-places places', {'visually-hidden': otherPlaces.length === 0})}>
