@@ -4,7 +4,7 @@ import { logoutAction } from '../api-actions/user';
 import { Offers } from '../../types/app-type';
 import { toast } from 'react-toastify';
 import { StatusCodes } from 'http-status-codes';
-import { parseStatusCode } from '../../util';
+import { parseStatusCode } from '../../util/util';
 import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
 
 const initialState = {

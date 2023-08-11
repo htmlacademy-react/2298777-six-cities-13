@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx",
     "preview": "vite preview",
-    "test": "vitest --passWithNoTests"
+    "test": "vitest --passWithNoTests --coverage"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.5",
@@ -41,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "5.60.1",
     "@typescript-eslint/parser": "5.57.1",
     "@vitejs/plugin-react": "4.0.1",
+    "@vitest/coverage-v8": "^0.34.1",
     "axios-mock-adapter": "1.21.5",
     "eslint": "8.43.0",
     "eslint-config-htmlacademy": "9.1.1",

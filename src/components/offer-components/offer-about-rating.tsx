@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { getStarWidth } from '../../util';
+import { getStarWidth } from '../../util/util';
 
 type OfferAboutRatingProps = {
   rating : number;

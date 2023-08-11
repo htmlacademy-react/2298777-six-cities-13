@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace, SortOptions } from '../../const';
 import { City, CityString, Offers, ValueOf, Location } from '../../types/app-type';
 import { logoutAction } from '../api-actions/user';
-import { getCurrentCityOffers, parseStatusCode } from '../../util';
+import { getCurrentCityOffers, parseStatusCode } from '../../util/util';
 import sort from '../../sort';
 import { StatusCodes } from 'http-status-codes';
 import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
