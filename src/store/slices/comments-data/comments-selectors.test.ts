@@ -1,12 +1,12 @@
 import { describe } from 'vitest';
 import { getComments, getCommentsLength, getIsCommentsLoading } from './selectors';
-import { generateComment } from '../../../util/mock';
+import { generateComments } from '../../../util/mock';
 import { NameSpace } from '../../../const';
 
 describe('comments selectors', () => {
   const state = {
     [NameSpace.Comments]: {
-      comments: generateComment(),
+      comments: generateComments(),
       isCommentsLoading: false,
       commentsLength: 1,
     },

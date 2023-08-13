@@ -20,3 +20,5 @@ export const getCurrentCityOffersLength = (state: Pick<State, NameSpace.Offers>)
 export const getIsOffersLoading = (state: Pick<State, NameSpace.Offers>) => state[NameSpace.Offers].isOffersLoading;
 
 export const getOffersError = (state: Pick<State, NameSpace.Offers>) => state[NameSpace.Offers].error;
+
+export const getOffer = (state: Pick<State, NameSpace.Offers>, index: number) => state[NameSpace.Offers].currentCityOffers[index];

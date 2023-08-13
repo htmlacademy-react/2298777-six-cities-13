@@ -79,4 +79,12 @@ describe('Offers selectors', () => {
     const result = offersSelectors.getOffersError(state);
     expect(result).toEqual(error);
   });
+
+  it('should return offer', () => {
+    const offers = state[NameSpace.Offers].currentCityOffers;
+    for (let i = 0; i < offers.length; i++) {
+      const result = offersSelectors.getOffer(state, i);
+      expect(result).toEqual(offers[i]);
+    }
+  });
 });

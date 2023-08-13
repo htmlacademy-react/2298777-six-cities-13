@@ -1,8 +1,8 @@
 import {internet, datatype, date, lorem, name, image} from 'faker';
-import {Comments, DetailedOffer, Offers, User} from '../types/app-type';
+import {Comments, DetailedOffer, Offer, Offers, User} from '../types/app-type';
 import { Cities } from '../const';
 
-const generateComment = () : Comments => new Array(15).fill(null).map(() => (
+const generateComments = () : Comments => new Array(15).fill(null).map(() => (
   {
     id: datatype.uuid(),
     date: date.recent(),
@@ -87,4 +87,31 @@ const generateUser = () : User => (
   }
 );
 
-export {generateComment, generateOfferCards, generateDetailOffer, generateUser};
+const changeRandomFavoriteStatus = (offers: Offers) : Offers => {
+  const randomLength = datatype.number({min: 0, max: offers.length});
+  const randomChangedIndexes = new Array(randomLength).fill(null).map(() => (datatype.number({min: 0, max: 14})));
+  const changedOffers = offers.map((offer, index) => {
+    if (randomChangedIndexes.includes(index)) {
+      return {...offer, isFavorite: !offer.isFavorite};
+    }
+    return offer;
+  });
+  return changedOffers;
+};
+
+const createDetailedOfferFromOffer = (offer: Offer) : DetailedOffer => ({
+  ...offer,
+  description: lorem.sentences(),
+  bedrooms: datatype.number({min: 1, max: 5}),
+  goods: new Array(5).fill(null).map(() => (lorem.words())),
+  host: {
+    name: name.firstName(),
+    avatarUrl: internet.avatar(),
+    isPro: datatype.boolean(),
+  },
+  images: new Array(5).fill(null).map(() => (image.city())),
+  maxAdults: datatype.number({min: 1, max: 5}),
+});
+
+export {generateComments, generateOfferCards, generateDetailOffer, generateUser,
+  changeRandomFavoriteStatus, createDetailedOfferFromOffer};
