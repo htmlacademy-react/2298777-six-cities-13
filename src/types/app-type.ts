@@ -24,7 +24,7 @@ type DetailedOffer = {
 
 type Comment = {
   id: string;
-  date: Date;
+  date: string;
   user: UserInComment;
   comment: string;
   rating: number;

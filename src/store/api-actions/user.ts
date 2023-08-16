@@ -5,7 +5,7 @@ import { APIRoute, AppRoutes } from '../../const';
 import { AuthData, User } from '../../types/app-type';
 import { AppDispatch } from '../../types/store';
 import { fetchFavoritesAction } from './favorite';
-import { setToken } from '../../services/token';
+import { removeToken, setToken } from '../../services/token';
 
 const checkAuthAction = createAsyncThunk<User, undefined, {
   dispatch: AppDispatch;
@@ -27,6 +27,7 @@ const logoutAction = createAsyncThunk<void, undefined, {
   'logout',
   async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
+    removeToken();
   },
 );
 

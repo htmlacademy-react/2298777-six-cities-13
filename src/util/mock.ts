@@ -1,11 +1,15 @@
 import {internet, datatype, date, lorem, name, image} from 'faker';
 import {Comments, DetailedOffer, Offer, Offers, User} from '../types/app-type';
 import { Cities } from '../const';
+import { Action } from 'redux';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import createAPI from '../services/api';
+import { State } from '../types/store';
 
 const generateComments = () : Comments => new Array(15).fill(null).map(() => (
   {
     id: datatype.uuid(),
-    date: date.recent(),
+    date: date.recent().toISOString(),
     user: {
       name: name.firstName(),
       avatarUrl: internet.avatar(),
@@ -113,5 +117,9 @@ const createDetailedOfferFromOffer = (offer: Offer) : DetailedOffer => ({
   maxAdults: datatype.number({min: 1, max: 5}),
 });
 
+const extractActionTypes = (actions: Action<string>[]) => actions.map((action) => action.type);
+
+export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>
+
 export {generateComments, generateOfferCards, generateDetailOffer, generateUser,
-  changeRandomFavoriteStatus, createDetailedOfferFromOffer};
+  changeRandomFavoriteStatus, createDetailedOfferFromOffer, extractActionTypes};
