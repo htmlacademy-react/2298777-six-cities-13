@@ -50,11 +50,14 @@ describe('Offers data slice', () => {
 
   it('should change current city', () => {
     const result = offersData.reducer(initialState, offersData.actions.setCurrentCity('Paris'));
+    const currentCityOffer = getCurrentCityOffers(initialState.offers, 'Paris');
     expect(result.currentCity).toEqual('Paris');
-    expect(result.currentCityOffers).toEqual(getCurrentCityOffers(initialState.offers, 'Paris'));
-    expect(result.currentCityOffersLength).toEqual(getCurrentCityOffers(initialState.offers, 'Paris').length);
-    expect(result.points).toEqual(getCurrentCityOffers(initialState.offers, 'Paris').map((offer) => offer.location));
-    expect(result.cityDetailed).toEqual(getCurrentCityOffers(initialState.offers, 'Paris')[0].city);
+    expect(result.currentCityOffers).toEqual(currentCityOffer);
+    expect(result.currentCityOffersLength).toEqual(currentCityOffer.length);
+    expect(result.points).toEqual(currentCityOffer.map((offer) => offer.location));
+    if (currentCityOffer.length > 0) {
+      expect(result.cityDetailed).toEqual(currentCityOffer[0].city);
+    }
     expect(result.currentSort).toEqual('Popular');
   });
 

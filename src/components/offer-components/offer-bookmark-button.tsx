@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import { Offer } from '../../types/app-type';
+import { DetailedOffer, Offer } from '../../types/app-type';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { postFavoriteAction } from '../../store/api-actions/favorite';
@@ -11,7 +11,7 @@ type OfferBookmarkButtonProps = {
   isFavorite: boolean;
   width?: number;
   height?: number;
-  offer: Offer;
+  offer: Offer | DetailedOffer;
 }
 
 const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width = 18, height = 19, offer}) => {
