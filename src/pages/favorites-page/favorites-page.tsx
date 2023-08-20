@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/other/logo';
-import HeaderContainer from '../../components/header/header-container';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
 import FavoritesMain from '../../components/favorites-components/favorites-main/favorites-main';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';

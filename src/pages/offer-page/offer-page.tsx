@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import HeaderContainer from '../../components/header/header-container';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
 import OfferMain from '../../components/offer-components/offer-main';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';

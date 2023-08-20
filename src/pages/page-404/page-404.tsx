@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AppRoutes } from '../../const';
-import HeaderContainer from '../../components/header/header-container';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
 import { FC } from 'react';
 
 const Page404 : FC = () => (

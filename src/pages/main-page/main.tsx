@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import HeaderContainer from '../../components/header/header-container';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
 import MainMain from '../../components/main-components/main-main';
 import MainEmpty from '../../components/main-components/main-empty';
 import { FC } from 'react';

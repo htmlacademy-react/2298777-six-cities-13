@@ -1,5 +1,5 @@
-import Logo from '../other/logo';
-import NavContainer from './nav-container';
+import Logo from '../../other/logo';
+import NavContainer from '../nav-container/nav-container';
 import { FC } from 'react';
 
 type HeaderContainerProps = {
@@ -7,7 +7,7 @@ type HeaderContainerProps = {
 }
 
 const HeaderContainer : FC<HeaderContainerProps> = ({isNavShown}) => (
-  <header className="header">
+  <header className="header" data-testid='header'>
     <div className="container">
       <div className="header__wrapper">
         <div className="header__left">
