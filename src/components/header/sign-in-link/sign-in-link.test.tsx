@@ -3,7 +3,7 @@ import { withHistory, withStore } from '../../../util/mock-components';
 import SignInLink from './sign-in-link';
 import { render, screen } from '@testing-library/react';
 
-describe('Component: profile nav link', () => {
+describe('Component: sign in link', () => {
   it('should render properly', () => {
     const component = withStore(withHistory(<SignInLink/>)).withStoreComponent;
 

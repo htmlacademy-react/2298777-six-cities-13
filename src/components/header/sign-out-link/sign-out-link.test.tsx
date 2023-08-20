@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock('../../../hooks/use-store');
 
-describe('Component: profile nav link', () => {
+describe('Component: sign out link', () => {
   it('should render properly', () => {
     const component = withStore(withHistory(<SignOutLink/>)).withStoreComponent;
 
