@@ -41,7 +41,11 @@ export const offersData = createSlice({
       state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
       state.currentCityOffersLength = state.currentCityOffers.length;
       state.points = state.currentCityOffers.map((offer) => offer.location);
-      state.cityDetailed = state.currentCityOffers[0].city;
+      if (state.currentCityOffersLength === 0) {
+        state.cityDetailed = null;
+      } else {
+        state.cityDetailed = state.currentCityOffers[0].city;
+      }
       state.currentSort = 'Popular';
     },
     setCurrentSort: (state, action : PayloadAction<ValueOf<typeof SortOptions>>) => {

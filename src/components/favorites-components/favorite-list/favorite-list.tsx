@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import FavoriteLocation from '../favorites-location';
+import FavoriteLocation from '../favorites-location/favorites-location';
 import FavoritePlaces from '../favorite-places/favorite-places';
 import { useAppSelector } from '../../../hooks/use-store';
 import { getFavorites } from '../../../store/slices/favorite-data/selectors';

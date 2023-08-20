@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 import { withStore, withHistory } from '../../../util/mock-components';
-import FavoriteList from './favorite-list';
+import FavoritesCitiesList from './favorites-cities-list';
 import { render, screen } from '@testing-library/react';
 import { generateOfferCards } from '../../../util/mock';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
@@ -8,7 +8,7 @@ import { getFavorites } from '../../../store/slices/favorite-data/selectors';
 
 vi.mock('../../../hooks/use-store');
 
-describe('Component: favorite-list', () => {
+describe('Component: favorites cities list', () => {
 
   it('should render properly', async () => {
     const mockFavorites = generateOfferCards();
@@ -22,9 +22,9 @@ describe('Component: favorite-list', () => {
       }
       return null;
     });
-    const component = withStore(withHistory(<FavoriteList/>)).withStoreComponent;
+    const component = withStore(withHistory(<FavoritesCitiesList/>)).withStoreComponent;
     render(component);
 
-    expect(screen.getByTestId('favorite-list')).toBeInTheDocument();
+    expect(screen.getByTestId('favorites-cities-list')).toBeInTheDocument();
   });
 });
