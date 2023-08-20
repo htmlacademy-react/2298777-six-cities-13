@@ -1,8 +1,8 @@
-import MainOffers from './main-offers';
+import MainOffers from '../main-offers';
 import { FC } from 'react';
-import MainTabs from './main-tabs';
-import { useAppSelector } from '../../hooks/use-store';
-import { getCurrentCityOffersLength } from '../../store/slices/offers-data/selectors';
+import MainTabs from '../main-tabs';
+import { useAppSelector } from '../../../hooks/use-store';
+import { getCurrentCityOffersLength } from '../../../store/slices/offers-data/selectors';
 
 
 const MainMain : FC = () => {
@@ -11,7 +11,7 @@ const MainMain : FC = () => {
     return null;
   }
   return (
-    <main className="page__main page__main--index">
+    <main className="page__main page__main--index" data-testid='main-main'>
       <h1 className="visually-hidden">Cities</h1>
       <MainTabs/>
       <MainOffers/>

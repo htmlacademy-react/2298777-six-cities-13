@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import MainLocations from './main-locations';
+import MainLocations from './main-locations/main-locations';
 
 const MainTabs : FC = () => (
   <div className="tabs">
