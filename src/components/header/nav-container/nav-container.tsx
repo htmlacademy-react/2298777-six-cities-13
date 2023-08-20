@@ -1,8 +1,8 @@
-import ProfileNavLink from '../profile-nav-link';
-import SignOutLink from '../sign-out-link';
+import ProfileNavLink from '../profile-nav-link/profile-nav-link';
+import SignOutLink from '../sign-out-link/sign-out-link';
 import { FC } from 'react';
 import { useAppSelector } from '../../../hooks/use-store';
-import SignInLink from '../sign-in-link';
+import SignInLink from '../sign-in-link/sign-in-link';
 import { AuthorizationStatus } from '../../../const';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
 

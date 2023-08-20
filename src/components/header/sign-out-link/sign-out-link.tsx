@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../const';
-import { useAppDispatch } from '../../hooks/use-store';
-import { logoutAction } from '../../store/api-actions/user';
+import { AppRoutes } from '../../../const';
+import { useAppDispatch } from '../../../hooks/use-store';
+import { logoutAction } from '../../../store/api-actions/user';
 
 const SignOutLink : FC = () => {
   const dispatch = useAppDispatch();

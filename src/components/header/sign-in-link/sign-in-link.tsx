@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../const';
+import { AppRoutes } from '../../../const';
 
 const SignInLink : FC = () => (
   <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.Login}>
