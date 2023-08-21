@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import MainTabs from '../main-tabs';
-import MainOffersEmpty from '../main-offers-empty';
+import MainTabs from '../main-tabs/main-tabs';
+import MainOffersEmpty from '../main-offers-empty/main-offers-empty';
 import { useAppSelector } from '../../../hooks/use-store';
 import { getCurrentCityOffersLength } from '../../../store/slices/offers-data/selectors';
 

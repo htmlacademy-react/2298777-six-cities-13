@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { useAppSelector } from '../../hooks/use-store';
-import { getCurrentCity, getCurrentCityOffersLength } from '../../store/slices/offers-data/selectors';
+import { useAppSelector } from '../../../hooks/use-store';
+import { getCurrentCity, getCurrentCityOffersLength } from '../../../store/slices/offers-data/selectors';
 
 const MainPlacesFound : FC = () => {
   const currentCityOffersLength = useAppSelector(getCurrentCityOffersLength);

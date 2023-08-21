@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { SortOptions } from '../../const';
+import { SortOptions } from '../../../const';
 import cn from 'classnames';
-import { useAppDispatch } from '../../hooks/use-store';
-import { ValueOf } from '../../types/app-type';
-import { offersData } from '../../store/slices/offers-data/offers-data';
+import { useAppDispatch } from '../../../hooks/use-store';
+import { ValueOf } from '../../../types/app-type';
+import { offersData } from '../../../store/slices/offers-data/offers-data';
 
 
 type MainSortOptionsProps = {
@@ -15,7 +15,10 @@ type MainSortOptionsProps = {
 const MainSortOptions : FC<MainSortOptionsProps> = ({selectedSort, isOpened, setOpenedState}) => {
   const dispatch = useAppDispatch();
   return(
-    <ul className={cn('places__options', ' places__options--custom', {'places__options--opened': isOpened})}>
+    <ul
+      className={cn('places__options', ' places__options--custom', {'places__options--opened': isOpened})}
+      data-testid='main-sort-options'
+    >
       {Object.values(SortOptions).map((option) => (
         <li
           key={option}
@@ -25,6 +28,7 @@ const MainSortOptions : FC<MainSortOptionsProps> = ({selectedSort, isOpened, set
             dispatch(offersData.actions.setCurrentSort(option));
             setOpenedState(!isOpened);
           }}
+          data-testid={`${option}-sort`}
         >
           {option}
         </li>

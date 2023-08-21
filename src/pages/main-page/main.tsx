@@ -27,7 +27,7 @@ const MainPage : FC = () => {
   }
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='main-page'>
       <Helmet>
         <title>6 cities</title>
       </Helmet>

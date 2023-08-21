@@ -1,8 +1,8 @@
 import { FC, useState, useRef } from 'react';
-import useOutside from '../../hooks/use-outside';
-import MainSortOptions from './main-sort-options';
-import { useAppSelector } from '../../hooks/use-store';
-import { getCurrentSort } from '../../store/slices/offers-data/selectors';
+import useOutside from '../../../hooks/use-outside';
+import MainSortOptions from '../main-sort-options/main-sort-options';
+import { useAppSelector } from '../../../hooks/use-store';
+import { getCurrentSort } from '../../../store/slices/offers-data/selectors';
 
 
 const MainSort : FC = () => {
