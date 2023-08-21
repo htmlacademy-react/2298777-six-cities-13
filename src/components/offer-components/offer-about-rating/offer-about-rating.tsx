@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { getStarWidth } from '../../util/util';
+import { getStarWidth } from '../../../util/util';
 
 type OfferAboutRatingProps = {
   rating : number;
 };
 
 const OfferAboutRating : FC<OfferAboutRatingProps> = ({rating}) => (
-  <div className="offer__rating rating">
+  <div className="offer__rating rating" data-testid='offer-about-rating'>
     <div className="offer__stars rating__stars">
       <span style={{width: getStarWidth(rating)}}></span>
       <span className="visually-hidden">Rating</span>

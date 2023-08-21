@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks/use-store';
 import { getCurrentCityOffersLength } from '../../store/slices/offers-data/selectors';
-import OfferCard from './offer-card';
+import OfferCard from './offer-card/offer-card';
 import { FC } from 'react';
 
 

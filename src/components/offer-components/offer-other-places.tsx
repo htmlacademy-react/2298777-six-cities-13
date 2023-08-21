@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
-import OfferCard from './offer-card';
+import OfferCard from './offer-card/offer-card';
 import cn from 'classnames';
 import { getNearByOffers } from '../../store/slices/near-by-data/selectors';
 

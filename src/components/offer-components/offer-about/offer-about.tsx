@@ -1,14 +1,14 @@
-import OfferHost from './offer-host';
+import OfferHost from '../offer-host';
 import { FC } from 'react';
-import OfferPremiumMark from './offer-premium-mark';
-import OfferAboutName from './offer-about-name';
-import OfferAboutRating from './offer-about-rating';
-import OfferAboutFeatures from './offer-about-features';
-import OfferAboutPrice from './offer-about-price';
-import OfferAboutInside from './offer-about-inside';
-import OfferAboutReviews from './offer-about-reviews';
-import { useAppSelector } from '../../hooks/use-store';
-import { getCurrentOffer } from '../../store/slices/offer-data/selectors';
+import OfferPremiumMark from '../offer-premium-mark';
+import OfferAboutName from '../offer-about-name/offer-about-name';
+import OfferAboutRating from '../offer-about-rating/offer-about-rating';
+import OfferAboutFeatures from '../offer-about-features/offer-about-features';
+import OfferAboutPrice from '../offer-about-price/offer-about-price';
+import OfferAboutInside from '../offer-about-inside/offer-about-inside';
+import OfferAboutReviews from '../offer-about-reviews/offer-about-reviews';
+import { useAppSelector } from '../../../hooks/use-store';
+import { getCurrentOffer } from '../../../store/slices/offer-data/selectors';
 
 const OfferAbout : FC = () => {
   const offer = useAppSelector(getCurrentOffer);
@@ -18,7 +18,7 @@ const OfferAbout : FC = () => {
   }
 
   return (
-    <div className="offer__container container">
+    <div className="offer__container container" data-testid='offer-about'>
       <div className="offer__wrapper">
         <OfferPremiumMark isPremium={offer.isPremium} isOfferMark/>
         <OfferAboutName offer={offer} isFavorite={offer.isFavorite}/>

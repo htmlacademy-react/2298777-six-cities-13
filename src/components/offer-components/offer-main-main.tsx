@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import OfferAbout from './offer-about';
+import OfferAbout from './offer-about/offer-about';
 import OfferGallery from './offer-gallery';
 import Map from '../other/map';
 

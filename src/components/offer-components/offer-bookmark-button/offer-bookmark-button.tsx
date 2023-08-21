@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import cn from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import { DetailedOffer, Offer } from '../../types/app-type';
+import { useAppDispatch, useAppSelector } from '../../../hooks/use-store';
+import { DetailedOffer, Offer } from '../../../types/app-type';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../const';
-import { postFavoriteAction } from '../../store/api-actions/favorite';
-import { getAuthStatus } from '../../store/slices/user-data/selectors';
+import { AppRoutes } from '../../../const';
+import { postFavoriteAction } from '../../../store/api-actions/favorite';
+import { getAuthStatus } from '../../../store/slices/user-data/selectors';
 
 type OfferBookmarkButtonProps = {
   isFavorite: boolean;
@@ -43,6 +43,7 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
           handleBookmarkClick();
         }
       }}
+      data-testid='offer-bookmark-button'
     >
       <svg className={classIcon} width={width} height={height}>
         <use xlinkHref="#icon-bookmark"></use>

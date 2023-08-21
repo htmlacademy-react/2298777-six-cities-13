@@ -7,7 +7,7 @@ type OfferAboutFeaturesProps = {
 }
 
 const OfferAboutFeatures : FC<OfferAboutFeaturesProps> = ({type, bedrooms, maxAdults}) => (
-  <ul className="offer__features">
+  <ul className="offer__features" data-testid='offer-features'>
     <li className="offer__feature offer__feature--entire">
       {type}
     </li>

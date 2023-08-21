@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Offer } from '../../types/app-type';
+import { DetailedOffer, Offer } from '../../types/app-type';
 import OfferLink from '../other/offer-link';
 
 type OfferNameProps = {
-  offer: Offer;
+  offer: Offer | DetailedOffer;
 };
 
 const OfferName : FC<OfferNameProps> = ({offer}) => (
