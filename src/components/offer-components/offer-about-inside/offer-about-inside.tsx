@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import OfferInsideItems from '../offer-inside-items';
+import OfferInsideItems from '../offer-inside-items/offer-inside-items';
 
 const OfferAboutInside : FC<{goods : string[]}> = ({goods}) => (
   <div className="offer__inside" data-testid='offer-inside'>

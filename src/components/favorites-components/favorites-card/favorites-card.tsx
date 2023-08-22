@@ -1,8 +1,8 @@
 import {Offer} from '../../../types/app-type';
 import {FC} from 'react';
 import OfferCardInfo from '../../offer-components/offer-card-info/offer-card-info';
-import OfferPremiumMark from '../../offer-components/offer-premium-mark';
-import OfferImageWrapper from '../../offer-components/offer-image-wrapper';
+import OfferPremiumMark from '../../offer-components/offer-premium-mark/offer-premium-mark';
+import OfferImageWrapper from '../../offer-components/offer-image-wrapper/offer-image-wrapper';
 
 type FavoritesCardProps = {
   offer: Offer;

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import MainSort from '../main-sort/main-sort';
-import OfferList from '../../offer-components/offer-list';
+import OfferList from '../../offer-components/offer-list/offer-list';
 import MainPlacesFound from '../main-places-found/main-places-found';
 
 const MainPlaces : FC = () => (

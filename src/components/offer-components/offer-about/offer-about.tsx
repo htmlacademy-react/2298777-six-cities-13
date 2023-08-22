@@ -1,6 +1,6 @@
-import OfferHost from '../offer-host';
+import OfferHost from '../offer-host/offer-host';
 import { FC } from 'react';
-import OfferPremiumMark from '../offer-premium-mark';
+import OfferPremiumMark from '../offer-premium-mark/offer-premium-mark';
 import OfferAboutName from '../offer-about-name/offer-about-name';
 import OfferAboutRating from '../offer-about-rating/offer-about-rating';
 import OfferAboutFeatures from '../offer-about-features/offer-about-features';

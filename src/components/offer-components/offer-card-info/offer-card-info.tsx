@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { DetailedOffer, Offer } from '../../../types/app-type';
-import OfferPrice from '../offer-price';
-import OfferRating from '../offer-rating';
-import OfferName from '../offer-name';
+import OfferPrice from '../offer-price/offer-price';
+import OfferRating from '../offer-rating/offer-rating';
+import OfferName from '../offer-name/offer-name';
 import cn from 'classnames';
 
 type OfferCardInfoProps = {

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import OfferCardInfo from '../offer-card-info/offer-card-info';
-import OfferPremiumMark from '../offer-premium-mark';
-import OfferImageWrapper from '../offer-image-wrapper';
+import OfferPremiumMark from '../offer-premium-mark/offer-premium-mark';
+import OfferImageWrapper from '../offer-image-wrapper/offer-image-wrapper';
 import { useAppDispatch, useAppSelector } from '../../../hooks/use-store';
 import { offersData } from '../../../store/slices/offers-data/offers-data';
 import { getOffer } from '../../../store/slices/offers-data/selectors';
