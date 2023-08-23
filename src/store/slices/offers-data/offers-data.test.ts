@@ -57,6 +57,8 @@ describe('Offers data slice', () => {
     expect(result.points).toEqual(currentCityOffer.map((offer) => offer.location));
     if (currentCityOffer.length > 0) {
       expect(result.cityDetailed).toEqual(currentCityOffer[0].city);
+    } else {
+      expect(result.cityDetailed).toEqual(null);
     }
     expect(result.currentSort).toEqual('Popular');
   });

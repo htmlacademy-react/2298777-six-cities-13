@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
-import HeaderContainer from '../../components/header/header-container';
-import LoginMain from '../../components/login-components/login-main';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
+import LoginMain from '../../components/login-components/login-main/login-main';
 import { FC } from 'react';
 
 const LoginPage : FC = () => (
-  <div className="page page--gray page--login">
+  <div className="page page--gray page--login" data-testid='page-login'>
     <Helmet>
       <title>6 cities - Login</title>
     </Helmet>

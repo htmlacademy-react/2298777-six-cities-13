@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import HeaderContainer from '../../components/header/header-container';
-import OfferMain from '../../components/offer-components/offer-main';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
+import OfferMain from '../../components/offer-components/offer-main/offer-main';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
@@ -38,7 +38,7 @@ const OfferPage : FC = () => {
   }
 
   return (
-    <div className="page">
+    <div className="page" data-testid='offer-page'>
       <Helmet>
         <title>6 cities - Offer</title>
       </Helmet>

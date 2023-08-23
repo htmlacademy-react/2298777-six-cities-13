@@ -41,7 +41,11 @@ export const offersData = createSlice({
       state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
       state.currentCityOffersLength = state.currentCityOffers.length;
       state.points = state.currentCityOffers.map((offer) => offer.location);
-      state.cityDetailed = state.currentCityOffers[0].city;
+      if (state.currentCityOffersLength === 0) {
+        state.cityDetailed = null;
+      } else {
+        state.cityDetailed = state.currentCityOffers[0].city;
+      }
       state.currentSort = 'Popular';
     },
     setCurrentSort: (state, action : PayloadAction<ValueOf<typeof SortOptions>>) => {
@@ -52,7 +56,7 @@ export const offersData = createSlice({
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
       }
     },
-    setSelectedPoint: (state, action : PayloadAction<Location>) => {
+    setSelectedPoint: (state, action : PayloadAction<Location | null>) => {
       state.selectedPoint = action.payload;
     }
   },
@@ -108,18 +112,22 @@ export const offersData = createSlice({
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const offer = state.offers.find((o) => o.id === action.payload.id);
         const currentCityOffer = state.currentCityOffers.find((o) => o.id === action.payload.id);
-        if (!offer || !currentCityOffer) {
-          return;
+        if (offer) {
+          offer.isFavorite = action.payload.isFavorite;
         }
-        offer.isFavorite = action.payload.isFavorite;
-        currentCityOffer.isFavorite = action.payload.isFavorite;
+        if (currentCityOffer) {
+          currentCityOffer.isFavorite = action.payload.isFavorite;
+        }
       })
       .addCase(fetchCurrentOfferAction.fulfilled, (state, action) => {
+        state.selectedPoint = action.payload.location;
         state.currentCity = action.payload.city.name;
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
         state.currentCityOffersLength = state.currentCityOffers.length;
         state.points = state.currentCityOffers.map((offer) => offer.location);
-        state.cityDetailed = state.currentCityOffers[0].city;
+        if (state.currentCityOffersLength) {
+          state.cityDetailed = state.currentCityOffers[0].city;
+        }
       });
   },
 });

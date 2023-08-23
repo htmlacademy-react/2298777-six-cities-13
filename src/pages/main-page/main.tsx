@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import HeaderContainer from '../../components/header/header-container';
-import MainMain from '../../components/main-components/main-main';
-import MainEmpty from '../../components/main-components/main-empty';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
+import MainMain from '../../components/main-components/main-main/main-main';
+import MainEmpty from '../../components/main-components/main-empty/main-empty';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
 import { fetchFavoritesAction } from '../../store/api-actions/favorite';
@@ -27,7 +27,7 @@ const MainPage : FC = () => {
   }
 
   return (
-    <div className="page page--gray page--main">
+    <div className="page page--gray page--main" data-testid='main-page'>
       <Helmet>
         <title>6 cities</title>
       </Helmet>

@@ -63,19 +63,20 @@ describe('comments slice async', () => {
 
   it('should add comment with postCommentAction.fulfilled', () => {
     let comments = generateComments();
+    const length = comments.length;
     comments = comments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     comments = comments.slice(0, 10);
     const initialState = {
       comments,
       isCommentsLoading: false,
-      commentsLength: comments.length,
+      commentsLength: length,
     };
     const comment = comments[0];
     const commentsForCheck = [comment, ...comments.slice(0, 9)];
     const stateForCheck = {
       comments: commentsForCheck,
       isCommentsLoading: false,
-      commentsLength: commentsForCheck.length,
+      commentsLength: length + 1,
     };
     const result = commentsData.reducer(initialState, postCommentAction.fulfilled(comment, '', {rating: 5, comment: 'comment', offerId: '1'}));
     expect(result).toEqual(stateForCheck);

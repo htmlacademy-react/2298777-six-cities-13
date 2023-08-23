@@ -1,4 +1,4 @@
-import LoginInput from '../login-input';
+import LoginInput from '../login-input/login-input';
 import { LoginData } from '../../../const';
 import { FC, useRef, useState } from 'react';
 import useFormSubmit from '../../../hooks/use-form-submit';

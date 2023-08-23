@@ -1,13 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/other/logo';
-import HeaderContainer from '../../components/header/header-container';
-import FavoritesMain from '../../components/favorites-components/favorites-main';
+import HeaderContainer from '../../components/header/header-conainer/header-container';
+import FavoritesMain from '../../components/favorites-components/favorites-main/favorites-main';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
-import FavoritesEmpty from '../../components/favorites-components/favorites-empty';
+import FavoritesEmpty from '../../components/favorites-components/favorites-empty/favorites-empty';
 import cn from 'classnames';
 import { fetchFavoritesAction } from '../../store/api-actions/favorite';
-import { checkAuthAction } from '../../store/api-actions/user';
 import CheckError from '../../components/other/check-error';
 import { getFavorites, getFavoritesError, getIsFavoritesLoading } from '../../store/slices/favorite-data/selectors';
 
@@ -18,7 +17,6 @@ const FavoritePage : FC = () => {
   const dispatch = useAppDispatch();
 
   const onTryAgain = () => {
-    dispatch(checkAuthAction());
     dispatch(fetchFavoritesAction());
   };
 
@@ -27,7 +25,7 @@ const FavoritePage : FC = () => {
   }
 
   return(
-    <div className={cn('page', {'page--favorites-empty': favorites.length === 0})}>
+    <div className={cn('page', {'page--favorites-empty': favorites.length === 0})} data-testid='favorites-page'>
       <Helmet>
         <title>6 cities - Favorites</title>
       </Helmet>

@@ -10,14 +10,9 @@ const useOfferPage = (city: CityString, isLoading: boolean, id: string | undefin
     if (id && !isLoading) {
       store.dispatch(fetchCurrentOfferAction(id));
       store.dispatch(fetchCommentsAction(id));
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (city && id && !isLoading) {
       store.dispatch(fetchNearByPlacesAction(id));
     }
-  }, [city]);
+  }, [id]);
 
 };
 
