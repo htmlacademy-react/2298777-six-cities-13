@@ -6,6 +6,8 @@ import { MapIcons } from '../../const';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 import { getCityDetailed, getPoints, getSelectedPoint } from '../../store/slices/offers-data/selectors';
+import { getNearByLocations } from '../../store/slices/near-by-data/selectors';
+import { getCurrentOffer } from '../../store/slices/offer-data/selectors';
 
 type MapProps = {
   className: string;
@@ -18,7 +20,16 @@ const Map : FC<MapProps> = ({className, isHoverActive}) => {
   const map = useMap(mapRef, city!);
   const [currentCity, setCurrentCity] = useState(city);
   const selectedPoint = useAppSelector(getSelectedPoint);
-  const points = useAppSelector(getPoints);
+  let points = useAppSelector(getPoints);
+  const nearByPoints = useAppSelector(getNearByLocations);
+  const currentOffer = useAppSelector(getCurrentOffer);
+
+  if (!isHoverActive) {
+    points = nearByPoints.slice();
+    if (currentOffer?.location) {
+      points.push(currentOffer.location);
+    }
+  }
 
   useEffect(() => {
     if (map && city) {
@@ -29,9 +40,14 @@ const Map : FC<MapProps> = ({className, isHoverActive}) => {
           lng: point.longitude,
         });
 
+        if (JSON.stringify(point) === JSON.stringify(currentOffer?.location)) {
+          marker.setIcon(MapIcons.ActiveIcon).addTo(markerLayer);
+          return;
+        }
+
         marker
           .setIcon(
-            isHoverActive && selectedPoint?.latitude === point.latitude && selectedPoint.longitude === point.longitude ?
+            isHoverActive && JSON.stringify(point) === JSON.stringify(selectedPoint) ?
               MapIcons.ActiveIcon :
               MapIcons.DefaultIcon
           )

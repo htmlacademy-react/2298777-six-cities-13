@@ -6,7 +6,7 @@ const MainPlacesFound : FC = () => {
   const currentCityOffersLength = useAppSelector(getCurrentCityOffersLength);
   const city = useAppSelector(getCurrentCity);
   return (
-    <b className="places__found">{currentCityOffersLength} places to stay in {city}</b>
+    <b className="places__found">{currentCityOffersLength} {currentCityOffersLength === 1 ? 'place' : 'places'} to stay in {city}</b>
   );
 };
 

@@ -24,24 +24,27 @@ export const commentsData = createSlice({
         state.isCommentsLoading = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
+        state.commentsLength = action.payload.length;
         state.comments = action.payload.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         state.comments = state.comments.slice(0, 10);
         state.isCommentsLoading = false;
-        state.commentsLength = action.payload.length;
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
-        state.comments = [];
         state.isCommentsLoading = false;
-        state.commentsLength = 0;
         toast.warn('Error while fetching comments');
       })
       .addCase(postCommentAction.fulfilled, (state, action) => {
+        state.commentsLength++;
         state.comments.unshift(action.payload);
+        state.isCommentsLoading = false;
         state.comments = state.comments.slice(0, 10);
-        state.commentsLength = state.comments.length;
       })
-      .addCase(postCommentAction.rejected, () => {
+      .addCase(postCommentAction.rejected, (state) => {
         toast.warn('Error while posting comment');
+        state.isCommentsLoading = false;
+      })
+      .addCase(postCommentAction.pending, (state) => {
+        state.isCommentsLoading = true;
       });
   },
 });

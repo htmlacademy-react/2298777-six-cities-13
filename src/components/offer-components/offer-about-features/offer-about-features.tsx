@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { capitalizeFirstLetter } from '../../../util/util';
 
 type OfferAboutFeaturesProps = {
   type: string;
@@ -9,13 +10,13 @@ type OfferAboutFeaturesProps = {
 const OfferAboutFeatures : FC<OfferAboutFeaturesProps> = ({type, bedrooms, maxAdults}) => (
   <ul className="offer__features" data-testid='offer-features'>
     <li className="offer__feature offer__feature--entire">
-      {type}
+      {capitalizeFirstLetter(type)}
     </li>
     <li className="offer__feature offer__feature--bedrooms">
-      {bedrooms} Bedrooms
+      {bedrooms} {bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
     </li>
     <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
+                  Max {maxAdults} {maxAdults === 1 ? 'adult' : 'adults'}
     </li>
   </ul>
 );

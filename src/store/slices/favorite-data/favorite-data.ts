@@ -40,6 +40,10 @@ export const favoriteData = createSlice({
         }
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
+        if (!action.payload.isFavorite && state.favorites.length === 1) {
+          state.favorites = [];
+          return;
+        }
         const offer : Offer = {
           type: action.payload.type,
           id: action.payload.id,

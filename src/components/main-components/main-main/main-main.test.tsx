@@ -2,9 +2,11 @@ import { describe } from 'vitest';
 import { withHistory, withStore } from '../../../util/mock-components';
 import MainMain from './main-main';
 import { render, screen } from '@testing-library/react';
-import { getCityDetailed, getCurrentCity, getCurrentCityOffersLength, getCurrentSort, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
-import { generateOfferCards } from '../../../util/mock';
+import { getCityDetailed, getCurrentCity, getCurrentCityOffers, getCurrentCityOffersLength, getCurrentSort, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
+import { generateDetailOffer, generateOfferCards } from '../../../util/mock';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
+import { getNearByLocations } from '../../../store/slices/near-by-data/selectors';
+import { getCurrentOffer } from '../../../store/slices/offer-data/selectors';
 
 vi.mock('../../../hooks/use-store');
 
@@ -28,8 +30,12 @@ describe('Component: main main', () => {
           return 'Popular';
         case getAuthStatus:
           return 'AUTH';
-        default:
-          return offers[0];
+        case getNearByLocations:
+          return offers.map((o) => o.location);
+        case getCurrentOffer:
+          return generateDetailOffer();
+        case getCurrentCityOffers:
+          return offers;
       }
     });
     const component = withStore(withHistory(<MainMain/>)).withStoreComponent;
@@ -58,8 +64,6 @@ describe('Component: main main', () => {
           return 'Popular';
         case getAuthStatus:
           return 'AUTH';
-        default:
-          return offers[0];
       }
     });
     const component = withStore(withHistory(<MainMain/>)).withStoreComponent;

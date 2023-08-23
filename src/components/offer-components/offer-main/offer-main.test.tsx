@@ -3,11 +3,11 @@ import { withHistory, withStore } from '../../../util/mock-components';
 import { render, screen } from '@testing-library/react';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
 import { generateComments, generateDetailOffer, generateOfferCards } from '../../../util/mock';
-import { getCityDetailed, getCurrentCityOffersLength, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
+import { getCityDetailed, getCurrentCityOffers, getCurrentCityOffersLength, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
 import { getCurrentOffer, getIsCurrentOfferLoading } from '../../../store/slices/offer-data/selectors';
 import { getComments, getCommentsLength } from '../../../store/slices/comments-data/selectors';
 import OfferMain from './offer-main';
-import { getNearByOffers } from '../../../store/slices/near-by-data/selectors';
+import { getNearByLocations, getNearByOffers } from '../../../store/slices/near-by-data/selectors';
 
 vi.mock('../../../hooks/use-store');
 
@@ -38,8 +38,10 @@ describe('Component: offer main', () => {
           return false;
         case getCommentsLength:
           return 1;
-        default:
-          return offers[0];
+        case getCurrentCityOffers:
+          return offers;
+        case getNearByLocations:
+          return offers.map((o) => o.location);
       }
     });
     const component = withStore(withHistory(<OfferMain/>)).withStoreComponent;

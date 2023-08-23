@@ -20,7 +20,7 @@ const OfferAbout : FC = () => {
   return (
     <div className="offer__container container" data-testid='offer-about'>
       <div className="offer__wrapper">
-        <OfferPremiumMark isPremium={offer.isPremium} isOfferMark/>
+        {offer.isPremium && <OfferPremiumMark isPremium={offer.isPremium} isOfferMark/>}
         <OfferAboutName offer={offer} isFavorite={offer.isFavorite}/>
         <OfferAboutRating rating={offer.rating}/>
         <OfferAboutFeatures bedrooms={offer.bedrooms} maxAdults={offer.maxAdults} type={offer.type}/>

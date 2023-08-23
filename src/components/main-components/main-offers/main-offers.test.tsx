@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { withHistory, withStore } from '../../../util/mock-components';
 import { render, screen } from '@testing-library/react';
 import MainOffers from './main-offers';
-import { getCityDetailed, getCurrentCity, getCurrentCityOffersLength, getCurrentSort, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
+import { getCityDetailed, getCurrentCity, getCurrentCityOffers, getCurrentCityOffersLength, getCurrentSort, getPoints, getSelectedPoint } from '../../../store/slices/offers-data/selectors';
 import { generateOfferCards } from '../../../util/mock';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
 
@@ -28,8 +28,8 @@ describe('Component: main offers', () => {
           return 'Popular';
         case getAuthStatus:
           return 'AUTH';
-        default:
-          return mockOffers[0];
+        case getCurrentCityOffers:
+          return mockOffers;
       }
     });
     const component = withStore(withHistory(<MainOffers/>)).withStoreComponent;

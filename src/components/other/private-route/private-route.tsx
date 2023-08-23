@@ -16,7 +16,7 @@ const PrivateRoute : FC<PropsWithChildren<{isAuthNeeded: boolean}>> = ({children
   }
 
   return (
-    authStatus === AuthorizationStatus.NoAuth ? children : <Navigate to={AppRoutes.Main}/>
+    authStatus !== AuthorizationStatus.Auth ? children : <Navigate to={AppRoutes.Main}/>
   );
 };
 

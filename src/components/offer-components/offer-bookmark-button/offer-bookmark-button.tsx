@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../../hooks/use-store';
 import { DetailedOffer, Offer } from '../../../types/app-type';
@@ -21,6 +21,7 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const authStatus = useAppSelector(getAuthStatus);
+  const [buttonState, setButtonState] = useState(isFavorite);
   const handleBookmarkClick = (evt? : React.MouseEvent<HTMLButtonElement>) => {
     if (evt) {
       evt.preventDefault();
@@ -28,11 +29,16 @@ const OfferBookmarkButton : FC<OfferBookmarkButtonProps> = ({isFavorite, width =
   };
   return (
     <button
-      className={cn(classButton, 'button', {[classActive]: isFavorite})}
+      className={cn(classButton, 'button', {[classActive]: buttonState})}
       type="button"
       onClick={() => {
         if (authStatus === 'AUTH') {
-          dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}));
+          dispatch(postFavoriteAction({offerId: offer.id, status: !offer.isFavorite}))
+            .then((data) => {
+              if (data.meta.requestStatus === 'fulfilled') {
+                setButtonState(!buttonState);
+              }
+            });
         } else {
           navigate(AppRoutes.Login);
         }

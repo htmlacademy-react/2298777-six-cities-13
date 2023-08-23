@@ -4,6 +4,7 @@ import OfferPrice from '../offer-price/offer-price';
 import OfferRating from '../offer-rating/offer-rating';
 import OfferName from '../offer-name/offer-name';
 import cn from 'classnames';
+import { capitalizeFirstLetter } from '../../../util/util';
 
 type OfferCardInfoProps = {
   offer: Offer | DetailedOffer;
@@ -15,7 +16,7 @@ const OfferCardInfo : FC<OfferCardInfoProps> = ({offer, isFavoriteCard = false})
     <OfferPrice offer={offer}/>
     <OfferRating offer={offer}/>
     <OfferName offer={offer}/>
-    <p className="place-card__type">{offer.type}</p>
+    <p className="place-card__type">{capitalizeFirstLetter(offer.type)}</p>
   </div>
 );
 

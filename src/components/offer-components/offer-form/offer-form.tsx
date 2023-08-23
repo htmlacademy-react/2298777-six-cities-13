@@ -1,5 +1,5 @@
 import OfferStarList from '../offer-star-list/offer-star-list';
-import React from 'react';
+import React, { useState } from 'react';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/use-store';
 import { postCommentAction } from '../../../store/api-actions/comment';
@@ -10,7 +10,7 @@ const OfferForm : FC = () => {
   const dispatch = useAppDispatch();
   const offerId = useAppSelector(getCurrentOffer)!.id;
   const isLoading = useAppSelector(getIsCommentsLoading);
-  const [review, setReview] = React.useState({
+  const [review, setReview] = useState({
     rating: 0,
     comment: '',
   });
@@ -22,10 +22,13 @@ const OfferForm : FC = () => {
       method="post"
       onSubmit={(evt) => {
         evt.preventDefault();
-        dispatch(postCommentAction({offerId, comment: review.comment, rating: review.rating}));
-        setReview({
-          rating: 0,
-          comment: '',
+        dispatch(postCommentAction({offerId, comment: review.comment, rating: review.rating})).then((data) => {
+          if (data.meta.requestStatus === 'fulfilled') {
+            setReview({
+              rating: 0,
+              comment: '',
+            });
+          }
         });
       }}
       data-testid='offer-form'
@@ -34,7 +37,7 @@ const OfferForm : FC = () => {
       <OfferStarList rating={review.rating} onChange={(evt) => setReview({
         ...review,
         rating: Number(evt.target.value),
-      })}
+      })} disabled={isLoading}
       />
       <textarea
         className="reviews__textarea form__textarea"
@@ -48,6 +51,7 @@ const OfferForm : FC = () => {
           });
         }}
         value={review.comment}
+        disabled={isLoading}
       >
       </textarea>
       <div className="reviews__button-wrapper">

@@ -3,8 +3,8 @@ import { withHistory, withStore } from '../../../util/mock-components';
 import { render, screen } from '@testing-library/react';
 import OfferList from './offer-list';
 import { getAuthStatus } from '../../../store/slices/user-data/selectors';
-import { generateDetailOffer } from '../../../util/mock';
-import { getCurrentCityOffersLength } from '../../../store/slices/offers-data/selectors';
+import { generateOfferCards } from '../../../util/mock';
+import { getCurrentCityOffers, getCurrentCityOffersLength } from '../../../store/slices/offers-data/selectors';
 
 vi.mock('../../../hooks/use-store');
 
@@ -17,8 +17,8 @@ describe('Component: offer inside items', () => {
           return 'AUTH';
         case getCurrentCityOffersLength:
           return 200;
-        default:
-          return generateDetailOffer();
+        case getCurrentCityOffers:
+          return generateOfferCards();
       }
     });
     const component = withStore(withHistory(<OfferList/>)).withStoreComponent;

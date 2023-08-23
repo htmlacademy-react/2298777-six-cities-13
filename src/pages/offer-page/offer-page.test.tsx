@@ -6,8 +6,8 @@ import { getComments, getCommentsLength } from '../../store/slices/comments-data
 import { generateComments, generateDetailOffer, generateOfferCards } from '../../util/mock';
 import { getCurrentOffer, getCurrentOfferError, getIsCurrentOfferLoading } from '../../store/slices/offer-data/selectors';
 import OfferPage from './offer-page';
-import { getNearByOffers } from '../../store/slices/near-by-data/selectors';
-import { getCurrentCityOffersLength, getPoints, getSelectedPoint, getCityDetailed, getCurrentCity } from '../../store/slices/offers-data/selectors';
+import { getNearByLocations, getNearByOffers } from '../../store/slices/near-by-data/selectors';
+import { getCurrentCityOffersLength, getPoints, getSelectedPoint, getCityDetailed, getCurrentCity, getCurrentCityOffers } from '../../store/slices/offers-data/selectors';
 
 vi.mock('../../hooks/use-store');
 
@@ -21,7 +21,7 @@ describe('Component: offer page', () => {
         case getAuthStatus:
           return 'AUTH';
         case getCurrentCityOffersLength:
-          return 1;
+          return 10;
         case getCurrentOffer:
           return offer;
         case getPoints:
@@ -42,8 +42,10 @@ describe('Component: offer page', () => {
           return 'Amsterdam';
         case getCurrentOfferError:
           return null;
-        default:
-          return offers[0];
+        case getNearByLocations:
+          return offers.map((o) => o.location);
+        case getCurrentCityOffers:
+          return offers;
       }
     });
     const component = withStore(withHistory(<OfferPage/>)).withStoreComponent;
