@@ -20,11 +20,11 @@ type DetailedOffer = {
   host: Host;
   images: string[];
   maxAdults: number;
-} & Offer;
+} & Omit<Offer, 'previewImage'>;
 
 type Comment = {
   id: string;
-  date: Date;
+  date: string;
   user: UserInComment;
   comment: string;
   rating: number;

@@ -1,14 +1,15 @@
-import { Offer } from '../../types/app-type';
 import { FC } from 'react';
 import OfferCardInfo from './offer-card-info';
 import OfferPremiumMark from './offer-premium-mark';
 import OfferImageWrapper from './offer-image-wrapper';
-import { useAppDispatch } from '../../hooks/use-store';
-import { offersData } from '../../store/slices/offers-data';
+import { useAppDispatch, useAppSelector } from '../../hooks/use-store';
+import { offersData } from '../../store/slices/offers-data/offers-data';
+import { getOffer } from '../../store/slices/offers-data/selectors';
 
 
-const OfferCard : FC<{offer: Offer}> = ({offer}) => {
+const OfferCard : FC<{index: number}> = ({index}) => {
   const dispatch = useAppDispatch();
+  const offer = useAppSelector((state) => getOffer(state, index));
 
   const handleOfferHover = () => {
     dispatch(offersData.actions.setSelectedPoint(offer.location));

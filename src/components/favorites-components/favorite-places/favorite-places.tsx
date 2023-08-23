@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { filterOfferByCity } from '../../util';
-import FavoritesCard from './favorites-card';
-import { CityString, Offers } from '../../types/app-type';
+import { filterOfferByCity } from '../../../util/util';
+import FavoritesCard from '../favorites-card';
+import { CityString, Offers } from '../../../types/app-type';
 
 type FavoritePlacesProps = {
   city: CityString;

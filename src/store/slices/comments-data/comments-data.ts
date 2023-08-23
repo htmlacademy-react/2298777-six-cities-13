@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { Comments } from '../../types/app-type';
+import { NameSpace } from '../../../const';
+import { Comments } from '../../../types/app-type';
 import { toast } from 'react-toastify';
-import { fetchCommentsAction, postCommentAction } from '../api-actions/comment';
+import { fetchCommentsAction, postCommentAction } from '../../api-actions/comment';
 
 const initialState = {
   comments: [],

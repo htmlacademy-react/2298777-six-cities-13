@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from '../../util';
+import { capitalizeFirstLetter } from '../../util/util';
 import { LoginData } from '../../const';
 import { FC } from 'react';
 

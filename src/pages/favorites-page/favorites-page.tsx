@@ -9,11 +9,12 @@ import cn from 'classnames';
 import { fetchFavoritesAction } from '../../store/api-actions/favorite';
 import { checkAuthAction } from '../../store/api-actions/user';
 import CheckError from '../../components/other/check-error';
+import { getFavorites, getFavoritesError, getIsFavoritesLoading } from '../../store/slices/favorite-data/selectors';
 
 const FavoritePage : FC = () => {
-  const favorites = useAppSelector((state) => state.favoriteData.favorites);
-  const isLoading = useAppSelector((state) => state.favoriteData.isFavoritesLoading);
-  const error = useAppSelector((state) => state.favoriteData.error);
+  const favorites = useAppSelector(getFavorites);
+  const isLoading = useAppSelector(getIsFavoritesLoading);
+  const error = useAppSelector(getFavoritesError);
   const dispatch = useAppDispatch();
 
   const onTryAgain = () => {

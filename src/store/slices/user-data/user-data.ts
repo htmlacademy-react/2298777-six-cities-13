@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthorizationStatus, NameSpace } from '../../const';
-import { User, ValueOf } from '../../types/app-type';
-import { checkAuthAction, loginAction, logoutAction } from '../api-actions/user';
-import { removeToken } from '../../services/token';
+import { AuthorizationStatus, NameSpace } from '../../../const';
+import { User, ValueOf } from '../../../types/app-type';
+import { checkAuthAction, loginAction, logoutAction } from '../../api-actions/user';
 import { toast } from 'react-toastify';
-import { parseStatusCode } from '../../util';
+import { parseStatusCode } from '../../../util/util';
 import { StatusCodes } from 'http-status-codes';
 
 const initialState = {
@@ -35,7 +34,6 @@ export const userData = createSlice({
       .addCase(logoutAction.fulfilled, (state) => {
         state.user = null;
         state.authStatus = 'NO_AUTH';
-        removeToken();
       })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.user = action.payload;

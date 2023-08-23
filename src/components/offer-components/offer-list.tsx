@@ -1,14 +1,15 @@
 import { useAppSelector } from '../../hooks/use-store';
+import { getCurrentCityOffersLength } from '../../store/slices/offers-data/selectors';
 import OfferCard from './offer-card';
 import { FC } from 'react';
 
 
 const OfferList : FC = () => {
-  const offers = useAppSelector((state) => state.offersData.currentCityOffers);
+  const numberOfCityOffers = useAppSelector(getCurrentCityOffersLength);
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (<OfferCard key={offer.id} offer={offer}/>))}
+      {new Array(numberOfCityOffers).fill(null).map((v, index) => <OfferCard index={index} key={index}/>)}
     </div>
   );
 };

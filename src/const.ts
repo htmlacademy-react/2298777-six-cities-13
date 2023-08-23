@@ -74,14 +74,14 @@ const APIRoute = {
   postFavorite: (offerId: string, status: number) =>`/favorite/${offerId}/${status}`,
 } as const;
 
-const NameSpace = {
-  Favorites: 'favoriteData',
-  Offers: 'offersData',
-  Offer: 'offerData',
-  Comments: 'commentsData',
-  User: 'userData',
-  NearBy: 'nearByData',
-} as const;
+enum NameSpace {
+  Favorites = 'favoriteData',
+  Offers = 'offersData',
+  Offer = 'offerData',
+  Comments = 'commentsData',
+  User = 'userData',
+  NearBy = 'nearByData',
+}
 
 export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,
   SortOptions, REVIEW_DATE_FORMAT, APIRoute, NameSpace };

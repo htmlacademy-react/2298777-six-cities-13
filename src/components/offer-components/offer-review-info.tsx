@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Comment } from '../../types/app-type';
-import { getStarWidth, humanizeDate } from '../../util';
+import { getStarWidth, humanizeDate } from '../../util/util';
 import { REVIEW_DATE_FORMAT } from '../../const';
 
 const OfferReviewInfo : FC<{comment: Comment}> = ({comment}) => {

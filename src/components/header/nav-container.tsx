@@ -4,9 +4,10 @@ import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
 import SignInLink from './sign-in-link';
 import { AuthorizationStatus } from '../../const';
+import { getAuthStatus } from '../../store/slices/user-data/selectors';
 
 const NavContainer : FC = () => {
-  const authStatus = useAppSelector((state) => state.userData.authStatus);
+  const authStatus = useAppSelector(getAuthStatus);
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

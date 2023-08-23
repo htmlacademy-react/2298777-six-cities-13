@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
-import { logoutAction } from '../api-actions/user';
-import { Offers } from '../../types/app-type';
+import { NameSpace } from '../../../const';
+import { logoutAction } from '../../api-actions/user';
+import { Offer, Offers } from '../../../types/app-type';
 import { toast } from 'react-toastify';
 import { StatusCodes } from 'http-status-codes';
-import { parseStatusCode } from '../../util';
-import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
+import { parseStatusCode } from '../../../util/util';
+import { fetchFavoritesAction, postFavoriteAction } from '../../api-actions/favorite';
 
 const initialState = {
   favorites: [],
@@ -40,10 +40,22 @@ export const favoriteData = createSlice({
         }
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        if (action.payload.isFavorite) {
-          state.favorites.push(action.payload);
+        const offer : Offer = {
+          type: action.payload.type,
+          id: action.payload.id,
+          city: action.payload.city,
+          previewImage: action.payload.images[0],
+          title: action.payload.title,
+          price: action.payload.price,
+          rating: action.payload.rating,
+          isFavorite: action.payload.isFavorite,
+          isPremium: action.payload.isPremium,
+          location: action.payload.location,
+        };
+        if (offer.isFavorite) {
+          state.favorites.push(offer);
         } else {
-          state.favorites = state.favorites.filter((offer) => offer.id !== action.payload.id);
+          state.favorites = state.favorites.filter((o) => o.id !== offer.id);
         }
       })
       .addCase(postFavoriteAction.rejected, () => {

@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { MapIcons } from '../../const';
 import { FC } from 'react';
 import { useAppSelector } from '../../hooks/use-store';
+import { getCityDetailed, getPoints, getSelectedPoint } from '../../store/slices/offers-data/selectors';
 
 type MapProps = {
   className: string;
@@ -13,11 +14,11 @@ type MapProps = {
 
 const Map : FC<MapProps> = ({className, isHoverActive}) => {
   const mapRef = useRef(null);
-  const city = useAppSelector((state) => state.offersData.cityDetailed);
+  const city = useAppSelector(getCityDetailed);
   const map = useMap(mapRef, city!);
   const [currentCity, setCurrentCity] = useState(city);
-  const selectedPoint = useAppSelector((state) => state.offersData.selectedPoint);
-  const points = useAppSelector((state) => state.offersData.points);
+  const selectedPoint = useAppSelector(getSelectedPoint);
+  const points = useAppSelector(getPoints);
 
   useEffect(() => {
     if (map && city) {

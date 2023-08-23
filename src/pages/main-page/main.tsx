@@ -8,11 +8,12 @@ import { fetchFavoritesAction } from '../../store/api-actions/favorite';
 import { fetchOffersAction } from '../../store/api-actions/offer';
 import { checkAuthAction } from '../../store/api-actions/user';
 import CheckError from '../../components/other/check-error';
+import { getIsOffersLoading, getOffersError } from '../../store/slices/offers-data/selectors';
 
 
 const MainPage : FC = () => {
-  const isOffersLoading = useAppSelector((state) => state.offersData.isOffersLoading);
-  const error = useAppSelector((state) => state.offersData.error);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+  const error = useAppSelector(getOffersError);
   const dispatch = useAppDispatch();
 
   const onTryAgain = () => {

@@ -3,7 +3,7 @@ import { SortOptions } from '../../const';
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks/use-store';
 import { ValueOf } from '../../types/app-type';
-import { offersData } from '../../store/slices/offers-data';
+import { offersData } from '../../store/slices/offers-data/offers-data';
 
 
 type MainSortOptionsProps = {

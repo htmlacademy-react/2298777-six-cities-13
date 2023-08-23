@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
-import { createRoute } from '../../util';
+import { createRoute } from '../../util/util';
 
 type OfferLinkProps = {
   offerId: string;

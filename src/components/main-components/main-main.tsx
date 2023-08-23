@@ -2,10 +2,11 @@ import MainOffers from './main-offers';
 import { FC } from 'react';
 import MainTabs from './main-tabs';
 import { useAppSelector } from '../../hooks/use-store';
+import { getCurrentCityOffersLength } from '../../store/slices/offers-data/selectors';
 
 
 const MainMain : FC = () => {
-  const currentCityOffersLength = useAppSelector((state) => state.offersData.currentCityOffersLength);
+  const currentCityOffersLength = useAppSelector(getCurrentCityOffersLength);
   if (!currentCityOffersLength) {
     return null;
   }

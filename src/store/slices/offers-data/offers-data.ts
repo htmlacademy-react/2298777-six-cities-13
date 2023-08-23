@@ -1,12 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NameSpace, SortOptions } from '../../const';
-import { City, CityString, Offers, ValueOf, Location } from '../../types/app-type';
-import { logoutAction } from '../api-actions/user';
-import { getCurrentCityOffers, parseStatusCode } from '../../util';
-import sort from '../../sort';
+import { NameSpace, SortOptions } from '../../../const';
+import { City, CityString, Offers, ValueOf, Location } from '../../../types/app-type';
+import { logoutAction } from '../../api-actions/user';
+import { getCurrentCityOffers, parseStatusCode } from '../../../util/util';
+import sort from '../../../sort';
 import { StatusCodes } from 'http-status-codes';
-import { fetchFavoritesAction, postFavoriteAction } from '../api-actions/favorite';
-import { fetchCurrentOfferAction, fetchOffersAction } from '../api-actions/offer';
+import { fetchFavoritesAction, postFavoriteAction } from '../../api-actions/favorite';
+import { fetchCurrentOfferAction, fetchOffersAction } from '../../api-actions/offer';
 
 const initialState = {
   currentCity: 'Paris',
@@ -66,7 +66,11 @@ export const offersData = createSlice({
         state.currentCityOffers = getCurrentCityOffers(state.offers, state.currentCity);
         state.currentCityOffersLength = state.currentCityOffers.length;
         state.points = state.currentCityOffers.map((offer) => offer.location);
-        state.cityDetailed = state.currentCityOffers[0].city;
+        if (state.currentCityOffersLength > 0) {
+          state.cityDetailed = state.currentCityOffers[0].city;
+        } else {
+          state.cityDetailed = null;
+        }
         state.isOffersLoading = false;
         state.error = null;
       })
@@ -84,11 +88,11 @@ export const offersData = createSlice({
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.offers = state.offers.map((offer) => ({
           ...offer,
-          isFavorite: action.payload.some((o) => o.id === offer.id),
+          isFavorite: action.payload.find((o) => o.id === offer.id)?.isFavorite || false,
         }));
         state.currentCityOffers = state.currentCityOffers.map((offer) => ({
           ...offer,
-          isFavorite: action.payload.some((o) => o.id === offer.id),
+          isFavorite: action.payload.find((o) => o.id === offer.id)?.isFavorite || false,
         }));
       })
       .addCase(logoutAction.fulfilled, (state) => {

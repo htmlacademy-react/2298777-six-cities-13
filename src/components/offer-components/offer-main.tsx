@@ -3,9 +3,10 @@ import { useAppSelector } from '../../hooks/use-store';
 import Loading from '../other/loading/loading';
 import OfferOtherPlaces from './offer-other-places';
 import OfferInfo from './offer-main-main';
+import { getIsCurrentOfferLoading } from '../../store/slices/offer-data/selectors';
 
 const OfferMain : FC = () => {
-  const loading = useAppSelector((state) => state.offerData.isCurrentOfferLoading);
+  const loading = useAppSelector(getIsCurrentOfferLoading);
 
   if (loading) {
     return <Loading/>;

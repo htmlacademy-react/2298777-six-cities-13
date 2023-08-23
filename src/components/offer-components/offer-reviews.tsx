@@ -2,10 +2,11 @@ import { FC } from 'react';
 import OfferReviewInfo from './offer-review-info';
 import OfferReviewUser from './offer-review-user';
 import { useAppSelector } from '../../hooks/use-store';
+import { getComments } from '../../store/slices/comments-data/selectors';
 
 
 const OfferReviews : FC = () => {
-  const comments = useAppSelector((state) => state.commentsData.comments);
+  const comments = useAppSelector(getComments);
   return (
     <ul className="reviews__list">
       {comments.map((comment) => (

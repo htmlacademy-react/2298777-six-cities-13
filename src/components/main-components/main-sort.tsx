@@ -2,10 +2,11 @@ import { FC, useState, useRef } from 'react';
 import useOutside from '../../hooks/use-outside';
 import MainSortOptions from './main-sort-options';
 import { useAppSelector } from '../../hooks/use-store';
+import { getCurrentSort } from '../../store/slices/offers-data/selectors';
 
 
 const MainSort : FC = () => {
-  const sort = useAppSelector((state) => state.offersData.currentSort);
+  const sort = useAppSelector(getCurrentSort);
   const ref = useRef(null);
   const [isOpened, setOpenedState] = useState(false);
   useOutside(ref, () => setOpenedState(false));

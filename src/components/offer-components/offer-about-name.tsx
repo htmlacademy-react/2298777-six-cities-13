@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import OfferBookmarkButton from './offer-bookmark-button';
-import { Offer } from '../../types/app-type';
+import { DetailedOffer } from '../../types/app-type';
 
 type OfferAboutNameProps = {
-  offer : Offer;
+  offer : DetailedOffer;
   isFavorite : boolean;
 };
 

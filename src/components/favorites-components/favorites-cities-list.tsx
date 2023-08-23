@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import FavoriteList from './favorite-list';
+import FavoriteList from './favorite-list/favorite-list';
 
 const FavoritesCitiesList : FC = () => (
   <section className="favorites">
