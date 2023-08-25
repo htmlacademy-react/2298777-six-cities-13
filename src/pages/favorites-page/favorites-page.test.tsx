@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 import { withStore, withHistory } from '../../util/mock-components';
-import FavoritePage from './favorites-page';
+import FavoritesPage from './favorites-page';
 import { render, screen } from '@testing-library/react';
 import { generateOfferCards } from '../../util/mock';
 import { getAuthStatus } from '../../store/slices/user-data/selectors';
@@ -29,7 +29,7 @@ describe('Component: favorite-list', () => {
           return null;
       }
     });
-    const component = withStore(withHistory(<FavoritePage/>)).withStoreComponent;
+    const component = withStore(withHistory(<FavoritesPage/>)).withStoreComponent;
     render(component);
 
     expect(screen.getByTestId('favorites-page')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('Component: favorite-list', () => {
       }
     });
 
-    const component = withStore(withHistory(<FavoritePage/>)).withStoreComponent;
+    const component = withStore(withHistory(<FavoritesPage/>)).withStoreComponent;
     render(component);
 
     expect(screen.getByText('pog pog')).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe('Component: favorite-list', () => {
       }
     });
 
-    const component = withStore(withHistory(<FavoritePage/>)).withStoreComponent;
+    const component = withStore(withHistory(<FavoritesPage/>)).withStoreComponent;
     render(component);
 
     expect(spyFetch).toBeCalledTimes(0);

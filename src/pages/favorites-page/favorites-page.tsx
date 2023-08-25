@@ -10,7 +10,7 @@ import { fetchFavoritesAction } from '../../store/api-actions/favorite';
 import CheckError from '../../components/other/check-error';
 import { getFavorites, getFavoritesError, getIsFavoritesLoading } from '../../store/slices/favorite-data/selectors';
 
-const FavoritePage : FC = () => {
+const FavoritesPage : FC = () => {
   const favorites = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getIsFavoritesLoading);
   const error = useAppSelector(getFavoritesError);
@@ -40,4 +40,4 @@ const FavoritePage : FC = () => {
 };
 
 
-export default FavoritePage;
+export default FavoritesPage;

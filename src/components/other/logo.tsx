@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../const';
 import { FC } from 'react';
+import { LogoSize } from '../../const';
 
 type LogoProps = {
   width?: number;
   height?: number;
 }
 
-const Logo : FC<LogoProps> = ({width = 81, height = 41}) => {
+const Logo : FC<LogoProps> = ({width = LogoSize.Width, height = LogoSize.Height}) => {
   const handleLogoClick = (evt? : React.MouseEvent<HTMLAnchorElement>) => {
     if (evt) {
       evt.preventDefault();
