@@ -1,5 +1,5 @@
 import { AppRoutes } from '../../const';
-import FavoritePage from '../../pages/favorites-page/favorites-page';
+import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main';
 import OfferPage from '../../pages/offer-page/offer-page';
@@ -17,7 +17,7 @@ const routeConfig = [
     },
     {path: AppRoutes.Favorites, element:
     <PrivateRoute isAuthNeeded>
-      <FavoritePage/>
+      <FavoritesPage/>
     </PrivateRoute>
     },
     {path: AppRoutes.Offer,

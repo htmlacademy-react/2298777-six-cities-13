@@ -83,5 +83,10 @@ enum NameSpace {
   NearBy = 'nearByData',
 }
 
+const LogoSize = {
+  Width: 81,
+  Height: 41,
+} as const;
+
 export {AppRoutes, AuthorizationStatus, Cities, Stars, LoginData, PinUrl, MapIcons,
-  SortOptions, REVIEW_DATE_FORMAT, APIRoute, NameSpace };
+  SortOptions, REVIEW_DATE_FORMAT, APIRoute, NameSpace, LogoSize};

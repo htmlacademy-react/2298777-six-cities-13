@@ -10,7 +10,6 @@ import { fetchCurrentOfferAction, fetchNearByPlacesAction } from '../../store/ap
 import useOfferPage from '../../hooks/use-offer-page';
 import CheckError from '../../components/other/check-error';
 import { getCurrentOfferError, getIsCurrentOfferLoading } from '../../store/slices/offer-data/selectors';
-import { getCurrentCity } from '../../store/slices/offers-data/selectors';
 
 const OfferPage : FC = () => {
   const dispatch = useAppDispatch();
@@ -18,8 +17,7 @@ const OfferPage : FC = () => {
   const navigate = useNavigate();
   const error = useAppSelector(getCurrentOfferError);
   const isLoading = useAppSelector(getIsCurrentOfferLoading);
-  const city = useAppSelector(getCurrentCity);
-  useOfferPage(city, isLoading, id);
+  useOfferPage(isLoading, id);
 
   const onTryAgain = () => {
     if (id) {
